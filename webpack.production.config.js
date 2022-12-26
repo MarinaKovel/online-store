@@ -1,25 +1,20 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+
 module.exports = {
     entry: './src/index.ts',
-    mode: 'development',
-    devServer: {
-        static: {
-            directory: path.join(__dirname, 'dist'),
-        },
-        port: 9000,
-        devMiddleware: {
-            index: 'index.html',
-            writeToDisk: true,
-        },
-    },
+    mode: 'production',
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             title: 'Some title',
-            template: 'src/index.html',
+        }),
+        new MiniCssExtractPlugin({
+            filename: 'style.css',
+            chunkFilename: '[id].css',
         }),
         new CopyPlugin({
             patterns: [
@@ -51,7 +46,14 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'sass-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/fonts/[name][ext]',
+                },
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,

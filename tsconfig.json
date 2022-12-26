@@ -1,11 +1,16 @@
 {
-  
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "outDir": "./dist/",
     "noImplicitAny": true,
     "strict": true,
-    "target": "es2015",
-    "allowJs": true
-  },
-  "files": ["src/index.ts","src/components/header/header.ts"]
+    "module": "es6",
+    "target": "es5",
+    // "jsx": "react",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+  }
 }
