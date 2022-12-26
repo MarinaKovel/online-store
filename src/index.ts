@@ -1,7 +1,3 @@
-import { header } from './components/header/header';
-import { footer } from './components/footer/footer';
-
-const body = document.body as HTMLBodyElement;
-
-body.append(header);
-body.append(footer);
+import './_nullstyle.scss';
+import a from './wands.json';
+console.log(a);
