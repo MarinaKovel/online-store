@@ -20,7 +20,7 @@ class App {
     header: Header;
 
     static renderNewView(idPage: string) {
-        const currentView = document.querySelector(`#${this.defaultPageClassName}`);
+        const currentView = document.querySelector(`#${this.defaultPageClassName}`) as HTMLElement;
         if (currentView) {
             currentView.remove();
         }
@@ -35,10 +35,14 @@ class App {
             view = new DevsPage(idPage);
             this.defaultPageClassName = PageIds.DevPage;
         } else {
+            idPage = PageIds.ErPage;
             view = new ErrorPage(idPage);
+
             this.defaultPageClassName = PageIds.ErPage;
         }
         if (view) {
+            console.log(App.appViews);
+
             const viewHtml = view.render();
             viewHtml.classList.add(this.defaultPageClassName);
             App.appViews.append(viewHtml);
@@ -60,10 +64,9 @@ class App {
     run() {
         App.appViews.append(this.header.render());
         App.renderNewView(PageIds.MainPage); //set up start page
-
         this.router();
     }
 }
 
-//MainPage ShopPage DevPage -List of pages
+//MainPage ShopPage DevPage 404 -List of pages
 export default App;
