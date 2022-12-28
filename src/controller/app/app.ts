@@ -2,7 +2,7 @@ import MainPage from '../../pages/main/main';
 import ShopPage from '../../pages/shop/shop';
 import DevsPage from '../../pages/dev-page/dev';
 import ErrorPage from '../../pages/error/error';
-import { ErrorTypes } from '../../pages/error/error';
+// import { ErrorTypes } from '../../pages/error/error';
 import Page from '../../constants/page';
 import Header from '../../componets/header/header';
 
@@ -59,7 +59,7 @@ class App {
     }
     run() {
         App.appViews.append(this.header.render());
-        App.renderNewView(PageIds.ErPage); //set up start page
+        App.renderNewView(PageIds.MainPage); //set up start page
 
         this.router();
     }
