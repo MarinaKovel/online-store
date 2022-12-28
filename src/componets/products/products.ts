@@ -115,16 +115,7 @@ class Products extends Component {
                 detailsBtn.innerText = Products.TextObj.detailsBtn;
     
                 productList.append(prodItem);
-                prodItem.appendChild(prodName);
-                prodItem.appendChild(core);
-                prodItem.appendChild(wood);
-                prodItem.appendChild(length);
-                prodItem.appendChild(rating);
-                prodItem.appendChild(stock);
-                prodItem.appendChild(discount);
-                prodItem.appendChild(price);
-                prodItem.appendChild(addToCartBtn);
-                prodItem.appendChild(detailsBtn);
+                prodItem.append(prodName, core, wood, length, rating, stock, discount, price, addToCartBtn, detailsBtn);
             }
         }
 
