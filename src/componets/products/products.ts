@@ -65,7 +65,7 @@ class Products extends Component {
         viewSettings.append(search);
         viewSettings.append(view);
         
-        let requestURL = '../app-data/wands.json';
+        let requestURL = './app-data/wands.json';
         let request = new XMLHttpRequest();
         request.open('GET', requestURL);
         request.responseType = 'json';
