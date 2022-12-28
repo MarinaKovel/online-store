@@ -1,0 +1,85 @@
+.error-page {
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.error-title {
+  font-size: 160px;
+}
+
+.error__discription {
+  font-size: 100px;
+}
+
+.error__scary-text {
+  font-size: 100px;
+  color: #dc143c;
+  opacity: 0;
+}
+
+.error-title,
+.error__discription {
+  animation-name: text-hide;
+  animation-duration: 4s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  text-shadow: -2px -6px 34px rgba(255, 215, 0, 1);
+  @keyframes text-hide {
+    1% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 0.2;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}
+
+.error__scary-text {
+  animation-name: text-unhide;
+  animation-duration: 3s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  @keyframes text-unhide {
+    1% {
+      opacity: 0;
+    }
+    80% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+      text-shadow: -2px -6px 54px red;
+    }
+  }
+}
+
+.error-page {
+  animation-name: dem-reveal;
+  animation-duration: 10s;
+  animation-timing-function: ease;
+  background: url("https://a-static.besthdwallpaper.com/alder-wand-the-deadly-hallow-wallpaper-1440x900-57925_4.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  @keyframes dem-reveal {
+    10% {
+      background: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b64adf7a-3f1d-46ad-a865-15632f08e88d/d5gcr8l-8b1b36a2-b03f-4d4f-94a0-762d2b0f87c3.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2I2NGFkZjdhLTNmMWQtNDZhZC1hODY1LTE1NjMyZjA4ZTg4ZFwvZDVnY3I4bC04YjFiMzZhMi1iMDNmLTRkNGYtOTRhMC03NjJkMmIwZjg3YzMuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.R8_VYdDUJY6lf4_P6bOdMCYlDWjrBYPYh8LMrWlodr0");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    100% {
+      background: url("https://a-static.besthdwallpaper.com/alder-wand-the-deadly-hallow-wallpaper-1440x900-57925_4.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+}

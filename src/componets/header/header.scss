@@ -1,0 +1,49 @@
+.header {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.header__nav {
+  display: flex;
+  flex: 1 1 auto;
+  gap: 30px;
+  justify-content: flex-end;
+}
+
+.nav__link {
+  font-size: 35px;
+  color: Gold;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    color: #800080;
+    // animation-name: link-Hover;
+    // animation-duration: 2s;
+    // animation-iteration-count: infinite;
+    animation: link-Hover 3s ease infinite;
+    @keyframes link-Hover {
+      0% {
+        text-shadow: -2px -6px 16px rgba(255, 215, 0, 1);
+      }
+      20% {
+        text-shadow: -2px -6px 16px rgba(255, 215, 0, 1);
+      }
+      40% {
+        text-shadow: -2px -6px 34px rgba(255, 215, 0, 1);
+      }
+      60% {
+        text-shadow: -2px -6px 54px rgba(255, 215, 0, 1);
+      }
+      80% {
+        text-shadow: -2px -6px 79px rgba(255, 215, 0, 1);
+      }
+      100% {
+        text-shadow: -2px -6px 100px rgba(255, 215, 0, 1);
+      }
+    }
+  }
+}
+.header__logo {
+  font-size: 30px;
+  color: Gold;
+}
