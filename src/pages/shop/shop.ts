@@ -3,7 +3,7 @@ import Products from '../../componets/products/products';
 
 class ShopPage extends Page {
     static TextObj = {
-        shopPageTitle: 'Online wand store',
+        shopPageTitle: 'Online wand shop',
     };
     constructor(id: string) {
         super(id);
