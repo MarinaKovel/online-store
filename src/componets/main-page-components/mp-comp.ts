@@ -4,18 +4,6 @@ import Snow from '../../constants/snow';
 import './snow.scss';
 import './mp-comp.scss';
 import './parallax.scss';
-// gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
-// ScrollSmoother.create({
-//     wrapper: '.app',
-//     content: '.main-page',
-// });
-
-const enum elSpeed {
-    layerBase = 40,
-    layerFront = 20,
-    layerMidl = 10,
-    speed = 0.05,
-}
 
 class MPContent extends PageInner {
     constructor(container: HTMLElement, tagName: string, className: string) {
