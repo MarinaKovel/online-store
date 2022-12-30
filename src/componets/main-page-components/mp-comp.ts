@@ -69,7 +69,7 @@ That's why it's so important to have your own wand, whether its core is made of 
 
         const shopLink = document.createElement('a') as HTMLAnchorElement;
         shopLink.classList.add('second__shop-link');
-        shopLink.href = PageIds.ShopPage;
+        shopLink.href = `#${PageIds.ShopPage}`;
         shopLink.innerText = MPContent.TextObj.link;
         secondSection.append(secondSectionTitle, secondSectionText, shopLink);
 
