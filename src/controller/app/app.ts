@@ -2,7 +2,6 @@ import MainPage from '../../pages/main/main';
 import ShopPage from '../../pages/shop/shop';
 import DevsPage from '../../pages/dev-page/dev';
 import ErrorPage from '../../pages/error/error';
-// import { ErrorTypes } from '../../pages/error/error';
 import Page from '../../constants/page';
 import Header from '../../componets/header/header';
 
@@ -26,6 +25,7 @@ class App {
         }
         let view: Page | null = null;
         if (idPage === PageIds.MainPage) {
+            window.location.hash = `#${PageIds.MainPage}`;
             view = new MainPage(idPage);
             this.defaultPageClassName = PageIds.MainPage;
         } else if (idPage === PageIds.ShopPage) {
@@ -42,7 +42,6 @@ class App {
         }
         if (view) {
             console.log(App.appViews);
-
             const viewHtml = view.render();
             viewHtml.classList.add(this.defaultPageClassName);
             App.appViews.append(viewHtml);
@@ -50,7 +49,6 @@ class App {
     }
 
     router() {
-        window.location.hash = `#${PageIds.MainPage}`;
         window.addEventListener('hashchange', () => {
             console.log('hash-change');
             const hash = window.location.hash.slice(1);
