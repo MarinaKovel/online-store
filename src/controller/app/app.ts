@@ -50,10 +50,12 @@ class App {
     }
 
     router() {
+        window.location.hash = `#${PageIds.MainPage}`;
         window.addEventListener('hashchange', () => {
             console.log('hash-change');
             const hash = window.location.hash.slice(1);
             App.renderNewView(hash);
+            console.log(hash);
         });
     }
 
@@ -63,7 +65,7 @@ class App {
     }
     run() {
         App.appViews.append(this.header.render());
-        App.renderNewView(PageIds.ShopPage); //set up start page
+        App.renderNewView(PageIds.MainPage); //set up start page
         this.router();
     }
 }

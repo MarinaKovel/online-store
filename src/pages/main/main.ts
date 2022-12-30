@@ -1,4 +1,5 @@
 import Page from '../../constants/page';
+import MPContent from '../../componets/main-page-components/mp-comp';
 
 class MainPage extends Page {
     static TextObj = {
@@ -9,9 +10,13 @@ class MainPage extends Page {
         super(id);
     }
 
+    renderComponents() {
+        const a = new MPContent(this.pageView, 'section', 'main-section');
+        a.render();
+    }
+
     render() {
-        const title = this.createHeaderTitle(MainPage.TextObj.MainTitle);
-        this.pageView.append(title);
+        this.renderComponents();
         return this.pageView;
     }
 }

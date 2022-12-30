@@ -2,7 +2,7 @@ abstract class Page {
     pageView: HTMLElement;
     static TextObj = {};
     constructor(id: string) {
-        this.pageView = document.createElement('div');
+        this.pageView = document.createElement('article');
         this.pageView.id = id;
     }
     createHeaderTitle(text: string) {

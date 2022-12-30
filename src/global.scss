@@ -1,6 +1,6 @@
 body {
   font-family: "HarryP";
-  background: black;
+  // background: black;
   color: gold;
   font-size: 50px;
 }
@@ -9,13 +9,11 @@ body {
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
-  width: 100%;
   height: 100%;
 }
 
 .main-page,
 .shop-page,
 .devs-page {
-  max-width: 1200px;
-  margin: 0 auto;
+  height: 100%;
 }
