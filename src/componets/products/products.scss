@@ -33,6 +33,18 @@ h1 {
 .settings__text {
     font-size: 2rem;
 }
+.sort__menu {
+    font-family: inherit;
+    color: gold;
+    font-size: 1.6rem;
+    margin: 5px;
+    padding: 3px;
+    background-color: #292300;
+    border: 1px solid gold;
+    border-radius: 5px;
+    box-shadow:  0 0 10px .02em rgba(128, 128, 0, 0.652);
+}
+
 .product__item {
     width: 250px;
     height: 250px;
@@ -45,10 +57,14 @@ h1 {
     padding: 10px;
     cursor: pointer;
 }
+.product__item:hover {
+    box-shadow:  0 0 10px .03em rgba(156, 156, 2, 0.68);
+}
 .prod__name {
     font-size: 1.7rem;
     text-align: center;
     padding: 0 10px;
+    height: 50px;
 }
 .prod__desc {
     font-size: 1.2rem;
@@ -61,7 +77,7 @@ h1 {
     border-radius: 25px;
     margin: 10px;
     padding: 5px 10px;
-    box-shadow:  0 0 10px .15em rgba(128, 128, 0, 0.652);
+    box-shadow:  0 0 10px .16em rgba(128, 128, 0, 0.652);
 }
 .buy__btn:hover {
     background-color: goldenrod;
