@@ -25,7 +25,8 @@ class Header extends Component {
     renderPageLinks() {
         const headerLogo = document.createElement('span') as HTMLSpanElement;
         headerLogo.classList.add('header__logo');
-        headerLogo.innerText = '>Ollivanders Store';
+
+        headerLogo.innerText = 'Ollivanders';
         const pageNav = document.createElement('nav') as HTMLElement;
         pageNav.classList.add('header__nav');
         links.forEach((link) => {
