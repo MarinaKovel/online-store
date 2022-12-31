@@ -17,7 +17,7 @@
     position: absolute;
     width: 100%;
     z-index: 10;
-    background-image: url("./mp-img/mv2.gif");
+    background-image: url("https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/mv2.gif");
     height: calc(var(--index) * 6);
     background-repeat: no-repeat;
     background-size: cover;
@@ -68,15 +68,15 @@
 }
 
 .layers__base {
-  background-image: url("./mp-img/base-layer.png");
+  background-image: url("https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/base-layer.png");
 }
 
 .layers__midl {
-  background-image: url("./mp-img/second-layer.png");
+  background-image: url("https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/second-layer.png");
 }
 
 .layers__front {
-  background-image: url("./mp-img/first-layer.png");
+  background-image: url("https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/first-layer.png");
 }
 
 .app {
@@ -112,6 +112,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-shadow: 1px 1px 2px rgb(13, 12, 13);
 }
 .main__second {
   min-height: 100vh;
@@ -121,7 +122,7 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  background: url("./mp-img/Ollivanders.jpg");
+  background: url("https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/Ollivanders.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
