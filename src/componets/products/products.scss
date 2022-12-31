@@ -24,6 +24,7 @@ h1 {
     border-bottom: 1px solid gold;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .product__list {
     background-color: #000;
@@ -33,16 +34,25 @@ h1 {
 .settings__text {
     font-size: 2rem;
 }
-.sort__menu {
+.sort__menu,
+.search__menu {
     font-family: inherit;
     color: gold;
     font-size: 1.6rem;
+    text-align: center;
     margin: 5px;
     padding: 3px;
     background-color: #292300;
     border: 1px solid gold;
     border-radius: 5px;
     box-shadow:  0 0 10px .02em rgba(128, 128, 0, 0.652);
+}
+.search__menu {
+    position: relative;
+    bottom: 5px;
+}
+.search__menu::-webkit-search-cancel-button {
+    -webkit-appearance: none;
 }
 
 .product__item {
@@ -82,3 +92,4 @@ h1 {
 .buy__btn:hover {
     background-color: goldenrod;
 }
+
