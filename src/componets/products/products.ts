@@ -26,7 +26,6 @@ class Products extends Component {
         sortText: 'Sort',
         resultText: 'Results: ',
         searchText: 'Search',
-        viewText: 'View',
         filterText: 'Filters',
         addToCartBtn: 'Add to cart',
         detailsBtn: 'Details',
@@ -64,7 +63,7 @@ class Products extends Component {
         results.className = 'settings__text';
         searchForm.className = 'search__form';
         search.className = 'search__menu';
-        view.className = 'settings__text';
+        view.className = 'view';
 
         sortRandom.setAttribute('value', 'sortRandom');
         sortChoiceByRatingDesc.setAttribute('value', 'sortByRatingDesc');
@@ -81,7 +80,6 @@ class Products extends Component {
         filters.innerText = Products.TextObj.filterText;
         sort.innerText = Products.TextObj.sortText;
         search.innerText = Products.TextObj.searchText;
-        view.innerText = Products.TextObj.viewText;
         sortRandom.innerText = Products.TextObj.sortRandom;
         sortChoiceByRatingDesc.innerText = Products.TextObj.sortByRatingDescText;
         sortChoiceByRatingAsc.innerText = Products.TextObj.sortByRatingAscText;
@@ -116,20 +114,18 @@ class Products extends Component {
                 } else if (sort.value === 'sortByRatingDesc') {
                     sortByRatingDesc(wands);
                 }
-                addWands(wandsData);
+                chooseView();
             }
 
             sort.addEventListener("change", sortProd);
         }
-
-        
 
         function getJson(jsonObj: RootObject) {
             wandsData = jsonObj['products'];
             return wandsData;
         }
 
-        function addWands(wandsData: Product[]) {
+        function addWandsGrid(wandsData: Product[]) {
             results.innerText = Products.TextObj.resultText + ' ' + wandsData.length; 
             for (let i = 0; i < wandsData.length; i++) {
                 const prodItem = document.createElement('div') as HTMLDivElement;
@@ -170,8 +166,35 @@ class Products extends Component {
 
                 productList.append(prodItem);
                 prodItem.append(prodName, core, wood, length, rating, stock, discount, price, addToCartBtn, detailsBtn);
+            }
+        }
 
-                
+        function addWandsList(wandsData: Product[]) {
+            results.innerText = Products.TextObj.resultText + ' ' + wandsData.length; 
+            for (let i = 0; i < wandsData.length; i++) {
+                const prodItem = document.createElement('div') as HTMLDivElement;
+                prodItem.style.backgroundImage = 'url(' + wandsData[i].thumbnail + ')';
+                const prodName = document.createElement('div') as HTMLDivElement;
+                const price = document.createElement('div') as HTMLDivElement;
+                const addToCartBtn = document.createElement('button') as HTMLButtonElement;
+                const detailsBtn = document.createElement('button') as HTMLButtonElement;
+    
+                productList.style.flexDirection = 'column';
+                prodName.style.height = 'auto';
+                price.style.fontSize = '2rem';
+                prodItem.className = 'product__itemlist';
+                prodName.className = 'prod__name';
+                price.className = 'prod__desc';
+                addToCartBtn.className = 'buy__btn';
+                detailsBtn.className = 'buy__btn';
+    
+                prodName.textContent = wandsData[i].name;
+                price.textContent = wandsData[i].price + 'ʛ (Galleon)';
+                addToCartBtn.innerText = Products.TextObj.addToCartBtn;
+                detailsBtn.innerText = Products.TextObj.detailsBtn;
+
+                productList.append(prodItem);
+                prodItem.append(prodName, price, addToCartBtn, detailsBtn);
             }
         }
         
@@ -257,13 +280,18 @@ class Products extends Component {
             
             wandsData.forEach(
                 function getMatch(elem) {
-                    let searchContent = (elem.name + elem.wood + elem.core + elem.length + elem.stock + elem.rating + elem.discountPercentage + elem.price).toUpperCase();
+                    let searchContent = (elem.name + elem.wood + elem.core + elem.length + elem.stock + elem.rating + elem.discountPercentage + elem.price + elem.ownerOfSimilarWand + elem.description).toUpperCase();
                     if (searchContent.includes(inputValue)) {
                         filtered = [];
                         filtered.push(elem);
-                        addWands(filtered);
-                        results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
-                    } else {
+                        if (view.className === 'view') {
+                            addWandsGrid(filtered);
+                            results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
+                        } else {
+                            addWandsList(filtered);
+                            results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
+                        }
+                    } else if (productList.childNodes.length === 0) {
                         results.innerText = Products.TextObj.resultText + ' 0';
                     }
                 }
@@ -272,6 +300,23 @@ class Products extends Component {
 
         searchForm.addEventListener('keyup', searchProducts);
         searchForm.addEventListener('submit', searchSubmit);
+
+        function chooseView() {
+            if (view.className === 'view') {
+                productList.innerHTML = '';
+                productList.style.flexDirection = 'row';
+                addWandsGrid(wandsData);
+            } else {
+                productList.innerHTML = '';
+                addWandsList(wandsData);
+            }
+        }
+        function changeView() {
+            view.classList.toggle('list');
+            chooseView();
+        }
+        
+        view.addEventListener('click', changeView);
 
         this.container.append(filters, productContainer);
     }
