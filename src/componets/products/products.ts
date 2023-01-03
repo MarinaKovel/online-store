@@ -23,10 +23,13 @@ export interface RootObject {
 class Products extends Component {
 
     static TextObj = {
+        reset: 'Reset Filters',
+        copy: 'Copy Link',
+        filterWoodName: 'Choose by Wood',
+        filterCoreName: 'Choose by Core',
         sortText: 'Sort',
         resultText: 'Results: ',
         searchText: 'Search',
-        filterText: 'Filters',
         addToCartBtn: 'Add to cart',
         detailsBtn: 'Details',
         sortRandom: 'Sort options:',
@@ -40,7 +43,17 @@ class Products extends Component {
     }
     
     renderProductList() {
+        const filtersContainer = document.createElement('div') as HTMLDivElement;
+        const resetCopyContainer = document.createElement('div') as HTMLDivElement;
+        const reset = document.createElement('button') as HTMLButtonElement;
+        const copy = document.createElement('button') as HTMLButtonElement;
         const filters = document.createElement('div') as HTMLDivElement;
+        const filterWood = document.createElement('div') as HTMLDivElement;
+        const filterWoodName = document.createElement('div') as HTMLDivElement;
+        const filterWoodContent = document.createElement('div') as HTMLDivElement;
+        const filterCore = document.createElement('div') as HTMLDivElement;
+        const filterCoreName = document.createElement('div') as HTMLDivElement;
+        const filterCoreContent = document.createElement('div') as HTMLDivElement;
         const productContainer = document.createElement('div') as HTMLDivElement;
         const viewSettings = document.createElement('div') as HTMLDivElement;
         const productList = document.createElement('div') as HTMLDivElement;
@@ -55,7 +68,16 @@ class Products extends Component {
         const search = document.createElement('input') as HTMLInputElement;
         const view = document.createElement('div') as HTMLDivElement;
 
-        filters.className = 'filters';
+        filtersContainer.className = 'filters__container';
+        resetCopyContainer.className = 'reset__container';
+        reset.className = 'reset';
+        copy.className = 'copy';
+        filterWood.className = 'filter-wood';
+        filterWoodName.className = 'filter-wood__name';
+        filterWoodContent.className = 'filter-wood__content';
+        filterCore.className = 'filter-core';
+        filterCoreName.className = 'filter-core__name';
+        filterCoreContent.className = 'filter-core__content';
         productContainer.className = 'product__container';
         viewSettings.className = 'view__settings';
         productList.className = 'product__list';
@@ -77,7 +99,10 @@ class Products extends Component {
         search.setAttribute('name', 'search');
         search.setAttribute('autocomplete', 'off');
         
-        filters.innerText = Products.TextObj.filterText;
+        reset.innerText = Products.TextObj.reset;
+        copy.innerText = Products.TextObj.copy;
+        filterWoodName.innerText = Products.TextObj.filterWoodName;
+        filterCoreName.innerText = Products.TextObj.filterCoreName;
         sort.innerText = Products.TextObj.sortText;
         search.innerText = Products.TextObj.searchText;
         sortRandom.innerText = Products.TextObj.sortRandom;
@@ -86,6 +111,11 @@ class Products extends Component {
         sortChoiceByPriceAsc.innerText = Products.TextObj.sortByPriceAscText;
         sortChoiceByPriceDesc.innerText = Products.TextObj.sortByPriceDescText;
 
+        filtersContainer.append(resetCopyContainer, filters);
+        filters.append(filterWood, filterCore);
+        filterWood.append(filterWoodName, filterWoodContent);
+        filterCore.append(filterCoreName, filterCoreContent);
+        resetCopyContainer.append(reset, copy);
         productContainer.append(viewSettings, productList);
         viewSettings.append(sort, results, searchForm, view);
         sort.append(sortRandom, sortChoiceByRatingAsc, sortChoiceByRatingDesc, sortChoiceByPriceAsc, sortChoiceByPriceDesc)
@@ -102,6 +132,8 @@ class Products extends Component {
             let wands: RootObject = request.response;
             getJson(wands);
             sortProd();
+            addFilterWood();
+            addFilterCore();
 
             function sortProd() {
                 productList.innerHTML = '';
@@ -197,7 +229,118 @@ class Products extends Component {
                 prodItem.append(prodName, price, addToCartBtn, detailsBtn);
             }
         }
-        
+
+        this.container.append(filtersContainer, productContainer);
+
+
+        function addFilterWood() {
+            let arrWood: string[] = [];
+            wandsData.forEach((elem) => arrWood.push(elem.wood));
+            let woodCategories = Array.from(new Set(arrWood));
+            let woodCategoriesLowerCase = woodCategories.map(elem => elem.toLowerCase().split(' ').join(''));
+            
+            for (let i = 0; i < woodCategories.length; i++) {
+                const woodDiv = document.createElement('div') as HTMLDivElement;
+                let woodInput = document.createElement('input') as HTMLInputElement;
+                const woodLabel = document.createElement('label') as HTMLLabelElement;
+                woodDiv.className = 'categoryDiv';
+                woodInput.className = 'category';
+                woodInput.setAttribute('type', 'checkbox');
+                woodInput.setAttribute('name', woodCategories[i]);
+                woodInput.setAttribute('id', woodCategoriesLowerCase[i]);
+                woodLabel.setAttribute('for', woodCategoriesLowerCase[i]);
+                woodLabel.innerText = woodCategories[i];
+                woodDiv.append(woodInput, woodLabel);
+                filterWoodContent.append(woodDiv);
+
+                woodInput.addEventListener('change', function() {
+                    productList.innerHTML = '';
+                    let filtered: Product[] = [];
+                    let arr = [];
+                    let inputs = document.getElementsByClassName('category');
+                    for (let i = 0; i < inputs.length; i++) {
+                        if ((inputs[i] as HTMLInputElement).checked) {
+                            arr.push(inputs[i].getAttribute('name'));
+                        }
+                    }
+                    let inputValue = arr.join('');
+
+                    wandsData.forEach(
+                        function getMatch(elem) {
+                            let searchContent = elem.wood;
+                            if (inputValue.includes(searchContent) || inputValue === '') {
+                                filtered = [];
+                                filtered.push(elem);
+                                if (view.className === 'view') {
+                                    addWandsGrid(filtered);
+                                    results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
+                                } else {
+                                    addWandsList(filtered);
+                                    results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
+                                }
+                            } else if (productList.childNodes.length === 0) {
+                                results.innerText = Products.TextObj.resultText + ' 0';
+                            }
+                        }
+                    )
+                });
+            }
+        }
+
+        function addFilterCore() {
+            let arrCore: string[] = [];
+            wandsData.forEach((elem) => arrCore.push(elem.core));
+            let coreCategories = Array.from(new Set(arrCore));
+            let coreCategoriesLowerCase = coreCategories.map(elem => elem.toLowerCase().split(' ').join(''));
+            
+            for (let i = 0; i < coreCategories.length; i++) {
+                const coreDiv = document.createElement('div') as HTMLDivElement;
+                let coreInput = document.createElement('input') as HTMLInputElement;
+                const coreLabel = document.createElement('label') as HTMLLabelElement;
+                coreDiv.className = 'categoryDiv';
+                coreInput.className = 'category';
+                coreInput.setAttribute('type', 'checkbox');
+                coreInput.setAttribute('name', coreCategories[i]);
+                coreInput.setAttribute('id', coreCategoriesLowerCase[i]);
+                coreLabel.setAttribute('for', coreCategoriesLowerCase[i]);
+                coreLabel.innerText = coreCategories[i];
+                coreDiv.append(coreInput, coreLabel);
+                filterCoreContent.append(coreDiv);
+
+                coreInput.addEventListener('change', function() {
+                    productList.innerHTML = '';
+                    let filtered: Product[] = [];
+                    let arr = [];
+                    let inputs = document.getElementsByClassName('category');
+                    for (let i = 0; i < inputs.length; i++) {
+                        if ((inputs[i] as HTMLInputElement).checked) {
+                            arr.push(inputs[i].getAttribute('name'));
+                        }
+                    }
+                    let inputValue = arr.join('');
+
+                    wandsData.forEach(
+                        function getMatch(elem) {
+                            let searchContent = elem.core;
+                            if (inputValue.includes(searchContent) || inputValue === '') {
+                                filtered = [];
+                                filtered.push(elem);
+                                if (view.className === 'view') {
+                                    addWandsGrid(filtered);
+                                    results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
+                                } else {
+                                    addWandsList(filtered);
+                                    results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
+                                }
+                            } else if (productList.childNodes.length === 0) {
+                                results.innerText = Products.TextObj.resultText + ' 0';
+                            }
+                        }
+                    )
+                });
+            }
+        }
+
         function sortByPriceAsc(jsonObj: RootObject) {
             let wandsData: Product[] = jsonObj['products'];
             
@@ -315,10 +458,7 @@ class Products extends Component {
             view.classList.toggle('list');
             chooseView();
         }
-        
         view.addEventListener('click', changeView);
-
-        this.container.append(filters, productContainer);
     }
 
     render(): HTMLElement {

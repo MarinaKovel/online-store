@@ -9,12 +9,159 @@ h1 {
     justify-content: space-around;
     margin-top: 20px;
 }
-.filters {
+.filters__container {
     width: 25vw;
     background-color: #292300;
     border: 1px solid gold;
     border-radius: 5px;
-    height: 70vh;
+    display: flex;
+    flex-direction: column;
+}
+.reset__container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+.reset,
+.copy {
+    border: 1px solid gold;
+    color: gold;
+    background-color: #292300;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin: 10px;
+    box-shadow:  0 0 10px .02em rgba(128, 128, 0, 0.652);
+}
+.reset:hover,
+.copy:hover {
+    background-color: #000;
+    box-shadow:  0 0 10px .16em rgba(128, 128, 0, 0.652);
+}
+.filter-wood,
+.filter-core {
+    border: 1px solid gold;
+    border-radius: 5px;
+    margin: 10px;
+}
+.filter-wood__name,
+.filter-core__name {
+    font-size: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid gold;
+    background-color: #544700;
+}
+.filter-wood__content,
+.filter-core__content {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+    color: gold;
+    height: 150px;
+    overflow: auto;
+    padding: 3px;
+}
+
+// Scroll style
+
+::-webkit-scrollbar {
+    width: 20px;
+    height: 8px;
+    background-color: #544700;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #292300;
+    border-radius: 9em;
+    box-shadow: inset 1px 1px 10px gold;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #544700;
+}
+::-webkit-scrollbar-button:vertical:start:decrement {
+    background: linear-gradient(120deg, #02141a 40%, rgba(0, 0, 0, 0) 41%),
+        linear-gradient(240deg, #02141a 40%, rgba(0, 0, 0, 0) 41%),
+        linear-gradient(0deg, #02141a 30%, rgba(0, 0, 0, 0) 31%);
+    background-color: gold;
+}
+
+::-webkit-scrollbar-button:vertical:end:increment {
+    background:
+        linear-gradient(300deg, #02141a 40%, rgba(0, 0, 0, 0) 41%),
+        linear-gradient(60deg, #02141a 40%, rgba(0, 0, 0, 0) 41%),
+        linear-gradient(180deg, #02141a 30%, rgba(0, 0, 0, 0) 31%);
+    background-color: gold;
+}
+
+// Checkbox style
+
+input[type="checkbox"]:checked, 
+input[type="checkbox"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+
+input[type="checkbox"]:checked + label, 
+input[type="checkbox"]:not(:checked) + label {
+    display: inline-block;
+    position: relative;
+    padding-left: 28px;
+    line-height: 20px;
+    cursor: pointer;
+}
+input[type="checkbox"]:checked + label {
+    color: gold;
+}
+input[type="checkbox"]:not(:checked) + label {
+    color: #7f7f7f;
+}
+
+input[type="checkbox"]:checked + label:before, 
+input[type="checkbox"]:not(:checked) + label:before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 0px;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #7f7f7f;
+    background-color: #292300;
+    border-radius: 2px;
+}
+
+input[type="checkbox"]:checked + label:after, 
+input[type="checkbox"]:not(:checked) + label:after {
+    content: "";
+    position: absolute;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    left: 5px;
+    top: 4px;
+    width: 10px;
+    height: 5px;
+    border-radius: 1px;
+    border-left: 3px solid gold;
+    border-bottom: 3px solid gold;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+input[type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+}
+
+input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+}
+
+.category {
+    margin: 0 5px;
+    scrollbar-color: gold #292300;
+    scrollbar-width: auto;
 }
 .product__container {
     width: 67vw;
@@ -132,4 +279,5 @@ h1 {
 .buy__btn:hover {
     background-color: goldenrod;
 }
+
 
