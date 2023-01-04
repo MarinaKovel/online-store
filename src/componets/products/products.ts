@@ -27,6 +27,8 @@ class Products extends Component {
         copy: 'Copy Link',
         filterWoodName: 'Choose by Wood',
         filterCoreName: 'Choose by Core',
+        filterLengthName: 'Choose by Length',
+        filterPriceName: 'Choose by Price',
         sortText: 'Sort',
         resultText: 'Results: ',
         searchText: 'Search',
@@ -54,6 +56,12 @@ class Products extends Component {
         const filterCore = document.createElement('div') as HTMLDivElement;
         const filterCoreName = document.createElement('div') as HTMLDivElement;
         const filterCoreContent = document.createElement('div') as HTMLDivElement;
+        const filterLength = document.createElement('div') as HTMLDivElement;
+        const filterLengthName = document.createElement('div') as HTMLDivElement;
+        const filterLengthContent = document.createElement('div') as HTMLDivElement;
+        const filterPrice = document.createElement('div') as HTMLDivElement;
+        const filterPriceName = document.createElement('div') as HTMLDivElement;
+        const filterPriceContent = document.createElement('div') as HTMLDivElement;
         const productContainer = document.createElement('div') as HTMLDivElement;
         const viewSettings = document.createElement('div') as HTMLDivElement;
         const productList = document.createElement('div') as HTMLDivElement;
@@ -78,6 +86,12 @@ class Products extends Component {
         filterCore.className = 'filter-core';
         filterCoreName.className = 'filter-core__name';
         filterCoreContent.className = 'filter-core__content';
+        filterLength.className = 'filter-length';
+        filterLengthName.className = 'filter-length__name';
+        filterLengthContent.className = 'filter-length__content';
+        filterPrice.className = 'filter-price';
+        filterPriceName.className = 'filter-price__name';
+        filterPriceContent.className = 'filter-price__content';
         productContainer.className = 'product__container';
         viewSettings.className = 'view__settings';
         productList.className = 'product__list';
@@ -103,6 +117,8 @@ class Products extends Component {
         copy.innerText = Products.TextObj.copy;
         filterWoodName.innerText = Products.TextObj.filterWoodName;
         filterCoreName.innerText = Products.TextObj.filterCoreName;
+        filterLengthName.innerText = Products.TextObj.filterLengthName;
+        filterPriceName.innerText = Products.TextObj.filterPriceName;
         sort.innerText = Products.TextObj.sortText;
         search.innerText = Products.TextObj.searchText;
         sortRandom.innerText = Products.TextObj.sortRandom;
@@ -112,9 +128,11 @@ class Products extends Component {
         sortChoiceByPriceDesc.innerText = Products.TextObj.sortByPriceDescText;
 
         filtersContainer.append(resetCopyContainer, filters);
-        filters.append(filterWood, filterCore);
+        filters.append(filterWood, filterCore, filterLength, filterPrice);
         filterWood.append(filterWoodName, filterWoodContent);
         filterCore.append(filterCoreName, filterCoreContent);
+        filterLength.append(filterLengthName, filterLengthContent);
+        filterPrice.append(filterPriceName, filterPriceContent);
         resetCopyContainer.append(reset, copy);
         productContainer.append(viewSettings, productList);
         viewSettings.append(sort, results, searchForm, view);
@@ -134,6 +152,8 @@ class Products extends Component {
             sortProd();
             addFilterWood();
             addFilterCore();
+            addFilterLength();
+            addFilterPrice();
 
             function sortProd() {
                 productList.innerHTML = '';
@@ -232,6 +252,115 @@ class Products extends Component {
 
         this.container.append(filtersContainer, productContainer);
 
+        function filter() {
+            productList.innerHTML = '';
+            let filtered: Product[] = [];
+            let inputValue: string[] = [];
+            let inputs = document.getElementsByClassName('category');
+            let inputsSliderLength = document.getElementsByClassName('length');
+            inputValue.push((inputsSliderLength[0] as HTMLInputElement).value, (inputsSliderLength[1] as HTMLInputElement).value);
+            inputValue.sort((a, b) => +a - +b);
+
+            let isEmptyWood = 0;
+            let isEmptyCore = 0;
+            for (let i = 0; i < inputs.length; i++) {
+                if ((inputs[i] as HTMLInputElement).checked) {
+                    inputs[i].classList.contains('wood') ? isEmptyWood = 1 : isEmptyCore = 1;
+                        inputValue.push(inputs[i].getAttribute('name') as string);
+                }
+            }
+
+            wandsData.forEach(
+                function getMatch(elem) {
+                    let searchContent;
+                    if (isEmptyWood && isEmptyCore) {
+                        searchContent = elem.wood + elem.core;
+                    } else if (!isEmptyWood && isEmptyCore) {
+                        searchContent = elem.core;
+                    } else if (isEmptyWood && !isEmptyCore) {
+                        searchContent = elem.wood;
+                    } else {
+                        searchContent = '';
+                    }
+                   
+                    for (let i = 0; i < inputValue.length; i++) {
+                        if (searchContent.includes(inputValue[i]) && elem.length >= inputValue[0] && elem.length <= inputValue[1] || inputValue[i] === '') {
+                        filtered = [];
+                        filtered.push(elem);
+                        console.log(inputValue)
+                        if (view.className === 'view') {
+                            addWandsGrid(filtered);
+                            results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
+                        } else {
+                            addWandsList(filtered);
+                            results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
+                        }
+                    } else if (productList.childNodes.length === 0) {
+                        results.innerText = Products.TextObj.resultText + ' 0';
+                    }
+                    }
+                    
+                }
+            )
+        }
+
+        function filterL() {
+            productList.innerHTML = '';
+            let filtered: Product[] = [];
+            let inputValue: string[] = [];
+            let inputsSliderLength = document.getElementsByClassName('length');
+            inputValue.push((inputsSliderLength[0] as HTMLInputElement).value, (inputsSliderLength[1] as HTMLInputElement).value);
+            inputValue.sort((a, b) => +a - +b);
+
+            wandsData.forEach(
+                function getMatch(elem) {
+                    for (let i = 0; i < inputValue.length; i++) {
+                        if (elem.length >= inputValue[0] && elem.length <= inputValue[1] || inputValue[i] === '') {
+                        filtered = [];
+                        filtered.push(elem);
+                        if (view.className === 'view') {
+                            addWandsGrid(filtered);
+                            results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
+                        } else {
+                            addWandsList(filtered);
+                            results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
+                        }
+                    } else if (productList.childNodes.length === 0) {
+                        results.innerText = Products.TextObj.resultText + ' 0';
+                    }
+                    }
+                }
+            )
+        }
+
+        function filterP() {
+            productList.innerHTML = '';
+            let filtered: Product[] = [];
+            let inputValue: string[] = [];
+            let inputsSliderPrice = document.getElementsByClassName('price');
+            inputValue.push((inputsSliderPrice[0] as HTMLInputElement).value, (inputsSliderPrice[1] as HTMLInputElement).value);
+            inputValue.sort((a, b) => +a - +b);
+
+            wandsData.forEach(
+                function getMatch(elem) {
+                    for (let i = 0; i < inputValue.length; i++) {
+                        if (elem.price >= +inputValue[0] && elem.price <= +inputValue[1] || inputValue[i] === '') {
+                        filtered = [];
+                        filtered.push(elem);
+                        if (view.className === 'view') {
+                            addWandsGrid(filtered);
+                            results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
+                        } else {
+                            addWandsList(filtered);
+                            results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
+                        }
+                    } else if (productList.childNodes.length === 0) {
+                        results.innerText = Products.TextObj.resultText + ' 0';
+                    }
+                    }
+                }
+            )
+        }
 
         function addFilterWood() {
             let arrWood: string[] = [];
@@ -241,10 +370,10 @@ class Products extends Component {
             
             for (let i = 0; i < woodCategories.length; i++) {
                 const woodDiv = document.createElement('div') as HTMLDivElement;
-                let woodInput = document.createElement('input') as HTMLInputElement;
+                const woodInput = document.createElement('input') as HTMLInputElement;
                 const woodLabel = document.createElement('label') as HTMLLabelElement;
                 woodDiv.className = 'categoryDiv';
-                woodInput.className = 'category';
+                woodInput.className = 'category wood';
                 woodInput.setAttribute('type', 'checkbox');
                 woodInput.setAttribute('name', woodCategories[i]);
                 woodInput.setAttribute('id', woodCategoriesLowerCase[i]);
@@ -253,37 +382,7 @@ class Products extends Component {
                 woodDiv.append(woodInput, woodLabel);
                 filterWoodContent.append(woodDiv);
 
-                woodInput.addEventListener('change', function() {
-                    productList.innerHTML = '';
-                    let filtered: Product[] = [];
-                    let arr = [];
-                    let inputs = document.getElementsByClassName('category');
-                    for (let i = 0; i < inputs.length; i++) {
-                        if ((inputs[i] as HTMLInputElement).checked) {
-                            arr.push(inputs[i].getAttribute('name'));
-                        }
-                    }
-                    let inputValue = arr.join('');
-
-                    wandsData.forEach(
-                        function getMatch(elem) {
-                            let searchContent = elem.wood;
-                            if (inputValue.includes(searchContent) || inputValue === '') {
-                                filtered = [];
-                                filtered.push(elem);
-                                if (view.className === 'view') {
-                                    addWandsGrid(filtered);
-                                    results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
-                                } else {
-                                    addWandsList(filtered);
-                                    results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
-                                }
-                            } else if (productList.childNodes.length === 0) {
-                                results.innerText = Products.TextObj.resultText + ' 0';
-                            }
-                        }
-                    )
-                });
+                woodInput.addEventListener('change', filter);
             }
         }
 
@@ -298,7 +397,7 @@ class Products extends Component {
                 let coreInput = document.createElement('input') as HTMLInputElement;
                 const coreLabel = document.createElement('label') as HTMLLabelElement;
                 coreDiv.className = 'categoryDiv';
-                coreInput.className = 'category';
+                coreInput.className = 'category core';
                 coreInput.setAttribute('type', 'checkbox');
                 coreInput.setAttribute('name', coreCategories[i]);
                 coreInput.setAttribute('id', coreCategoriesLowerCase[i]);
@@ -307,39 +406,108 @@ class Products extends Component {
                 coreDiv.append(coreInput, coreLabel);
                 filterCoreContent.append(coreDiv);
 
-                coreInput.addEventListener('change', function() {
-                    productList.innerHTML = '';
-                    let filtered: Product[] = [];
-                    let arr = [];
-                    let inputs = document.getElementsByClassName('category');
-                    for (let i = 0; i < inputs.length; i++) {
-                        if ((inputs[i] as HTMLInputElement).checked) {
-                            arr.push(inputs[i].getAttribute('name'));
-                        }
-                    }
-                    let inputValue = arr.join('');
-
-                    wandsData.forEach(
-                        function getMatch(elem) {
-                            let searchContent = elem.core;
-                            if (inputValue.includes(searchContent) || inputValue === '') {
-                                filtered = [];
-                                filtered.push(elem);
-                                if (view.className === 'view') {
-                                    addWandsGrid(filtered);
-                                    results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
-                                } else {
-                                    addWandsList(filtered);
-                                    results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
-                                }
-                            } else if (productList.childNodes.length === 0) {
-                                results.innerText = Products.TextObj.resultText + ' 0';
-                            }
-                        }
-                    )
-                });
+                coreInput.addEventListener('change', filter);
             }
         }
+
+        function addFilterLength() {
+            let arrLength: number[] = [];
+            wandsData.forEach((elem) => arrLength.push(+elem.length));
+                
+                const minDiv = document.createElement('div') as HTMLDivElement;
+                const maxDiv = document.createElement('div') as HTMLDivElement;
+                const lengthMinInput = document.createElement('input') as HTMLInputElement;
+                const lengthMaxInput = document.createElement('input') as HTMLInputElement;
+                const lengthSpan = document.createElement('span') as HTMLSpanElement;
+
+                lengthSpan.className = 'multi-range';
+                lengthMinInput.className = 'category length min';
+                lengthMaxInput.className = 'category length max';
+                lengthMinInput.setAttribute('type', 'range');
+                lengthMinInput.setAttribute('min', '9');
+                lengthMinInput.setAttribute('max', '18');
+                lengthMinInput.setAttribute('value', '9');
+                lengthMinInput.setAttribute('step', '1');
+                lengthMaxInput.setAttribute('type', 'range');
+                lengthMaxInput.setAttribute('min', '9');
+                lengthMaxInput.setAttribute('max', '18');
+                lengthMaxInput.setAttribute('value', '18');
+                lengthMaxInput.setAttribute('step', '1');
+                minDiv.innerText = '9"';
+                maxDiv.innerText = '18"';
+            
+                lengthSpan.append(lengthMinInput, lengthMaxInput);
+                filterLengthContent.append(minDiv, lengthSpan, maxDiv);
+                
+                const rangeInput = document.querySelectorAll(".length");
+                rangeInput.forEach((input) => {
+                    input.addEventListener("input", (e) => {
+                      let minRange = parseInt(lengthMinInput.value);
+                      let maxRange = parseInt(lengthMaxInput.value);
+                      if (maxRange > minRange) {
+                            lengthMinInput.setAttribute('value', minRange.toString());
+                            minDiv.innerText = minRange.toString() + '"';
+                          lengthMaxInput.setAttribute('value', maxRange.toString());
+                          maxDiv.innerText = maxRange.toString() + '"';
+                      } else {
+                        minDiv.innerText = maxRange.toString() + '"';
+                        maxDiv.innerText = minRange.toString() + '"';
+                      }
+                    });
+                  });
+                  lengthMinInput.addEventListener('change', filterL);
+                  lengthMaxInput.addEventListener('change', filterL);
+        }
+
+        function addFilterPrice() {
+            let arrPrice: number[] = [];
+            wandsData.forEach((elem) => arrPrice.push(+elem.price));
+                
+                const minDiv = document.createElement('div') as HTMLDivElement;
+                const maxDiv = document.createElement('div') as HTMLDivElement;
+                const priceMinInput = document.createElement('input') as HTMLInputElement;
+                const priceMaxInput = document.createElement('input') as HTMLInputElement;
+                const priceSpan = document.createElement('span') as HTMLSpanElement;
+
+                priceSpan.className = 'multi-range2';
+                priceMinInput.className = 'category price min';
+                priceMaxInput.className = 'category price max';
+                priceMinInput.setAttribute('type', 'range');
+                priceMinInput.setAttribute('min', '5');
+                priceMinInput.setAttribute('max', '30');
+                priceMinInput.setAttribute('value', '5');
+                priceMinInput.setAttribute('step', '1');
+                priceMaxInput.setAttribute('type', 'range');
+                priceMaxInput.setAttribute('min', '5');
+                priceMaxInput.setAttribute('max', '30');
+                priceMaxInput.setAttribute('value', '30');
+                priceMaxInput.setAttribute('step', '1');
+                minDiv.innerText = '5"';
+                maxDiv.innerText = '30"';
+            
+                priceSpan.append(priceMinInput, priceMaxInput);
+                filterPriceContent.append(minDiv, priceSpan, maxDiv);
+                
+                const rangeInput = document.querySelectorAll(".price");
+                rangeInput.forEach((input) => {
+                    input.addEventListener("input", (e) => {
+                      let minRange = parseInt(priceMinInput.value);
+                      let maxRange = parseInt(priceMaxInput.value);
+                      if (maxRange > minRange) {
+                            priceMinInput.setAttribute('value', minRange.toString());
+                            minDiv.innerText = minRange.toString() + '"';
+                          priceMaxInput.setAttribute('value', maxRange.toString());
+                          maxDiv.innerText = maxRange.toString() + '"';
+                      } else {
+                        minDiv.innerText = maxRange.toString() + '"';
+                        maxDiv.innerText = minRange.toString() + '"';
+                      }
+                    });
+                  });
+                  priceMinInput.addEventListener('change', filterP);
+                  priceMaxInput.addEventListener('change', filterP);
+        }
+
 
         function sortByPriceAsc(jsonObj: RootObject) {
             let wandsData: Product[] = jsonObj['products'];
