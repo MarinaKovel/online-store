@@ -204,6 +204,7 @@ class Products extends Component {
                 price.className = 'prod__desc';
                 addToCartBtn.className = 'buy__btn';
                 detailsBtn.className = 'buy__btn';
+                prodItem.setAttribute('id', (wandsData[i].id).toString());
     
                 prodName.textContent = wandsData[i].name;
                 core.textContent = 'Core: ' + wandsData[i].core;
@@ -239,6 +240,7 @@ class Products extends Component {
                 price.className = 'prod__desc';
                 addToCartBtn.className = 'buy__btn';
                 detailsBtn.className = 'buy__btn';
+                prodItem.setAttribute('id', (wandsData[i].id).toString());
     
                 prodName.textContent = wandsData[i].name;
                 price.textContent = wandsData[i].price + 'ʛ (Galleon)';
@@ -280,14 +282,13 @@ class Products extends Component {
                     } else if (isEmptyWood && !isEmptyCore) {
                         searchContent = elem.wood;
                     } else {
-                        searchContent = '';
+                        searchContent = inputValue[0];
                     }
                    
                     for (let i = 0; i < inputValue.length; i++) {
                         if (searchContent.includes(inputValue[i]) || inputValue[i] === '') {
                         filtered = [];
                         filtered.push(elem);
-                        console.log(inputValue)
                         if (view.className === 'view') {
                             addWandsGrid(filtered);
                             results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
@@ -315,9 +316,9 @@ class Products extends Component {
             wandsData.forEach(
                 function getMatch(elem) {
                     for (let i = 0; i < inputValue.length; i++) {
-                        if (elem.length >= inputValue[0] && elem.length <= inputValue[1] || inputValue[i] === '') {
-                        filtered = [];
-                        filtered.push(elem);
+                        if (+elem.length >= +inputValue[0] && +elem.length <= +inputValue[1] && !document.getElementById(elem.id.toString()) || inputValue[i] === '') {
+                            filtered = [];
+                            filtered.push(elem);
                         if (view.className === 'view') {
                             addWandsGrid(filtered);
                             results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
@@ -344,7 +345,7 @@ class Products extends Component {
             wandsData.forEach(
                 function getMatch(elem) {
                     for (let i = 0; i < inputValue.length; i++) {
-                        if (elem.price >= +inputValue[0] && elem.price <= +inputValue[1] || inputValue[i] === '') {
+                        if (elem.price >= +inputValue[0] && elem.price <= +inputValue[1] && !document.getElementById(elem.id.toString()) || inputValue[i] === '') {
                         filtered = [];
                         filtered.push(elem);
                         if (view.className === 'view') {
@@ -482,8 +483,8 @@ class Products extends Component {
                 priceMaxInput.setAttribute('max', '30');
                 priceMaxInput.setAttribute('value', '30');
                 priceMaxInput.setAttribute('step', '1');
-                minDiv.innerText = '5"';
-                maxDiv.innerText = '30"';
+                minDiv.innerText = '5ʛ';
+                maxDiv.innerText = '30ʛ';
             
                 priceSpan.append(priceMinInput, priceMaxInput);
                 filterPriceContent.append(minDiv, priceSpan, maxDiv);
@@ -495,12 +496,12 @@ class Products extends Component {
                       let maxRange = parseInt(priceMaxInput.value);
                       if (maxRange > minRange) {
                             priceMinInput.setAttribute('value', minRange.toString());
-                            minDiv.innerText = minRange.toString() + '"';
+                            minDiv.innerText = minRange.toString() + 'ʛ';
                           priceMaxInput.setAttribute('value', maxRange.toString());
                           maxDiv.innerText = maxRange.toString() + '"';
                       } else {
-                        minDiv.innerText = maxRange.toString() + '"';
-                        maxDiv.innerText = minRange.toString() + '"';
+                        minDiv.innerText = maxRange.toString() + 'ʛ';
+                        maxDiv.innerText = minRange.toString() + 'ʛ';
                       }
                     });
                   });
