@@ -284,7 +284,7 @@ class Products extends Component {
                     }
                    
                     for (let i = 0; i < inputValue.length; i++) {
-                        if (searchContent.includes(inputValue[i]) && elem.length >= inputValue[0] && elem.length <= inputValue[1] || inputValue[i] === '') {
+                        if (searchContent.includes(inputValue[i]) || inputValue[i] === '') {
                         filtered = [];
                         filtered.push(elem);
                         console.log(inputValue)
