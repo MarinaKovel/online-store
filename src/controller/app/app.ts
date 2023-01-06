@@ -63,7 +63,7 @@ class App {
     }
     run() {
         App.appViews.append(this.header.render());
-        App.renderNewView(PageIds.ShopPage); //set up start page
+        App.renderNewView(PageIds.DevPage); //set up start page
         this.router();
     }
 }
