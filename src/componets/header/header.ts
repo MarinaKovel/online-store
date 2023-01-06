@@ -23,10 +23,9 @@ class Header extends Component {
     }
 
     renderPageLinks() {
-        const headerLogo = document.createElement('span') as HTMLSpanElement;
+        const headerLogo = document.createElement('div') as HTMLSpanElement;
         headerLogo.classList.add('header__logo');
 
-        headerLogo.innerText = 'Ollivanders';
         const pageNav = document.createElement('nav') as HTMLElement;
         pageNav.classList.add('header__nav');
         links.forEach((link) => {
@@ -36,7 +35,15 @@ class Header extends Component {
             pageLink.innerText = `${link.text}`;
             pageNav.append(pageLink);
         });
-        this.container.append(headerLogo, pageNav);
+        const cartContainer = document.createElement('div');
+        cartContainer.className = 'cart__container';
+        let cartNum = document.createElement('div');
+        cartNum.classList.add('cart__num');
+        cartNum.innerText = '0';
+        let cartPrice = document.createElement('div');
+        cartPrice.classList.add('cart__price');
+        cartContainer.append(cartNum, cartPrice);
+        this.container.append(headerLogo, pageNav, cartContainer);
     }
 
     render(): HTMLElement {
