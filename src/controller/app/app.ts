@@ -54,6 +54,7 @@ class App {
             const hash = window.location.hash.slice(1);
             App.renderNewView(hash);
             console.log(hash);
+            console.log(window.location);
         });
     }
 
@@ -65,6 +66,7 @@ class App {
         App.appViews.append(this.header.render());
         App.renderNewView(PageIds.ShopPage); //set up start page
         this.router();
+        console.log(window.location);
     }
 }
 

@@ -21,7 +21,6 @@ export interface RootObject {
 }
 
 class Products extends Component {
-
     static TextObj = {
         reset: 'Reset Filters',
         copy: 'Copy Link',
@@ -43,7 +42,7 @@ class Products extends Component {
     constructor(tagName: string, className: string) {
         super(tagName, className);
     }
-    
+
     renderProductList() {
         const filtersContainer = document.createElement('div') as HTMLDivElement;
         const resetCopyContainer = document.createElement('div') as HTMLDivElement;
@@ -112,7 +111,7 @@ class Products extends Component {
         search.setAttribute('placeholder', 'Search your wand');
         search.setAttribute('name', 'search');
         search.setAttribute('autocomplete', 'off');
-        
+
         reset.innerText = Products.TextObj.reset;
         copy.innerText = Products.TextObj.copy;
         filterWoodName.innerText = Products.TextObj.filterWoodName;
@@ -136,7 +135,13 @@ class Products extends Component {
         resetCopyContainer.append(reset, copy);
         productContainer.append(viewSettings, productList);
         viewSettings.append(sort, results, searchForm, view);
-        sort.append(sortRandom, sortChoiceByRatingAsc, sortChoiceByRatingDesc, sortChoiceByPriceAsc, sortChoiceByPriceDesc)
+        sort.append(
+            sortRandom,
+            sortChoiceByRatingAsc,
+            sortChoiceByRatingDesc,
+            sortChoiceByPriceAsc,
+            sortChoiceByPriceDesc
+        );
         searchForm.append(search);
         this.container.append(filtersContainer, productContainer);
 
@@ -149,7 +154,7 @@ class Products extends Component {
         request.responseType = 'json';
         request.send();
 
-        request.onload = function() {
+        request.onload = function () {
             wands = request.response;
             getJson(wands);
             sortProd();
@@ -158,13 +163,13 @@ class Products extends Component {
             addFilterLength();
             addFilterPrice();
 
-            sort.addEventListener("change", filter);
-            reset.addEventListener("click", resetFilters);
-            copy.addEventListener("click", copyLink);
+            sort.addEventListener('change', filter);
+            reset.addEventListener('click', resetFilters);
+            copy.addEventListener('click', copyLink);
             view.addEventListener('click', changeView);
             searchForm.addEventListener('keyup', filter);
             searchForm.addEventListener('submit', searchSubmit);
-        }
+        };
 
         function getJson(jsonObj: RootObject) {
             wandsData = jsonObj['products'];
@@ -189,8 +194,8 @@ class Products extends Component {
             let arrWood: string[] = [];
             wandsData.forEach((elem) => arrWood.push(elem.wood));
             let woodCategories = Array.from(new Set(arrWood));
-            let woodCategoriesLowerCase = woodCategories.map(elem => elem.toLowerCase().split(' ').join(''));
-            
+            let woodCategoriesLowerCase = woodCategories.map((elem) => elem.toLowerCase().split(' ').join(''));
+
             for (let i = 0; i < woodCategories.length; i++) {
                 const woodDiv = document.createElement('div') as HTMLDivElement;
                 const woodInput = document.createElement('input') as HTMLInputElement;
@@ -213,8 +218,8 @@ class Products extends Component {
             let arrCore: string[] = [];
             wandsData.forEach((elem) => arrCore.push(elem.core));
             let coreCategories = Array.from(new Set(arrCore));
-            let coreCategoriesLowerCase = coreCategories.map(elem => elem.toLowerCase().split(' ').join(''));
-            
+            let coreCategoriesLowerCase = coreCategories.map((elem) => elem.toLowerCase().split(' ').join(''));
+
             for (let i = 0; i < coreCategories.length; i++) {
                 const coreDiv = document.createElement('div') as HTMLDivElement;
                 let coreInput = document.createElement('input') as HTMLInputElement;
@@ -236,97 +241,97 @@ class Products extends Component {
         function addFilterLength() {
             let arrLength: number[] = [];
             wandsData.forEach((elem) => arrLength.push(+elem.length));
-                const minDiv = document.createElement('div') as HTMLDivElement;
-                const maxDiv = document.createElement('div') as HTMLDivElement;
-                const lengthMinInput = document.createElement('input') as HTMLInputElement;
-                const lengthMaxInput = document.createElement('input') as HTMLInputElement;
-                const lengthSpan = document.createElement('span') as HTMLSpanElement;
+            const minDiv = document.createElement('div') as HTMLDivElement;
+            const maxDiv = document.createElement('div') as HTMLDivElement;
+            const lengthMinInput = document.createElement('input') as HTMLInputElement;
+            const lengthMaxInput = document.createElement('input') as HTMLInputElement;
+            const lengthSpan = document.createElement('span') as HTMLSpanElement;
 
-                lengthSpan.className = 'multi-range';
-                lengthMinInput.className = 'category length min';
-                lengthMaxInput.className = 'category length max';
-                lengthMinInput.setAttribute('type', 'range');
-                lengthMinInput.setAttribute('min', '9');
-                lengthMinInput.setAttribute('max', '18');
-                lengthMinInput.setAttribute('value', '9');
-                lengthMinInput.setAttribute('step', '1');
-                lengthMaxInput.setAttribute('type', 'range');
-                lengthMaxInput.setAttribute('min', '9');
-                lengthMaxInput.setAttribute('max', '18');
-                lengthMaxInput.setAttribute('value', '18');
-                lengthMaxInput.setAttribute('step', '1');
-                minDiv.innerText = '9"';
-                maxDiv.innerText = '18"';
-            
-                lengthSpan.append(lengthMinInput, lengthMaxInput);
-                filterLengthContent.append(minDiv, lengthSpan, maxDiv);
-                
-                const rangeInput = document.querySelectorAll(".length");
-                rangeInput.forEach((input) => {
-                    input.addEventListener("input", (e) => {
-                      let minRange = parseInt(lengthMinInput.value);
-                      let maxRange = parseInt(lengthMaxInput.value);
-                      if (maxRange > minRange) {
-                            lengthMinInput.setAttribute('value', minRange.toString());
-                            minDiv.innerText = minRange.toString() + '"';
-                          lengthMaxInput.setAttribute('value', maxRange.toString());
-                          maxDiv.innerText = maxRange.toString() + '"';
-                      } else {
+            lengthSpan.className = 'multi-range';
+            lengthMinInput.className = 'category length min';
+            lengthMaxInput.className = 'category length max';
+            lengthMinInput.setAttribute('type', 'range');
+            lengthMinInput.setAttribute('min', '9');
+            lengthMinInput.setAttribute('max', '18');
+            lengthMinInput.setAttribute('value', '9');
+            lengthMinInput.setAttribute('step', '1');
+            lengthMaxInput.setAttribute('type', 'range');
+            lengthMaxInput.setAttribute('min', '9');
+            lengthMaxInput.setAttribute('max', '18');
+            lengthMaxInput.setAttribute('value', '18');
+            lengthMaxInput.setAttribute('step', '1');
+            minDiv.innerText = '9"';
+            maxDiv.innerText = '18"';
+
+            lengthSpan.append(lengthMinInput, lengthMaxInput);
+            filterLengthContent.append(minDiv, lengthSpan, maxDiv);
+
+            const rangeInput = document.querySelectorAll('.length');
+            rangeInput.forEach((input) => {
+                input.addEventListener('input', (e) => {
+                    let minRange = parseInt(lengthMinInput.value);
+                    let maxRange = parseInt(lengthMaxInput.value);
+                    if (maxRange > minRange) {
+                        lengthMinInput.setAttribute('value', minRange.toString());
+                        minDiv.innerText = minRange.toString() + '"';
+                        lengthMaxInput.setAttribute('value', maxRange.toString());
+                        maxDiv.innerText = maxRange.toString() + '"';
+                    } else {
                         minDiv.innerText = maxRange.toString() + '"';
                         maxDiv.innerText = minRange.toString() + '"';
-                      }
-                    });
-                  });
-                  lengthMinInput.addEventListener('change', filter);
-                  lengthMaxInput.addEventListener('change', filter);
+                    }
+                });
+            });
+            lengthMinInput.addEventListener('change', filter);
+            lengthMaxInput.addEventListener('change', filter);
         }
 
         function addFilterPrice() {
             let arrPrice: number[] = [];
             wandsData.forEach((elem) => arrPrice.push(+elem.price));
-                const minDiv = document.createElement('div') as HTMLDivElement;
-                const maxDiv = document.createElement('div') as HTMLDivElement;
-                const priceMinInput = document.createElement('input') as HTMLInputElement;
-                const priceMaxInput = document.createElement('input') as HTMLInputElement;
-                const priceSpan = document.createElement('span') as HTMLSpanElement;
+            const minDiv = document.createElement('div') as HTMLDivElement;
+            const maxDiv = document.createElement('div') as HTMLDivElement;
+            const priceMinInput = document.createElement('input') as HTMLInputElement;
+            const priceMaxInput = document.createElement('input') as HTMLInputElement;
+            const priceSpan = document.createElement('span') as HTMLSpanElement;
 
-                priceSpan.className = 'multi-range2';
-                priceMinInput.className = 'category price min';
-                priceMaxInput.className = 'category price max';
-                priceMinInput.setAttribute('type', 'range');
-                priceMinInput.setAttribute('min', '5');
-                priceMinInput.setAttribute('max', '30');
-                priceMinInput.setAttribute('value', '5');
-                priceMinInput.setAttribute('step', '1');
-                priceMaxInput.setAttribute('type', 'range');
-                priceMaxInput.setAttribute('min', '5');
-                priceMaxInput.setAttribute('max', '30');
-                priceMaxInput.setAttribute('value', '30');
-                priceMaxInput.setAttribute('step', '1');
-                minDiv.innerText = '5ʛ';
-                maxDiv.innerText = '30ʛ';
-            
-                priceSpan.append(priceMinInput, priceMaxInput);
-                filterPriceContent.append(minDiv, priceSpan, maxDiv);
-                
-                const rangeInput = document.querySelectorAll(".price");
-                rangeInput.forEach((input) => {
-                    input.addEventListener("input", (e) => {
-                      let minRange = parseInt(priceMinInput.value);
-                      let maxRange = parseInt(priceMaxInput.value);
-                      if (maxRange > minRange) {
-                            priceMinInput.setAttribute('value', minRange.toString());
-                            minDiv.innerText = minRange.toString() + 'ʛ';
-                          priceMaxInput.setAttribute('value', maxRange.toString());
-                          maxDiv.innerText = maxRange.toString() + '"';
-                      } else {
+            priceSpan.className = 'multi-range2';
+            priceMinInput.className = 'category price min';
+            priceMaxInput.className = 'category price max';
+            priceMinInput.setAttribute('type', 'range');
+            priceMinInput.setAttribute('min', '5');
+            priceMinInput.setAttribute('max', '30');
+            priceMinInput.setAttribute('value', '5');
+            priceMinInput.setAttribute('step', '1');
+            priceMaxInput.setAttribute('type', 'range');
+            priceMaxInput.setAttribute('min', '5');
+            priceMaxInput.setAttribute('max', '30');
+            priceMaxInput.setAttribute('value', '30');
+            priceMaxInput.setAttribute('step', '1');
+            minDiv.innerText = '5ʛ';
+            maxDiv.innerText = '30ʛ';
+
+            priceSpan.append(priceMinInput, priceMaxInput);
+            filterPriceContent.append(minDiv, priceSpan, maxDiv);
+
+            const rangeInput = document.querySelectorAll('.price');
+            rangeInput.forEach((input) => {
+                input.addEventListener('input', (e) => {
+                    let minRange = parseInt(priceMinInput.value);
+                    let maxRange = parseInt(priceMaxInput.value);
+                    if (maxRange > minRange) {
+                        priceMinInput.setAttribute('value', minRange.toString());
+                        minDiv.innerText = minRange.toString() + 'ʛ';
+                        priceMaxInput.setAttribute('value', maxRange.toString());
+                        maxDiv.innerText = maxRange.toString() + '"';
+                    } else {
                         minDiv.innerText = maxRange.toString() + 'ʛ';
                         maxDiv.innerText = minRange.toString() + 'ʛ';
-                      }
-                    });
-                  });
-                  priceMinInput.addEventListener('change', filter);
-                  priceMaxInput.addEventListener('change', filter);
+                    }
+                });
+            });
+            priceMinInput.addEventListener('change', filter);
+            priceMaxInput.addEventListener('change', filter);
         }
 
         function filter() {
@@ -336,7 +341,7 @@ class Products extends Component {
             let inputValue: string[] = []; // Length min, length max, Price min, Price max
             let inputWood: string[] = []; // Wood
             let inputCore: string[] = []; // Core
-            console.log(inputValue)
+            console.log(inputValue);
 
             let inputsLength = document.getElementsByClassName('length');
             inputValue.push((inputsLength[0] as HTMLInputElement).value, (inputsLength[1] as HTMLInputElement).value);
@@ -363,30 +368,47 @@ class Products extends Component {
                 }
             }
 
-            wandsData.forEach(
-                function getMatch(elem) {
-                    let searchContent1 = elem.wood;
-                    let searchContent2 = elem.core;
-                    let searchContent3 = elem.length;
-                    let searchContent4 = elem.price;
-                    let searchContent5 = (elem.name + elem.wood + elem.core + elem.length + elem.stock + elem.rating + elem.discountPercentage + elem.price + elem.ownerOfSimilarWand + elem.description).toUpperCase();
+            wandsData.forEach(function getMatch(elem) {
+                let searchContent1 = elem.wood;
+                let searchContent2 = elem.core;
+                let searchContent3 = elem.length;
+                let searchContent4 = elem.price;
+                let searchContent5 = (
+                    elem.name +
+                    elem.wood +
+                    elem.core +
+                    elem.length +
+                    elem.stock +
+                    elem.rating +
+                    elem.discountPercentage +
+                    elem.price +
+                    elem.ownerOfSimilarWand +
+                    elem.description
+                ).toUpperCase();
 
-                    let inp1 = inputWood.join();
-                    let inp2 = inputCore.join();
-                    searchResult = search.value.trim().toUpperCase();
+                let inp1 = inputWood.join();
+                let inp2 = inputCore.join();
+                searchResult = search.value.trim().toUpperCase();
 
-                    if ((inp1.includes(searchContent1) || inp1 === '') && (inp2.includes(searchContent2) || inp2 === '') && (+searchContent3 >= +inputValue[0] && +searchContent3 <= +inputValue[1]) && (+searchContent4 >= +inputValue[2] && +searchContent4 <= +inputValue[3]) && (searchContent5.includes(searchResult) || searchResult === undefined)) {
-                        filtered.push(elem);
-                    }
+                if (
+                    (inp1.includes(searchContent1) || inp1 === '') &&
+                    (inp2.includes(searchContent2) || inp2 === '') &&
+                    +searchContent3 >= +inputValue[0] &&
+                    +searchContent3 <= +inputValue[1] &&
+                    +searchContent4 >= +inputValue[2] &&
+                    +searchContent4 <= +inputValue[3] &&
+                    (searchContent5.includes(searchResult) || searchResult === undefined)
+                ) {
+                    filtered.push(elem);
                 }
-            )
+            });
 
             addWandsGrid(filtered);
             results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
         }
 
         function addWandsGrid(wandsData: Product[]) {
-            results.innerText = Products.TextObj.resultText + ' ' + wandsData.length; 
+            results.innerText = Products.TextObj.resultText + ' ' + wandsData.length;
             for (let i = 0; i < wandsData.length; i++) {
                 const prodItem = document.createElement('div') as HTMLDivElement;
                 prodItem.style.backgroundImage = 'url(' + wandsData[i].thumbnail + ')';
@@ -400,7 +422,7 @@ class Products extends Component {
                 const price = document.createElement('div') as HTMLDivElement;
                 const addToCartBtn = document.createElement('button') as HTMLButtonElement;
                 const detailsBtn = document.createElement('button') as HTMLButtonElement;
-    
+
                 prodItem.className = 'product__item';
                 prodName.className = 'prod__name';
                 wood.className = 'prod__desc';
@@ -412,8 +434,8 @@ class Products extends Component {
                 price.className = 'prod__desc';
                 addToCartBtn.className = 'buy__btn';
                 detailsBtn.className = 'buy__btn';
-                prodItem.setAttribute('id', (wandsData[i].id).toString());
-    
+                prodItem.setAttribute('id', wandsData[i].id.toString());
+
                 prodName.textContent = wandsData[i].name;
                 core.textContent = 'Core: ' + wandsData[i].core;
                 wood.textContent = 'Wood: ' + wandsData[i].wood;
@@ -431,7 +453,7 @@ class Products extends Component {
         }
 
         function addWandsList(wandsData: Product[]) {
-            results.innerText = Products.TextObj.resultText + ' ' + wandsData.length; 
+            results.innerText = Products.TextObj.resultText + ' ' + wandsData.length;
             for (let i = 0; i < wandsData.length; i++) {
                 const prodItem = document.createElement('div') as HTMLDivElement;
                 prodItem.style.backgroundImage = 'url(' + wandsData[i].thumbnail + ')';
@@ -439,7 +461,7 @@ class Products extends Component {
                 const price = document.createElement('div') as HTMLDivElement;
                 const addToCartBtn = document.createElement('button') as HTMLButtonElement;
                 const detailsBtn = document.createElement('button') as HTMLButtonElement;
-    
+
                 productList.style.flexDirection = 'column';
                 prodName.style.height = 'auto';
                 price.style.fontSize = '2rem';
@@ -448,8 +470,8 @@ class Products extends Component {
                 price.className = 'prod__desc';
                 addToCartBtn.className = 'buy__btn';
                 detailsBtn.className = 'buy__btn';
-                prodItem.setAttribute('id', (wandsData[i].id).toString());
-    
+                prodItem.setAttribute('id', wandsData[i].id.toString());
+
                 prodName.textContent = wandsData[i].name;
                 price.textContent = wandsData[i].price + 'ʛ (Galleon)';
                 addToCartBtn.innerText = Products.TextObj.addToCartBtn;
@@ -463,7 +485,7 @@ class Products extends Component {
         function sortByPriceAsc(jsonObj: RootObject) {
             let wandsData: Product[] = jsonObj['products'];
             sortResult = 'sortByPriceAsc';
-            
+
             wandsData.sort((a, b) => {
                 let priceElA = a.price.toString();
                 let priceElB = b.price.toString();
@@ -476,14 +498,14 @@ class Products extends Component {
                     return -1;
                 }
                 return 0;
-              });
+            });
         }
 
         function sortByPriceDesc(jsonObj: RootObject) {
             let wandsData: Product[] = jsonObj['products'];
             sortResult = 'sortByPriceDesc';
-            
-              wandsData.sort((a, b) => {
+
+            wandsData.sort((a, b) => {
                 let priceElA = a.price.toString();
                 let priceElB = b.price.toString();
                 let numA = parseInt(priceElA);
@@ -495,13 +517,13 @@ class Products extends Component {
                     return -1;
                 }
                 return 0;
-              });
+            });
         }
 
         function sortByRatingAsc(jsonObj: RootObject) {
             let wandsData: Product[] = jsonObj['products'];
             sortResult = 'sortByRatingAsc';
-            
+
             wandsData.sort((a, b) => {
                 let ratingElA = a.rating.toString();
                 let ratingElB = b.rating.toString();
@@ -514,14 +536,14 @@ class Products extends Component {
                     return -1;
                 }
                 return 0;
-              });
+            });
         }
 
         function sortByRatingDesc(jsonObj: RootObject) {
             let wandsData: Product[] = jsonObj['products'];
             sortResult = 'sortByRatingDesc';
-            
-              wandsData.sort((a, b) => {
+
+            wandsData.sort((a, b) => {
                 let ratingElA = a.rating.toString();
                 let ratingElB = b.rating.toString();
                 let numA = parseInt(ratingElA);
@@ -533,7 +555,7 @@ class Products extends Component {
                     return -1;
                 }
                 return 0;
-              });
+            });
         }
 
         function searchSubmit(evt: Event) {
@@ -552,7 +574,7 @@ class Products extends Component {
                 filtered.length === 0 ? addWandsList(wandsData) : addWandsList(filtered);
             }
         }
-        
+
         function changeView() {
             view.classList.toggle('list');
             chooseView();
@@ -582,7 +604,7 @@ class Products extends Component {
             copytext.select();
             document.execCommand('copy');
             document.body.removeChild(copytext);
-          }
+        }
     }
 
     render(): HTMLElement {
