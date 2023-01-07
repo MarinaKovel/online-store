@@ -66,7 +66,6 @@ class App {
         App.appViews.append(this.header.render());
         App.renderNewView(PageIds.DevPage); //set up start page
         this.router();
-        console.log(window.location);
     }
 }
 
