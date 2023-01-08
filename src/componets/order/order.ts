@@ -1,5 +1,6 @@
 import './order.scss';
 import Component from '../compTemplate';
+import { PageIds } from '../../controller/app/app';
 
 export interface Product {
     id: number;
@@ -268,7 +269,7 @@ class Order extends Component {
             popup.innerHTML = "Thank you! Your order is proccessed.";
             popup.appendChild(finishImg);
             setTimeout(function(){
-                (location as unknown) = "https://google.com";
+              window.location.hash = PageIds.MainPage;
             }, 3000);
         })
     }
