@@ -362,7 +362,6 @@ class Products extends Component {
             let inputValue: string[] = []; // Length min, length max, Price min, Price max
             let inputWood: string[] = []; // Wood
             let inputCore: string[] = []; // Core
-            console.log(inputValue)
 
             let inputsLength = document.getElementsByClassName('length');
             inputValue.push((inputsLength[0] as HTMLInputElement).value, (inputsLength[1] as HTMLInputElement).value);
@@ -676,6 +675,8 @@ class Products extends Component {
             copytext.select();
             document.execCommand('copy');
             document.body.removeChild(copytext);
+            copy.innerText = 'Copied!';
+            setTimeout(() => { copy.innerText = Products.TextObj.copy; }, 1500);
           }
 
     }
