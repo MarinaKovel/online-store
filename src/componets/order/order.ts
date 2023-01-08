@@ -117,7 +117,7 @@ class Order extends Component {
         name.setAttribute('name', 'name');
         name.setAttribute('id', 'name');
         name.setAttribute('placeholder', ' ');
-        name.setAttribute('pattern', '([A-Za-zА-Яа-яЁё]{3,} ){1,}[A-Za-zА-Яа-яЁё]{3,}');
+        name.setAttribute('pattern', '([A-Za-zА-Яа-яЁё]{3,} ){1}([A-Za-zА-Яа-яЁё]{3,}[ ]?){1,}');
         name.setAttribute('title', 'Minimum 2 words with minimum 3 letters');
         name.setAttribute('autocomplete', 'off');
         name.required = true;
