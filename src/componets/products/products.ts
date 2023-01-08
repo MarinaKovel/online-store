@@ -19,6 +19,9 @@ export interface Product {
 export interface RootObject {
     products: Product[];
 }
+interface ObjectInterface {
+    [key: string]: number;
+}
 
 class Products extends Component {
     static TextObj = {
@@ -32,6 +35,7 @@ class Products extends Component {
         resultText: 'Results: ',
         searchText: 'Search',
         addToCartBtn: 'Add to cart',
+        addToCartBtn2: 'Add more',
         detailsBtn: 'Details',
         sortRandom: 'Sort options:',
         sortByRatingDescText: 'Sort by Rating ↓',
@@ -44,6 +48,28 @@ class Products extends Component {
     }
 
     renderProductList() {
+        let productsInCart: ObjectInterface = {0: 0};
+        let priceInCart: ObjectInterface = {price: 0};
+        let json = localStorage.getItem("cart") as string;
+        let jsonP = localStorage.getItem("totalPrice") as string;
+        let cart: ObjectInterface = JSON.parse(json);
+        let totalPrice: ObjectInterface = JSON.parse(jsonP);
+
+        if (cart) { productsInCart = cart; }
+        if (totalPrice) { priceInCart = totalPrice; }
+        let sum = 0;
+        for (let num of Object.values(productsInCart)) {
+            sum += num;
+        }
+
+        let cartNum = document.querySelector('.cart__num');
+        let cartPrice = document.querySelector('.cart__price');
+        (cartNum as HTMLDivElement).innerHTML = sum.toString();
+        if (priceInCart.price > 0) {
+            (cartPrice as HTMLDivElement).innerHTML = priceInCart.price.toString() + 'ʛ';
+            (cartPrice as HTMLDivElement).style.display = 'block';
+        }
+
         const filtersContainer = document.createElement('div') as HTMLDivElement;
         const resetCopyContainer = document.createElement('div') as HTMLDivElement;
         const reset = document.createElement('button') as HTMLButtonElement;
@@ -437,7 +463,7 @@ class Products extends Component {
                 stock.className = 'prod__desc';
                 discount.className = 'prod__desc';
                 price.className = 'prod__desc';
-                addToCartBtn.className = 'buy__btn';
+                addToCartBtn.classList.add('buy__btn', (wandsData[i].id).toString());
                 detailsBtn.className = 'buy__btn';
                 prodItem.setAttribute('id', wandsData[i].id.toString());
                 prodItem.setAttribute('data-link', `Wand${wandsData[i].id.toString()}`);
@@ -450,11 +476,45 @@ class Products extends Component {
                 stock.textContent = 'Stock: ' + wandsData[i].stock;
                 discount.textContent = 'Discount: ' + wandsData[i].discountPercentage + '%';
                 price.textContent = 'Price: ' + wandsData[i].price + 'ʛ';
-                addToCartBtn.innerText = Products.TextObj.addToCartBtn;
                 detailsBtn.innerText = Products.TextObj.detailsBtn;
+                if (productsInCart[i + 1] > 0) {
+                    addToCartBtn.innerText = Products.TextObj.addToCartBtn2;
+                } else {
+                    addToCartBtn.innerText = Products.TextObj.addToCartBtn;
+                }
 
                 productList.append(prodItem);
                 prodItem.append(prodName, core, wood, length, rating, stock, discount, price, addToCartBtn, detailsBtn);
+
+                addToCartBtn.addEventListener('click', () => {
+                    let stock = wandsData[i].stock;
+                    let key = (i + 1).toString();
+                    if (!productsInCart[key] && stock === 0) {
+                        productsInCart[key] = 0;
+                        (cartPrice as HTMLDivElement).style.display = 'none';
+                    } else if (!productsInCart[key] && stock > 0) {
+                        productsInCart[key] = 1;
+                        (cartPrice as HTMLDivElement).style.display = 'block';
+                        (cartPrice as HTMLDivElement).innerText = (+((cartPrice as HTMLDivElement).innerText.slice(0, -1)) + wandsData[i].price).toString() + 'ʛ';
+                        addToCartBtn.innerText = Products.TextObj.addToCartBtn2;
+                    } else if(productsInCart[key] && productsInCart[key] < stock) {
+                        productsInCart[key] = productsInCart[key] + 1;
+                        (cartPrice as HTMLDivElement).innerText = (+((cartPrice as HTMLDivElement).innerText.slice(0, -1)) + wandsData[i].price).toString() + 'ʛ';
+                        addToCartBtn.innerText = Products.TextObj.addToCartBtn2;
+                    } else if (productsInCart[key] && productsInCart[key] > stock) {
+                        productsInCart[key] = productsInCart[key];
+                    }
+                    cart = productsInCart;
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    let sum = 0;
+                    for (let num of Object.values(productsInCart)) {
+                        sum += num;
+                    }
+                    priceInCart.price = +((cartPrice as HTMLDivElement).innerText.slice(0, -1));
+                    totalPrice = priceInCart;
+                    localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
+                    (cartNum as HTMLDivElement).innerHTML = sum.toString();
+                });
             }
         }
 
@@ -483,11 +543,45 @@ class Products extends Component {
 
                 prodName.textContent = wandsData[i].name;
                 price.textContent = wandsData[i].price + 'ʛ (Galleon)';
-                addToCartBtn.innerText = Products.TextObj.addToCartBtn;
                 detailsBtn.innerText = Products.TextObj.detailsBtn;
+                if (productsInCart[i + 1] > 0) {
+                    addToCartBtn.innerText = Products.TextObj.addToCartBtn2;
+                } else {
+                    addToCartBtn.innerText = Products.TextObj.addToCartBtn;
+                }
 
                 productList.append(prodItem);
                 prodItem.append(prodName, price, addToCartBtn, detailsBtn);
+
+                addToCartBtn.addEventListener('click', () => {
+                    let stock = wandsData[i].stock;
+                    let key = (i + 1).toString();
+                    if (!productsInCart[key] && stock === 0) {
+                        productsInCart[key] = 0;
+                        (cartPrice as HTMLDivElement).style.display = 'none';
+                    } else if (!productsInCart[key] && stock > 0) {
+                        productsInCart[key] = 1;
+                        (cartPrice as HTMLDivElement).style.display = 'block';
+                        (cartPrice as HTMLDivElement).innerText = (+((cartPrice as HTMLDivElement).innerText.slice(0, -1)) + wandsData[i].price).toString() + 'ʛ';
+                        addToCartBtn.innerText = Products.TextObj.addToCartBtn2;
+                    } else if(productsInCart[key] && productsInCart[key] < stock) {
+                        productsInCart[key] = productsInCart[key] + 1;
+                        (cartPrice as HTMLDivElement).innerText = (+((cartPrice as HTMLDivElement).innerText.slice(0, -1)) + wandsData[i].price).toString() + 'ʛ';
+                        addToCartBtn.innerText = Products.TextObj.addToCartBtn2;
+                    } else if (productsInCart[key] && productsInCart[key] > stock) {
+                        productsInCart[key] = productsInCart[key];
+                    }
+                    cart = productsInCart;
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    let sum = 0;
+                    for (let num of Object.values(productsInCart)) {
+                        sum += num;
+                    }
+                    priceInCart.price = +((cartPrice as HTMLDivElement).innerText.slice(0, -1));
+                    totalPrice = priceInCart;
+                    localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
+                    (cartNum as HTMLDivElement).innerHTML = sum.toString();
+                });
             }
         }
 
@@ -613,7 +707,10 @@ class Products extends Component {
             copytext.select();
             document.execCommand('copy');
             document.body.removeChild(copytext);
-        }
+            copy.innerText = 'Copied!';
+            setTimeout(() => { copy.innerText = Products.TextObj.copy; }, 1500);
+          }
+
     }
 
     render(): HTMLElement {
