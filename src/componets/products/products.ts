@@ -423,6 +423,12 @@ class Products extends Component {
                 const addToCartBtn = document.createElement('button') as HTMLButtonElement;
                 const detailsBtn = document.createElement('button') as HTMLButtonElement;
 
+                detailsBtn.addEventListener('click', () => {
+                    const ARTICLE = document.querySelector('article');
+                    ARTICLE?.setAttribute('id', prodItem.getAttribute('data-link') as string);
+                    window.location.hash = `${ARTICLE?.getAttribute('id')}`;
+                });
+
                 prodItem.className = 'product__item';
                 prodName.className = 'prod__name';
                 wood.className = 'prod__desc';
@@ -435,6 +441,7 @@ class Products extends Component {
                 addToCartBtn.className = 'buy__btn';
                 detailsBtn.className = 'buy__btn';
                 prodItem.setAttribute('id', wandsData[i].id.toString());
+                prodItem.setAttribute('data-link', `Wand${wandsData[i].id.toString()}`);
 
                 prodName.textContent = wandsData[i].name;
                 core.textContent = 'Core: ' + wandsData[i].core;
@@ -462,6 +469,8 @@ class Products extends Component {
                 const addToCartBtn = document.createElement('button') as HTMLButtonElement;
                 const detailsBtn = document.createElement('button') as HTMLButtonElement;
 
+                // detailsBtn.addEventListener('click',())
+
                 productList.style.flexDirection = 'column';
                 prodName.style.height = 'auto';
                 price.style.fontSize = '2rem';
@@ -470,6 +479,7 @@ class Products extends Component {
                 price.className = 'prod__desc';
                 addToCartBtn.className = 'buy__btn';
                 detailsBtn.className = 'buy__btn';
+                prodItem.setAttribute('link', 'wand');
                 prodItem.setAttribute('id', wandsData[i].id.toString());
 
                 prodName.textContent = wandsData[i].name;

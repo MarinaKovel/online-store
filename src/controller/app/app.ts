@@ -5,6 +5,18 @@ import ErrorPage from '../../pages/error/error';
 import Page from '../../constants/page';
 import Header from '../../componets/header/header';
 
+import { WandsPageIDs } from '../../constants/wandsTypes';
+import WandPage from '../../componets/description/wand-page';
+
+const WandPages = Object.values(WandsPageIDs);
+function getWand(idPage: string, arr: string[]): string {
+    let testSting: string = '';
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === idPage) testSting = arr[i];
+    }
+    return `${testSting}`;
+}
+
 export const enum PageIds {
     MainPage = 'main-page',
     ShopPage = 'shop-page',
@@ -34,10 +46,16 @@ class App {
         } else if (idPage === PageIds.DevPage) {
             view = new DevsPage(idPage);
             this.defaultPageClassName = PageIds.DevPage;
+        } else if (idPage === getWand(idPage, WandsPageIDs)) {
+            const Article = document.querySelector('article');
+            idPage = getWand(idPage, WandsPageIDs);
+            console.log(getWand(idPage, WandsPageIDs));
+            Article?.remove();
+            view = new WandPage(idPage);
+            this.defaultPageClassName = getWand(idPage, WandsPageIDs);
         } else {
             idPage = PageIds.ErPage;
             view = new ErrorPage(idPage);
-
             this.defaultPageClassName = PageIds.ErPage;
         }
         if (view) {
@@ -54,7 +72,6 @@ class App {
             const hash = window.location.hash.slice(1);
             App.renderNewView(hash);
             console.log(hash);
-            console.log(window.location);
         });
     }
 
@@ -64,7 +81,7 @@ class App {
     }
     run() {
         App.appViews.append(this.header.render());
-        App.renderNewView(PageIds.DevPage); //set up start page
+        App.renderNewView(PageIds.ShopPage); //set up start page
         this.router();
     }
 }
