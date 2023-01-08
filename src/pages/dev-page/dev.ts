@@ -1,5 +1,5 @@
 import Page from '../../constants/page';
-import Order from '../../componets/order/order'; // Order
+import Description from '../../componets/description/description'; // Desc
 
 class DevsPage extends Page {
     static TextObj = {
@@ -12,8 +12,8 @@ class DevsPage extends Page {
         const title = this.createHeaderTitle(DevsPage.TextObj.DevPageTitle);
         this.pageView.append(title);
 
-        let order = new Order('section', 'order');  //add order
-        this.pageView.append(order.render());  //add order
+        let description = new Description('section', 'product');  //add desc
+        this.pageView.append(description.render());  //add desc
 
         return this.pageView;
     }
