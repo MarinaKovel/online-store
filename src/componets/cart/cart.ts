@@ -64,6 +64,7 @@ class Cart extends Component {
             (cartPrice as HTMLDivElement).style.display = 'block';
         }
 
+        const cartContainer = document.createElement('div');
         const leftContainer = document.createElement('div');
         const rightContainer = document.createElement('div');
         const rightTitle = document.createElement('h2');
@@ -89,8 +90,11 @@ class Cart extends Component {
         const buyBtn = document.createElement('button');
         let n = 0;
 
+        cartContainer.className = 'cart';
         leftContainer.className = 'left__container';
         rightContainer.className = 'right__container';
+        leftTitle.className = 'left__title';
+        rightTitle.className = 'right__title';
         productsNum.className = 'products-num';
         productsNumText.className = 'products-num__text';
         productsNumTotal.className = 'products-num__total';
@@ -134,6 +138,7 @@ class Cart extends Component {
         foundBtn.innerText = Cart.TextObj.foundBtn;
         promoInput.innerText = 'Code';
 
+        cartContainer.append(leftContainer, rightContainer);
         leftContainer.append(leftTitle);
         rightContainer.append(rightTitle, productsNum, productsPrice, applied, formPromo, foundCode, promoText, buyBtn);
         formPromo.append(promoInput);
@@ -142,7 +147,7 @@ class Cart extends Component {
         appliedCode.append(appliedName, appliedBtn);
         productsNum.append(productsNumText, productsNumTotal);
         productsPrice.append(productsPriceText, productsPriceTotal, productsPricePromo);
-        this.container.append(leftContainer, rightContainer);
+        this.container.append(cartContainer);
 
         let wands: RootObject;
         let wandsData: Product[];
@@ -175,6 +180,18 @@ class Cart extends Component {
                 productsPriceTotal.style.textDecoration = 'none';
                 productsPricePromo.style.display = 'none';
             })
+            let popup = document.querySelector('.order') as HTMLDivElement;
+        
+        buyBtn.onclick = function() {
+            console.log(popup)
+            popup.style.display = "block";
+            };
+        window.onclick = function(e) {
+            if (e.target == popup) {
+                popup.style.display = "none";
+            }
+            }
+
         }
 
         function getPromoCode() {
@@ -221,7 +238,6 @@ class Cart extends Component {
                     const upBtn = document.createElement('button');
                     const numInput = document.createElement('input');
                     const priceForType = document.createElement('span');
-
 
                     productContainer.className = 'prod__container';
                     count.className = 'count';
@@ -290,8 +306,6 @@ class Cart extends Component {
                                 (cartPrice as HTMLDivElement).style.display = 'none';
                             }
                             productsPriceTotal.innerText = priceInCart.price.toString() + 'ʛ';
-                            console.log(cartNum.innerText)
-                            console.log(totalPrice)
                         }
                         let sum = 0;
                         for (let num of Object.values(cart)) {
@@ -306,9 +320,6 @@ class Cart extends Component {
                             leftContainer.innerText = Cart.TextObj.emptyCart;
                         }
                         productsNumTotal.innerText = sum.toString();
-                        console.log(cart)
-                        console.log(totalPrice)
-
                     })
                     upBtn.addEventListener('click', () => {
                         if (cart[key] < wandsData[arrId[i] - 1].stock) {
@@ -331,15 +342,12 @@ class Cart extends Component {
                         }
                         cartNum.innerText = sum.toString();
                         productsNumTotal.innerText = sum.toString();
-                        console.log(cart)
-
                     })
                 }
-                
             }
         }
         }
-
+        
     }
     render(): HTMLElement {
         this.renderCart();
