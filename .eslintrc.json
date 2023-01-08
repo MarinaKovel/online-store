@@ -1,0 +1,10 @@
+{
+  "extends":["airbnb-typescript/base","plugin:import/recommended","plugin:prettier/recommended"],
+  "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+  "parserOptions": {
+    "project":"./tsconfig.json"
+  },
+  "rules":{
+    "no-console":"off"
+  }
+}

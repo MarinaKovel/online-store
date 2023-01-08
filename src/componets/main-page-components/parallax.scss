@@ -1,0 +1,141 @@
+:root {
+  --index: calc(1vw + 1vh);
+  --textSh: 0 0 15px black, 0 0 35px rgb(246, 6, 166);
+  --transition: transform 0.75s cubic-buzier(0.75, 0.2, 0, 1);
+}
+
+.main-page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  will-change: transform;
+  transition: var(--transition);
+  z-index: 4;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    background-image: url("https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/mv2.gif");
+    height: calc(var(--index) * 6);
+    background-repeat: no-repeat;
+    background-size: cover;
+    bottom: calc(var(--index) * -3);
+  }
+}
+
+.first__title {
+  font-size: calc(var(--index) * 2.5);
+  color: var(--titleColor);
+  text-shadow: var(--textSh);
+}
+
+.first__text {
+  margin-top: 5px;
+  font-size: calc(var(--index) * 1.25);
+  max-width: 300px;
+  text-align: center;
+  color: var(--titleColor);
+  text-shadow: var(--textSh);
+}
+
+.second__title {
+  font-size: calc(var(--index) * 2);
+  max-width: 600px;
+  text-align: center;
+  text-shadow: var(--textSh);
+  transition: var(--transition);
+  transform: translate3d(0, calc(var(--scrollTop) / 20), 0);
+  will-change: transform;
+}
+
+.second__text {
+  font-size: calc(var(--index) * 5);
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  text-shadow: var(--textSh);
+  transition: var(--transition);
+  transform: translate3d(0, calc(var(--scrollTop) / 13), 0);
+}
+.second__shop-link {
+  font-size: calc(var(--index) * 3);
+  margin-top: 10px;
+  transition: var(--transition);
+  transform: translate3d(0, calc(var(--scrollTop) / 21), 0);
+}
+
+.layers__base {
+  background-image: url("https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/base-layer.png");
+}
+
+.layers__midl {
+  background-image: url("https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/second-layer.png");
+}
+
+.layers__front {
+  background-image: url("https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/first-layer.png");
+}
+
+.app {
+  background-color: black;
+}
+
+.layers {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  will-change: transform;
+}
+
+.layer {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center left;
+  z-index: 2;
+  transition: var(--transition);
+}
+
+.main__first {
+  z-index: 1;
+  transition: var(--transition);
+  transform: translate3d(0, calc(var(--scrollTop) / 2), 0);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-shadow: 1px 1px 2px rgb(13, 12, 13);
+}
+.main__second {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: url("https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/Ollivanders.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.layers__base {
+  transform: translate3d(0, calc(var(--scrollTop) / 1.6), 0);
+  z-index: 0;
+}
+
+.layers__midl {
+  transform: translate3d(0, calc(var(--scrollTop) / 2.5), 0);
+}
+.layers__front {
+  transform: translate3d(0, calc(var(--scrollTop) / 5.7), 0);
+}

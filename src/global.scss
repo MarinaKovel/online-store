@@ -1,0 +1,19 @@
+body {
+  font-family: "HarryP";
+  // background: black;
+  color: gold;
+  font-size: 50px;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  height: 100%;
+}
+
+.main-page,
+.shop-page,
+.devs-page {
+  height: 100%;
+}

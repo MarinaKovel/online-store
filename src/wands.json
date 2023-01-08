@@ -1,0 +1,545 @@
+{"products":[
+    {
+      "id": 1,
+      "name": "Elder wand with Thestral tail hair",
+      "wood": "Elder",
+      "core": "Thestral tail hair",
+      "length": 15,
+      "ownerOfSimilarWand": "Albus Dumbledore",
+      "description": "The rarest wand wood of all, and reputed to be deeply unlucky, the elder wand is trickier to master than any other. It contains powerful magic, but scorns to remain with any owner who is not the superior of his or her company; it takes a remarkable wizard to keep the elder wand for any length of time. This core type was regarded as an unstable, if not difficult substance to use in wand making.",
+      "price": 21,
+      "discountPercentage": 10,
+      "rating": 5,
+      "stock": 3,
+      "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/01_Dumbledore_thumbnail.png",
+      "images": [
+        "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/01_Dumbledore_large1.jpg",
+        "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/01_Dumbledore_large2.jpg",
+        "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/01_Dumbledore_large3.jpg"
+      ]
+    },
+    {
+        "id": 2,
+        "name": "Yew wand with Dragon heartstring",
+        "wood": "Yew",
+        "core": "Dragon heartstring",
+        "length": 9,
+        "ownerOfSimilarWand": "Ginny Weasley",
+        "description": "A yew wand is suited for a person who is a fierce protector of others. Yew wands are among the rarer kinds, and their ideal matches are likewise unusual, and occasionally notorious. The wand of yew is reputed to endow its possessor with the power of life and death. Dragon heartstrings produce wands with the most power, and which are capable of the most flamboyant spells.",
+        "price": 10,
+        "discountPercentage": 10,
+        "rating": 4,
+        "stock": 8,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/02_Ginny_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/02_Ginny_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/02_Ginny_large2.jpg"
+        ]
+      },
+    {
+      "id": 3,
+      "name": "Vine wand with Dragon heartstring",
+      "wood": "Vine",
+      "core": "Dragon heartstring",
+      "length": 10.75,
+      "ownerOfSimilarWand": "Hermione Granger",
+      "description": "Vine wands are among the less common types, and I have been intrigued to notice that their owners are nearly always those witches or wizards who seek a greater purpose, who have a vision beyond the ordinary and who frequently astound those who think they know them best. Dragon wands tended to learn more quickly than other types.",
+      "price": 23,
+      "discountPercentage": 10,
+      "rating": 5,
+      "stock": 1,
+      "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/03_Hermione_thumbnail.png",
+      "images": [
+        "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/03_Hermione_large1.jpg",
+        "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/03_Hermione_large2.jpg",
+        "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/03_Hermione_large3.jpg"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Rosewood wand with Veela hair",
+      "wood": "Rosewood",
+      "core": "Veela hair",
+      "length": 9.5,
+      "ownerOfSimilarWand": "Fleur Delacour",
+      "description": "In this wand the core is a hair from Fleur Delacour's grandmother, who was a Veela. I did not use Veela hair because it made for 'temperamental' wands. Rosewood wands are quite rare. They are not very compatible with Dark magic as this wood represents love and purity. Rosewood wands are known to excel in love spells and healing magic.",
+      "price": 16,
+      "discountPercentage": 10,
+      "rating": 5,
+      "stock": 1,
+      "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/04_FleurDelacour_thumbnail.png",
+      "images": [
+        "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/04_FleurDelacour_large1.jpg",
+        "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/04_FleurDelacour_large2.jpg"
+      ]
+    },
+    {
+        "id": 5,
+        "name": "Ash wand with Unicorn hair",
+        "wood": "Ash",
+        "core": "Unicorn hair",
+        "length": 12.25,
+        "ownerOfSimilarWand": "Cedric Diggory",
+        "description": "This wand was 'pleasantly springy'; hair from particularly fine male unicorn (seventeen hands high), which nearly gored me with its horn after he plucked its tail hair. Ash people are kind and generous with a gift for seeing what is beautiful in the world and in others. Ash people should be careful that their romantic hearts do not lead them into danger.",
+        "price": 19,
+        "discountPercentage": 10,
+        "rating": 4,
+        "stock": 0,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/05_Cederic_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/05_Cederic_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/05_Cederic_large2.jpg"
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Cherry wand with Unicorn hair",
+        "wood": "Cherry",
+        "core": "Unicorn hair",
+        "length": 13,
+        "ownerOfSimilarWand": "Neville Longbottom",
+        "description": "This very rare wand wood creates a wand of strange power, most highly prized by the wizarding students of the school of Mahoutokoro in Japan, where those who own cherry wands have special prestige. They are the most faithful of all wands, and usually remain strongly attached to their first owner, irrespective of whether they are an accomplished witch or wizard.",
+        "price": 11,
+        "discountPercentage": 10,
+        "rating": 5,
+        "stock": 15,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/06_Neville_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/06_Neville_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/06_Neville_large2.jpg"
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Ebony wand with Triple core",
+        "wood": "Ebony",
+        "core": "Triple core",
+        "length": 9,
+        "ownerOfSimilarWand": "Severus Snape",
+        "description": "Crafted from ebony from the Connemara mountains and a hardly-ever seen triple core: a phoenix tailfeather and the heartstrings of a Romanian ridgeback and a kelpie, it is an extremely powerful combination, temperamental with any other wizard who might have tried it, even Tom Riddle himself. This jet-black wand wood has an impressive appearance and reputation, being highly suited to all manner of combative magic, and to Transfiguration.",
+        "price": 19,
+        "discountPercentage": 10,
+        "rating": 4,
+        "stock": 0,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/07_Snape_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/07_Snape_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/07_Snape_large2.jpg"
+        ]
+    },
+    {
+        "id": 8,
+        "name": "Swamp mayhaw wand with Rougarou hair",
+        "wood": "Swamp mayhaw",
+        "core": "Rougarou hair",
+        "length": 13.5,
+        "ownerOfSimilarWand": "Seraphina Picquery",
+        "description": "It was crafted by Violetta Beauvais and was, like all Beauvais wands, made of swamp mayhaw wood with a rougarou hair core. The wand has a pink jewelled handle, quite simple, quite classic, influenced by deco, and is ebony, tipped with a silver clasp around it.  Rougarou hair was used as a wand core by wandmaker Violetta Beauvais. According to wandlore, wands containing the hair of this beast are rather suitable for performing the Dark Arts.",
+        "price": 17,
+        "discountPercentage": 10,
+        "rating": 3,
+        "stock": 1,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/08_Seraphina_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/08_Seraphina_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/08_Seraphina_large2.jpg"
+        ]
+    },
+    {
+        "id": 9,
+        "name": "Hornbeam wand with Dragon heartstring",
+        "wood": "Hornbeam",
+        "core": "Dragon heartstring",
+        "length": 10.25,
+        "ownerOfSimilarWand": "Viktor Krum",
+        "description": "This wand is thicker than usual, and made by Gregorovitch. Hornbeam selects for its life mate the talented witch or wizard with a single, pure passion, which some might call obsession (though I prefer the term 'vision'), which will almost always be realised. As a rule, dragon heartstrings produced wands with the most power, and which were capable of the most flamboyant spells.",
+        "price": 11,
+        "discountPercentage": 10,
+        "rating": 5,
+        "stock": 1,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/09_ViktorKrum_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/09_ViktorKrum_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/09_ViktorKrum_large2.jpg"
+        ]
+    },
+    {
+        "id": 10,
+        "name": "Elder wand with Dragon heartstring",
+        "wood": "Elder",
+        "core": "Dragon heartstring",
+        "length": 15,
+        "ownerOfSimilarWand": "Gellert Grindelwald",
+        "description": "It has certain identifying characteristics that those who are learned in wandlore recognize... Whether it needs to pass by murder, I do not know. Its history is bloody, but that may be simply due to the fact that it is such a desirable object, and arouses such passions in wizards. Immensely powerful, dangerous in the wrong hands, and an object of incredible fascination to all of us who study the power of wands.",
+        "price": 24,
+        "discountPercentage": 10,
+        "rating": 4,
+        "stock": 6,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/10_Grindelwalds_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/10_Grindelwalds_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/10_Grindelwalds_large2.jpg"
+        ]
+    },
+    {
+        "id": 11,
+        "name": "Blackthorn wand with Troll whisker",
+        "wood": "Blackthorn",
+        "core": "Troll whisker",
+        "length": 9,
+        "ownerOfSimilarWand": "Sir Cadogan",
+        "description": "According to legend, this wand was made from blackthorn and Troll whiskers as a core. Blackthorn, which is a very unusual wand wood, has the reputation, in my view well-merited, of being best suited to a warrior. Troll whiskers are considered an inferior substance to my three Supreme Cores (Unicorn hair, Dragon heartstring and Phoenix feather).",
+        "price": 5,
+        "discountPercentage": 10,
+        "rating": 4,
+        "stock": 0,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/11_Cadogan_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/11_Cadogan_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/11_Cadogan_large2.jpg"
+        ]
+    },
+    {
+        "id": 12,
+        "name": "Walnut wand with Dragon heartstring",
+        "wood": "Walnut",
+        "core": "Dragon heartstring",
+        "length": 12.75,
+        "ownerOfSimilarWand": "Bellatrix Lestrange",
+        "description": "This wand was described as 'unyielding'. Highly intelligent witches and wizards ought to be offered a walnut wand for trial first, because in nine cases out of ten, the two will find in each other their ideal mate. The dragon wand tended to be easiest to turn to the Dark Arts, though it would not incline that way of its own accord.",
+        "price": 16,
+        "discountPercentage": 10,
+        "rating": 4,
+        "stock": 1,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/12_Bellatrix_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/12_Bellatrix_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/12_Bellatrix_large2.jpg"
+        ]
+    },
+    {
+        "id": 13,
+        "name": "Alder wand with Unicorn hair",
+        "wood": "Alder",
+        "core": "Unicorn hair",
+        "length": 9,
+        "ownerOfSimilarWand": "Quirinus Quirrell",
+        "description": "Alder is an unyielding wood, yet I have discovered that its ideal owner is not stubborn or obstinate, but often helpful, considerate and most likeable. Alder wood is well suited for making flutes and pipes, and for building bridges. Alder people are adventurous travellers and confident decision makers who trust their inner voices. Alder people should work hard to maintain a balance between work and play.",
+        "price": 12,
+        "discountPercentage": 10,
+        "rating": 4,
+        "stock": 4,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/13_Quirrell_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/13_Quirrell_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/13_Quirrell_large2.jpg"
+        ]
+    },
+    {
+        "id": 14,
+        "name": "Cypress wand with Unicorn hair",
+        "wood": "Cypress",
+        "core": "Unicorn hair",
+        "length": 10.25,
+        "ownerOfSimilarWand": "Remus Lupin",
+        "description": "Cypress wands are said to be well-matched to wizards who are self-sacrificing and willing to die a heroic death. Cypress wands are associated with nobility. Unicorn hair generally produces the most consistent magic, and is least subject to fluctuations and blockages. These are the most faithful of all wands, and usually remain strongly attached to their first owner, irrespective of whether they are an accomplished witch or wizard.",
+        "price": 9,
+        "discountPercentage": 10,
+        "rating": 5,
+        "stock": 2,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/14_Lupin_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/14_Lupin_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/14_Lupin_large2.jpg"
+        ]
+    },
+    {
+        "id": 15,
+        "name": "Hawthorn wand with Unicorn hair",
+        "wood": "Hawthorn",
+        "core": "Unicorn hair",
+        "length": 10,
+        "ownerOfSimilarWand": "Draco Malfoy",
+        "description": "The wandmaker Gregorovitch wrote that hawthorn 'makes a strange, contradictory wand, as full of paradoxes as the tree that gave it birth, whose leaves and blossoms heal, and yet whose cut branches smell of death.' Minor disadvantages of unicorn hair are that they don't make the most powerful wands and that they are prone to melancholy if seriously mishandled, meaning that the hair may have 'died' and needs replacing.",
+        "price": 6,
+        "discountPercentage": 10,
+        "rating": 4,
+        "stock": 8,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/15_DracoMalfoi_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/15_DracoMalfoi_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/15_DracoMalfoi_large2.jpg"
+        ]
+    },
+    {
+        "id": 16,
+        "name": "Fir wand with Dragon heartstring",
+        "wood": "Fir",
+        "core": "Dragon heartstring",
+        "length": 9.5,
+        "ownerOfSimilarWand": "Minerva McGonagall",
+        "description": "My august grandfather, Gerbold Octavius Ollivander, always called wands of this wood 'the survivor's wand,' because he had sold it to three wizards who subsequently passed through mortal peril unscathed. Dragon wands tended to learn more quickly than other types. While they could change allegiance if won from their original master, they always bonded strongly with the current owner.",
+        "price": 24,
+        "discountPercentage": 10,
+        "rating": 5,
+        "stock": 3,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/16_Minevra_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/16_Minevra_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/16_Minevra_large2.jpg"
+        ]
+    },
+    {
+        "id": 17,
+        "name": "Cherry wand with Unicorn hair",
+        "wood": "Cherry",
+        "core": "Unicorn hair",
+        "length": 9.75,
+        "ownerOfSimilarWand": "Mary Cattermole",
+        "description": "Cherry wands are the most faithful of all wands, and usually remain strongly attached to their first owner, irrespective of whether they were an accomplished witch or wizard. Unicorn hair generally produced the most consistent magic, and was least subject to fluctuations and blockages. Wands with unicorn cores were generally the most difficult to turn to the Dark Arts.",
+        "price": 10,
+        "discountPercentage": 10,
+        "rating": 4,
+        "stock": 5,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/17_Cattermole_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/17_Cattermole_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/17_Cattermole_large2.jpg"
+        ]
+    },
+    {
+        "id": 18,
+        "name": "Larch wand with Phoenix feather",
+        "wood": "Larch",
+        "core": "Phoenix feather",
+        "length": 10.5,
+        "ownerOfSimilarWand": "Celestina Warbeck",
+        "description": "Strong, durable and warm in colour, larch has long been valued as an attractive and powerful wand wood. Its reputation for instilling courage and confidence in the user has ensured that demand has always outstripped supply. This is the rarest core type. Phoenix feathers were capable of the greatest range of magic, though they may have taken longer than either unicorn or dragon cores to reveal this.",
+        "price": 18,
+        "discountPercentage": 10,
+        "rating": 3,
+        "stock": 2,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/18_Warbeck_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/18_Warbeck_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/18_Warbeck_large2.jpg"
+        ]
+    },
+    {
+        "id": 19,
+        "name": "The Diadem of Ravenclaw Wand",
+        "wood": "Chestnut",
+        "core": "Dragon heartstring",
+        "length": 18,
+        "ownerOfSimilarWand": "New type",
+        "description": "Inspired by the powerful and famed Diadem of the Ravenclaw House is this bespoke Diadem of Ravenclaw Wand. This ornate wand features decorative detailing of the lost Diadem including pristine sapphire-like stones, and unique metalwork on its handle. Created with the Ravenclaw house in mind, this unique wand is designed for a Ravenclaw who finds guidance in her wise words.",
+        "price": 22,
+        "discountPercentage": 10,
+        "rating": 4,
+        "stock": 2,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/19_DiademofRavenclaw_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/19_DiademofRavenclaw_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/19_DiademofRavenclaw_large2.jpg"
+        ]
+    },
+    {
+        "id": 20,
+        "name": "Holly wand with Phoenix feather",
+        "wood": "Holly",
+        "core": "Phoenix feather",
+        "length": 11,
+        "ownerOfSimilarWand": "Harry Potter",
+        "description": "'Brother' to Voldemort's wand — the core tail feathers are both from Fawkes. This was the rarest core type. Phoenix feathers were capable of the greatest range of magic, though they may have taken longer than either unicorn or dragon cores to reveal this. They showed the most initiative, sometimes acting of their own accord, a quality that many witches and wizards disliked.",
+        "price": 30,
+        "discountPercentage": 10,
+        "rating": 5,
+        "stock": 1,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/20_Harry_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/20_Harry_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/20_Harry_large2.jpg"
+        ]
+    },
+    {
+        "id": 21,
+        "name": "Mahogany wand with Dragon heartstring",
+        "wood": "Mahogany",
+        "core": "Dragon heartstring",
+        "length": 11,
+        "ownerOfSimilarWand": "James Potter",
+        "description": "This wand is 'excellent for transfiguration.' As a rule, dragon heartstrings produced wands with the most power, and which were capable of the most flamboyant spells. While they could change allegiance if won from their original master, they always bonded strongly with the current owner. It was also the most prone of the three cores to accidents, being somewhat temperamental.",
+        "price": 24,
+        "discountPercentage": 10,
+        "rating": 5,
+        "stock": 1,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/21_JamesPotter_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/21_JamesPotter_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/21_JamesPotter_large2.jpg"
+        ]
+    },
+    {
+        "id": 22,
+        "name": "The Cup of Hufflepuff Wand",
+        "wood": "Chestnut",
+        "core": "Dragon heartstring",
+        "length": 18,
+        "ownerOfSimilarWand": "New type",
+        "description": "A design is inspired by elements of Helga Hufflepuff’s cup, with a gold fluted handle and topped by a relief sculpture of a badger, the House mascot. This wand is for Hufflepuff students who cherish the history of their house-founder and always seeks to emulate her kind and fair demeanour. The wand is presented in a high-quality box, complete with vellum paper overlay and information card. Part of the Exclusive Design Collection Series.",
+        "price": 22,
+        "discountPercentage": 10,
+        "rating": 4,
+        "stock": 5,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/22_TheCupofHufflepuff_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/22_TheCupofHufflepuff_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/22_TheCupofHufflepuff_large2.jpg"
+        ]
+    },
+    {
+        "id": 23,
+        "name": "Yew wand with Phoenix feather",
+        "wood": "Yew",
+        "core": "Phoenix feather",
+        "length": 13,
+        "ownerOfSimilarWand": "Tom Riddle",
+        "description": "This wand is 'brother' to Harry Potter's wand — the core tail feathers are both from Fawkes. Yew wands are among the rarer kinds, and their ideal matches are likewise unusual, and occasionally notorious. The wand of yew is reputed to endow its possessor with the power of life and death. Phoenix feathers are capable of the greatest range of magic, though they may have taken longer than either unicorn or dragon cores to reveal this.",
+        "price": 24,
+        "discountPercentage": 10,
+        "rating": 5,
+        "stock": 1,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/23_TomRiddle_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/23_TomRiddle_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/23_TomRiddle_large2.jpg"
+        ]
+    },
+    {
+        "id": 24,
+        "name": "Cedar wand with Dragon heartstring",
+        "wood": "Cedar",
+        "core": "Dragon heartstring",
+        "length": 10.25,
+        "ownerOfSimilarWand": "Horace Slughorn",
+        "description": "Fairly flexible wand. Whenever I meet one who carries a cedar wand, I find strength of character and unusual loyalty. My father, Gervaise Ollivander, used always to say, 'you will never fool the cedar carrier,' and I agree: the cedar wand finds its perfect home where there is perspicacity and perception. As a rule, dragon heartstrings produce wands with the most power, and which are capable of the most flamboyant spells.",
+        "price": 21,
+        "discountPercentage": 10,
+        "rating": 3,
+        "stock": 2,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/24_Slughorn_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/24_Slughorn_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/24_Slughorn_large2.jpg"
+        ]
+    },
+    {
+        "id": 25,
+        "name": "The Locket Of Slytherin Wand",
+        "wood": "Chestnut",
+        "core": "Dragon heartstring",
+        "length": 18,
+        "ownerOfSimilarWand": "New type",
+        "description": "A wand inspired by the Slytherin Locket artefact, with an octagonal handle like the eight-sided locket. The wand is embellished with etched runes and includes an emerald-like stone, evocative of the locket's decorative features. A proud Slytherin who seeks artefacts from the House's past will not resist this wand. The wand is presented in a high-quality box, complete with vellum paper overlay and an information card.",
+        "price": 22,
+        "discountPercentage": 10,
+        "rating": 4,
+        "stock": 5,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/25_TheLocketofSlytherin_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/25_TheLocketofSlytherin_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/25_TheLocketofSlytherin_large2.jpg"
+        ]
+    },
+    {
+        "id": 26,
+        "name": "The Sword of Gryffindor Wand",
+        "wood": "Chestnut",
+        "core": "Dragon heartstring",
+        "length": 18,
+        "ownerOfSimilarWand": "New type",
+        "description": "This wand is inspired by elements of house-founder, Godric Gryffindor’s sword, known to be 'the best duelist of his time'. It is a sublime choice for Gryffindor students seeking a connection with their house history and ancestry, and for those who possess the traits of courage and bravery, like Godric Gryffindor. The wand is presented in a high-quality box, complete with vellum paper overlay and an information card.",
+        "price": 22,
+        "discountPercentage": 10,
+        "rating": 5,
+        "stock": 5,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/26_SwordofGriffindor_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/26_SwordofGriffindor_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/26_SwordofGriffindor_large2.jpg"
+        ]
+    },
+    {
+        "id": 27,
+        "name": "Willow wand with Unicorn hair",
+        "wood": "Willow",
+        "core": "Unicorn hair",
+        "length": 14,
+        "ownerOfSimilarWand": "Ron Weasley",
+        "description": "Unicorn hair generally produces the most consistent magic, and is least subject to fluctuations and blockages. Wands with unicorn cores are generally the most difficult to turn to the Dark Arts. They are the most faithful of all wands, and usually remain strongly attached to their first owner, irrespective of whether they were an accomplished witch or wizard.",
+        "price": 23,
+        "discountPercentage": 10,
+        "rating": 5,
+        "stock": 3,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/27_Ron_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/27_Ron_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/27_Ron_large2.jpg"
+        ]
+    },
+    {
+        "id": 28,
+        "name": "Loyal Magic Caster Wand",
+        "wood": "Cypress",
+        "core": "Dragon heartstring",
+        "length": 10.5,
+        "ownerOfSimilarWand": "New type",
+        "description": "Ethereal and hypnotic, the design of this wand is truly captivating. Striated with a round orb at the end of its handle, it exudes a protective feeling. Appealing to owners who are wise beyond their years, it is a perfect match for those who value grace and artistry.",
+        "price": 25,
+        "discountPercentage": 10,
+        "rating": 5,
+        "stock": 4,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/28_Loyal-GlamShot_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/28_Loyal-GlamShot_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/28_Loyal-GlamShot_large2.jpg"
+        ]
+    },
+    {
+        "id": "29",
+        "name": "Honourable Magic Caster Wand",
+        "wood": "Cypress",
+        "core": "Dragon heartstring",
+        "length": 10.5,
+        "ownerOfSimilarWand": "New type",
+        "description": "Rugged and aged in appearance, this wand was designed for those with powerful intuition and an affinity for the magic of the natural world. Its warmth will draw those with strength, courage, and conviction. For the best or worst of times, this wand feels as exemplary as the one who wields it.",
+        "price": 25,
+        "discountPercentage": 10,
+        "rating": 5,
+        "stock": 5,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/29_Honourable-GlamShot_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/29_Honourable-GlamShot_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/29_Honourable-GlamShot_large2.jpg"
+        ]
+    },
+    {
+        "id": 30,
+        "name": "Defiant Magic Caster Wand",
+        "wood": "Cypress",
+        "core": "Dragon heartstring",
+        "length": 10.5,
+        "ownerOfSimilarWand": "New type",
+        "description": "Imposing in appearance, the design of this wand is slightly bent and features visible cracks – attributes, rather than imperfections, which embody a sense of internal strength. It is a perfect match for those who hold fast to their beliefs, regardless of how they are perceived.",
+        "price": 25,
+        "discountPercentage": 10,
+        "rating": 5,
+        "stock": 2,
+        "thumbnail": "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/30_Defiant-GlamShot_thumbnail.png",
+        "images": [
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/30_Defiant-GlamShot_large1.jpg",
+          "https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/30_Defiant-GlamShot_large2.jpg"
+        ]
+    }
+  ]
+  }

@@ -1,0 +1,45 @@
+.header {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 13;
+}
+
+.header__nav {
+  display: flex;
+  flex: 1 1 auto;
+  gap: 30px;
+  justify-content: flex-end;
+  text-shadow: 1px 1px 2px rgb(13, 12, 13);
+}
+
+.nav__link {
+  font-size: 35px;
+  transition: all 1s ease-in-out;
+  &:hover {
+    color: black;
+    transition: all 1s ease-in-out;
+    animation: pulsate 0.11s ease-in-out infinite alternate;
+    @keyframes pulsate {
+      100% {
+        text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #f09, 0 0 80px #f09, 0 0 90px #f09,
+          0 0 100px #f09, 0 0 150px #f09;
+      }
+
+      0% {
+        text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 18px #fff, 0 0 38px #f09, 0 0 73px #f09, 0 0 80px #f09,
+          0 0 94px #f09, 0 0 140px #f09;
+      }
+    }
+  }
+}
+.header__logo {
+  font-size: 40px;
+  color: Gold;
+  font-family: "HarryP_2";
+  text-shadow: 1px 1px 2px rgb(13, 12, 13);
+}
