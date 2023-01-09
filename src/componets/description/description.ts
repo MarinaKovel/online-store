@@ -183,6 +183,76 @@ class Description extends Component {
                 localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
                 (cartNum as HTMLDivElement).innerHTML = sum.toString();
             });
+            buyNow.addEventListener('click', () => {
+                let arrKeys = [];
+                let arrValues = [];
+                for (let key in cart) {
+                    arrKeys.push(key);
+                    arrValues.push(cart[key]);
+                }
+                if (arrKeys.length === 0 ) {
+                    let stock = products[i].stock;
+                let key = (i + 1).toString();
+                if (!productsInCart[key] && stock === 0) {
+                    productsInCart[key] = 0;
+                    (cartPrice as HTMLDivElement).style.display = 'none';
+                } else if (!productsInCart[key] && stock > 0) {
+                    productsInCart[key] = 1;
+                    (cartPrice as HTMLDivElement).style.display = 'block';
+                    (cartPrice as HTMLDivElement).innerText = (+((cartPrice as HTMLDivElement).innerText.slice(0, -1)) + products[i].price).toString() + 'ʛ';
+                } else if(productsInCart[key] && productsInCart[key] < stock) {
+                    productsInCart[key] = productsInCart[key] + 1;
+                    (cartPrice as HTMLDivElement).innerText = (+((cartPrice as HTMLDivElement).innerText.slice(0, -1)) + products[i].price).toString() + 'ʛ';
+                } else if (productsInCart[key] && productsInCart[key] > stock) {
+                    productsInCart[key] = productsInCart[key];
+                }
+                cart = productsInCart;
+                localStorage.setItem("cart", JSON.stringify(cart));
+                let sum = 0;
+                for (let num of Object.values(productsInCart)) {
+                    sum += num;
+                }
+                priceInCart.price = +((cartPrice as HTMLDivElement).innerText.slice(0, -1));
+                totalPrice = priceInCart;
+                localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
+                (cartNum as HTMLDivElement).innerHTML = sum.toString();
+                } else {
+                    let count = 0;
+                    for (let j = 1; j < arrKeys.length; j++) {
+                        let d = (i + 1).toString();
+                        if ((!arrKeys.includes(d)) || (+arrKeys[j] === i + 1 && +arrValues[j] === 0)) {
+                        count++;
+                        } 
+                    }
+                    if (count > 0) {
+                        let stock = products[i].stock;
+                let key = (i + 1).toString();
+                if (!productsInCart[key] && stock === 0) {
+                    productsInCart[key] = 0;
+                    (cartPrice as HTMLDivElement).style.display = 'none';
+                } else if (!productsInCart[key] && stock > 0) {
+                    productsInCart[key] = 1;
+                    (cartPrice as HTMLDivElement).style.display = 'block';
+                    (cartPrice as HTMLDivElement).innerText = (+((cartPrice as HTMLDivElement).innerText.slice(0, -1)) + products[i].price).toString() + 'ʛ';
+                } else if(productsInCart[key] && productsInCart[key] < stock) {
+                    productsInCart[key] = productsInCart[key] + 1;
+                    (cartPrice as HTMLDivElement).innerText = (+((cartPrice as HTMLDivElement).innerText.slice(0, -1)) + products[i].price).toString() + 'ʛ';
+                } else if (productsInCart[key] && productsInCart[key] > stock) {
+                    productsInCart[key] = productsInCart[key];
+                }
+                cart = productsInCart;
+                localStorage.setItem("cart", JSON.stringify(cart));
+                let sum = 0;
+                for (let num of Object.values(productsInCart)) {
+                    sum += num;
+                }
+                priceInCart.price = +((cartPrice as HTMLDivElement).innerText.slice(0, -1));
+                totalPrice = priceInCart;
+                localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
+                (cartNum as HTMLDivElement).innerHTML = sum.toString();
+                    }
+                }
+            });
             }
     }
     render(): HTMLElement {
