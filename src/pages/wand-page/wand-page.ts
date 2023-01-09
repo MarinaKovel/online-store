@@ -1,5 +1,7 @@
 import './description.scss';
 import Page from '../../constants/page';
+import { PageIds } from '../../controller/app/app';
+import { ProvidePlugin } from 'webpack';
 
 export interface Product {
     id: number;
@@ -19,16 +21,42 @@ export interface Product {
 export interface RootObject {
     products: Product[];
 }
+interface ObjectInterface {
+    [key: string]: number;
+}
 
 class WandPage extends Page {
     static TextObj = {
         addToCart: 'Add to cart',
+        addToCart2: 'Add more',
         buyNow: 'Buy now',
     };
     constructor(id: string) {
         super(id);
     }
     renderDescription() {
+        let productsInCart: ObjectInterface = {0: 0};
+        let priceInCart: ObjectInterface = {price: 0};
+        let json = localStorage.getItem("cart") as string;
+        let jsonP = localStorage.getItem("totalPrice") as string;
+        let cart: ObjectInterface = JSON.parse(json);
+        let totalPrice: ObjectInterface = JSON.parse(jsonP);
+
+        if (cart) { productsInCart = cart; }
+        if (totalPrice) { priceInCart = totalPrice; }
+        let sum = 0;
+        for (let num of Object.values(productsInCart)) {
+            sum += num;
+        }
+
+        let cartNum = document.querySelector('.cart__num');
+        let cartPrice = document.querySelector('.cart__price');
+        (cartNum as HTMLDivElement).innerHTML = sum.toString();
+        if (priceInCart.price > 0) {
+            (cartPrice as HTMLDivElement).innerHTML = priceInCart.price.toString() + 'ʛ';
+            (cartPrice as HTMLDivElement).style.display = 'block';
+        }
+
         const breadcrumb = document.createElement('ul');
         const description = document.createElement('div');
         const prodImg = document.createElement('div');
@@ -36,8 +64,6 @@ class WandPage extends Page {
         const bigImg = document.createElement('div');
         const previewImg = document.createElement('div');
         const fullDesc = document.createElement('div');
-        const addToCart = document.createElement('button');
-        const buyNow = document.createElement('button');
         const big = document.createElement('img');
         const small1 = document.createElement('img');
         const small2 = document.createElement('img');
@@ -49,16 +75,10 @@ class WandPage extends Page {
         bigImg.className = 'big-img';
         previewImg.className = 'preview-img';
         fullDesc.className = 'full-desc';
-        addToCart.className = 'add-to-cart';
-        buyNow.className = 'buy-now';
         big.className = 'big';
         small1.className = 'small';
         small2.className = 'small';
 
-        addToCart.innerText = WandPage.TextObj.addToCart;
-        buyNow.innerText = WandPage.TextObj.buyNow;
-
-        prodDesc.append(fullDesc, addToCart, buyNow);
         description.append(prodImg, prodDesc);
         prodImg.append(bigImg, previewImg);
         bigImg.append(big);
@@ -70,28 +90,26 @@ class WandPage extends Page {
         request.open('GET', requestURL);
         request.responseType = 'json';
         request.send();
-        request.onload = function () {
+        request.onload = function() {
             let wands: RootObject = request.response;
             fillWandDesc(wands);
-        };
+        }
 
         function fillWandDesc(jsonObj: RootObject) {
-            const number = window.location.hash.slice(1).replace(/[a-zA-Z]/gi, '');
-            const n = 1;
-            let i = Number(number) - 1; //Relevant wand's id!! (0-29)
+            let i = 0;    //Relevant wand's id!! (0-29)
             let products: Product[] = jsonObj['products'];
 
             let breadcrumbWands = document.createElement('li');
             let breadcrumbWood = document.createElement('li');
             let breadcrumbCore = document.createElement('li');
             let breadcrumbCurrent = document.createElement('li');
-            breadcrumbCurrent.className = 'current';
+            breadcrumbCurrent.className = "current";
             breadcrumbWands.textContent = 'Wands';
             breadcrumbWood.textContent = products[i].wood;
             breadcrumbCore.textContent = products[i].core;
             breadcrumbCurrent.textContent = products[i].name;
             breadcrumb.append(breadcrumbWands, breadcrumbWood, breadcrumbCore, breadcrumbCurrent);
-
+            
             let wandName = document.createElement('h1');
             let wood = document.createElement('p');
             let core = document.createElement('p');
@@ -102,14 +120,28 @@ class WandPage extends Page {
             let stock = document.createElement('p');
             let discountPercentage = document.createElement('p');
             let price = document.createElement('h2');
+            const addToCart = document.createElement('button');
+            const buyNow = document.createElement('button');
+
+            addToCart.className = 'add-to-cart';
+            buyNow.className = 'buy-now';
+
+            buyNow.innerText = WandPage.TextObj.buyNow;
+            if (productsInCart[i + 1]) {
+                addToCart.innerText = WandPage.TextObj.addToCart2;
+            } else {
+                addToCart.innerText = WandPage.TextObj.addToCart;
+            }
+
+            prodDesc.append(fullDesc, addToCart, buyNow);
 
             big.src = products[i].images[0];
             (small1 as HTMLImageElement).src = products[i].images[0];
             (small2 as HTMLImageElement).src = products[i].images[1];
-            small1.addEventListener('click', () => {
+            small1.addEventListener("click", () => {
                 big.src = products[i].images[0];
             });
-            small2.addEventListener('click', () => {
+            small2.addEventListener("click", () => {
                 big.src = products[i].images[1];
             });
 
@@ -123,20 +155,110 @@ class WandPage extends Page {
             stock.textContent = 'Stock: ' + products[i].stock;
             discountPercentage.textContent = 'Discount: ' + products[i].discountPercentage + '%';
             price.textContent = 'Price: ' + products[i].price + 'ʛ (Galleon)';
-
-            fullDesc.append(
-                wandName,
-                wood,
-                core,
-                length,
-                ownerOfSimilarWand,
-                rating,
-                stock,
-                description,
-                discountPercentage,
-                price
-            );
-        }
+            
+            fullDesc.append(wandName, wood, core, length, ownerOfSimilarWand, rating, stock, description, discountPercentage, price);
+            
+            addToCart.addEventListener('click', () => {
+                let stock = products[i].stock;
+                let key = (i + 1).toString();
+                if (!productsInCart[key] && stock === 0) {
+                    productsInCart[key] = 0;
+                    (cartPrice as HTMLDivElement).style.display = 'none';
+                } else if (!productsInCart[key] && stock > 0) {
+                    productsInCart[key] = 1;
+                    (cartPrice as HTMLDivElement).style.display = 'block';
+                    (cartPrice as HTMLDivElement).innerText = (+((cartPrice as HTMLDivElement).innerText.slice(0, -1)) + products[i].price).toString() + 'ʛ';
+                } else if(productsInCart[key] && productsInCart[key] < stock) {
+                    productsInCart[key] = productsInCart[key] + 1;
+                    (cartPrice as HTMLDivElement).innerText = (+((cartPrice as HTMLDivElement).innerText.slice(0, -1)) + products[i].price).toString() + 'ʛ';
+                } else if (productsInCart[key] && productsInCart[key] > stock) {
+                    productsInCart[key] = productsInCart[key];
+                }
+                cart = productsInCart;
+                localStorage.setItem("cart", JSON.stringify(cart));
+                let sum = 0;
+                for (let num of Object.values(productsInCart)) {
+                    sum += num;
+                }
+                priceInCart.price = +((cartPrice as HTMLDivElement).innerText.slice(0, -1));
+                totalPrice = priceInCart;
+                localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
+                (cartNum as HTMLDivElement).innerHTML = sum.toString();
+            });
+            buyNow.addEventListener('click', () => {
+                window.location.hash = PageIds.CartPage;
+                let popup = document.querySelector('.order');
+                (popup as HTMLDivElement).style.display = 'flex';
+                let arrKeys = [];
+                let arrValues = [];
+                for (let key in cart) {
+                    arrKeys.push(key);
+                    arrValues.push(cart[key]);
+                }
+                if (arrKeys.length === 0 ) {
+                    let stock = products[i].stock;
+                let key = (i + 1).toString();
+                if (!productsInCart[key] && stock === 0) {
+                    productsInCart[key] = 0;
+                    (cartPrice as HTMLDivElement).style.display = 'none';
+                } else if (!productsInCart[key] && stock > 0) {
+                    productsInCart[key] = 1;
+                    (cartPrice as HTMLDivElement).style.display = 'block';
+                    (cartPrice as HTMLDivElement).innerText = (+((cartPrice as HTMLDivElement).innerText.slice(0, -1)) + products[i].price).toString() + 'ʛ';
+                } else if(productsInCart[key] && productsInCart[key] < stock) {
+                    productsInCart[key] = productsInCart[key] + 1;
+                    (cartPrice as HTMLDivElement).innerText = (+((cartPrice as HTMLDivElement).innerText.slice(0, -1)) + products[i].price).toString() + 'ʛ';
+                } else if (productsInCart[key] && productsInCart[key] > stock) {
+                    productsInCart[key] = productsInCart[key];
+                }
+                cart = productsInCart;
+                localStorage.setItem("cart", JSON.stringify(cart));
+                let sum = 0;
+                for (let num of Object.values(productsInCart)) {
+                    sum += num;
+                }
+                priceInCart.price = +((cartPrice as HTMLDivElement).innerText.slice(0, -1));
+                totalPrice = priceInCart;
+                localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
+                (cartNum as HTMLDivElement).innerHTML = sum.toString();
+                } else {
+                    let count = 0;
+                    for (let j = 1; j < arrKeys.length; j++) {
+                        let d = (i + 1).toString();
+                        if ((!arrKeys.includes(d)) || (+arrKeys[j] === i + 1 && +arrValues[j] === 0)) {
+                        count++;
+                        } 
+                    }
+                    if (count > 0) {
+                        let stock = products[i].stock;
+                let key = (i + 1).toString();
+                if (!productsInCart[key] && stock === 0) {
+                    productsInCart[key] = 0;
+                    (cartPrice as HTMLDivElement).style.display = 'none';
+                } else if (!productsInCart[key] && stock > 0) {
+                    productsInCart[key] = 1;
+                    (cartPrice as HTMLDivElement).style.display = 'block';
+                    (cartPrice as HTMLDivElement).innerText = (+((cartPrice as HTMLDivElement).innerText.slice(0, -1)) + products[i].price).toString() + 'ʛ';
+                } else if(productsInCart[key] && productsInCart[key] < stock) {
+                    productsInCart[key] = productsInCart[key] + 1;
+                    (cartPrice as HTMLDivElement).innerText = (+((cartPrice as HTMLDivElement).innerText.slice(0, -1)) + products[i].price).toString() + 'ʛ';
+                } else if (productsInCart[key] && productsInCart[key] > stock) {
+                    productsInCart[key] = productsInCart[key];
+                }
+                cart = productsInCart;
+                localStorage.setItem("cart", JSON.stringify(cart));
+                let sum = 0;
+                for (let num of Object.values(productsInCart)) {
+                    sum += num;
+                }
+                priceInCart.price = +((cartPrice as HTMLDivElement).innerText.slice(0, -1));
+                totalPrice = priceInCart;
+                localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
+                (cartNum as HTMLDivElement).innerHTML = sum.toString();
+                    }
+                }
+            });
+            }
     }
     render(): HTMLElement {
         this.renderDescription();

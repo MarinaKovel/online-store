@@ -1,3 +1,4 @@
+
 .header {
   padding: 15px;
   display: flex;
@@ -46,7 +47,7 @@
   text-shadow: 1px 1px 2px rgb(13, 12, 13);
   height: 60px;
   width: 200px;
-  background-image: url("./logo23.svg");
+  background-image: url('./logo23.svg');
   background-size: 170px 100px;
   background-position: 0% 50%;
   background-repeat: no-repeat;
@@ -59,12 +60,11 @@
   width: 90px;
   margin-left: 20px;
   display: flex;
-  cursor: pointer;
 }
 .cart__num {
   height: 60px;
   width: 50px;
-  background-image: url("https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/16e855dd074766096135b3d744d755e3e01c5e56/cart7.svg");
+  background-image: url('https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/16e855dd074766096135b3d744d755e3e01c5e56/cart7.svg');
   background-position: 100% -29%;
   background-size: 55px 50px;
   background-repeat: no-repeat;
@@ -79,3 +79,4 @@
   line-height: 50px;
   display: none;
 }
+
