@@ -9,3 +9,8 @@ export function getWand(idPage: string, arr: string[]): string {
 export function setLastView(id: string): void {
     localStorage.setItem('last-view', id);
 }
+
+export function SETVIEW(): void {
+    localStorage.setItem('last-view', 'main-page');
+    window.location.hash = `${localStorage.getItem('last-view')}`;
+}
