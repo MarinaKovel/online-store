@@ -279,16 +279,16 @@ class Order extends Component {
         finishImg.style.borderRadius = '5px';
         form.addEventListener('submit', function () {
             popup.style.fontSize = '2rem';
-            popup.style.height = '300px';
+            popup.style.height = '100vh';
             popup.style.flexDirection = 'column';
             popup.style.textAlign = 'center';
-            popup.style.justifyContent = 'space-around';
+            popup.style.justifyContent = 'center';
             popup.style.alignItems = 'center';
             popup.innerHTML = 'Thank you! Your order is proccessed.';
             popup.appendChild(finishImg);
 
             setTimeout(function () {
-                window.location.hash = PageIds.CartPage;
+                window.location.hash = PageIds.MainPage;
                 let cart: ObjectInterface = { 0: 0 };
                 let totalPrice: ObjectInterface = { price: 0 };
                 localStorage.setItem('cart', JSON.stringify(cart));
