@@ -36,6 +36,7 @@ class App {
     header: Header;
 
     static renderNewView(idPage: string) {
+        localStorage.setItem('last-view', 'main-page');
         const currentView = document.querySelector(`#${this.defaultPageClassName}`) as HTMLElement;
         idPage = `${window.location.hash.slice(1)}`;
 
@@ -95,8 +96,6 @@ class App {
         this.router();
         App.appViews.append(this.header.render());
         App.renderNewView(localStorage.getItem('last-view')!); //set up start page
-        console.log(localStorage.getItem('last-view'));
-        console.log(window.location.hash);
     }
 }
 
