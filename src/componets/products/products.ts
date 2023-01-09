@@ -100,6 +100,10 @@ class Products extends Component {
         const searchForm = document.createElement('form') as HTMLFormElement;
         const search = document.createElement('input') as HTMLInputElement;
         const view = document.createElement('div') as HTMLDivElement;
+        const lengthMinInput = document.createElement('input') as HTMLInputElement;
+        const lengthMaxInput = document.createElement('input') as HTMLInputElement;
+        const priceMinInput = document.createElement('input') as HTMLInputElement;
+        const priceMaxInput = document.createElement('input') as HTMLInputElement;
 
         filtersContainer.className = 'filters__container';
         resetCopyContainer.className = 'reset__container';
@@ -193,6 +197,7 @@ class Products extends Component {
             reset.addEventListener('click', resetFilters);
             copy.addEventListener('click', copyLink);
             view.addEventListener('click', changeView);
+            searchForm.addEventListener('change', setLengthPrice);
             searchForm.addEventListener('keyup', filter);
             searchForm.addEventListener('submit', searchSubmit);
         };
@@ -236,6 +241,7 @@ class Products extends Component {
                 woodDiv.append(woodInput, woodLabel);
                 filterWoodContent.append(woodDiv);
 
+                woodInput.addEventListener('change', setLengthPrice);
                 woodInput.addEventListener('change', filter);
             }
         }
@@ -260,6 +266,7 @@ class Products extends Component {
                 coreDiv.append(coreInput, coreLabel);
                 filterCoreContent.append(coreDiv);
 
+                coreInput.addEventListener('change', setLengthPrice);
                 coreInput.addEventListener('change', filter);
             }
         }
@@ -269,11 +276,11 @@ class Products extends Component {
             wandsData.forEach((elem) => arrLength.push(+elem.length));
             const minDiv = document.createElement('div') as HTMLDivElement;
             const maxDiv = document.createElement('div') as HTMLDivElement;
-            const lengthMinInput = document.createElement('input') as HTMLInputElement;
-            const lengthMaxInput = document.createElement('input') as HTMLInputElement;
             const lengthSpan = document.createElement('span') as HTMLSpanElement;
 
             lengthSpan.className = 'multi-range';
+            minDiv.className = 'minL__label';
+            maxDiv.className = 'maxL__label';
             lengthMinInput.className = 'category length min';
             lengthMaxInput.className = 'category length max';
             lengthMinInput.setAttribute('type', 'range');
@@ -286,8 +293,12 @@ class Products extends Component {
             lengthMaxInput.setAttribute('max', '18');
             lengthMaxInput.setAttribute('value', '18');
             lengthMaxInput.setAttribute('step', '1');
-            minDiv.innerText = '9"';
-            maxDiv.innerText = '18"';
+
+            let min = lengthMinInput.getAttribute('min');
+            if (min) { minDiv.innerText = min.toString() + '"'; }
+
+            let max = lengthMaxInput.getAttribute('max');
+            if (max) { maxDiv.innerText = max.toString() + '"'; }
 
             lengthSpan.append(lengthMinInput, lengthMaxInput);
             filterLengthContent.append(minDiv, lengthSpan, maxDiv);
@@ -317,11 +328,11 @@ class Products extends Component {
             wandsData.forEach((elem) => arrPrice.push(+elem.price));
             const minDiv = document.createElement('div') as HTMLDivElement;
             const maxDiv = document.createElement('div') as HTMLDivElement;
-            const priceMinInput = document.createElement('input') as HTMLInputElement;
-            const priceMaxInput = document.createElement('input') as HTMLInputElement;
             const priceSpan = document.createElement('span') as HTMLSpanElement;
 
             priceSpan.className = 'multi-range2';
+            minDiv.className = 'minP__label';
+            maxDiv.className = 'maxP__label';
             priceMinInput.className = 'category price min';
             priceMaxInput.className = 'category price max';
             priceMinInput.setAttribute('type', 'range');
@@ -360,6 +371,13 @@ class Products extends Component {
             priceMaxInput.addEventListener('change', filter);
         }
 
+        function setLengthPrice() {
+            lengthMinInput.setAttribute('value', '9');
+            lengthMaxInput.setAttribute('value', '18');
+            priceMinInput.setAttribute('value', '5');
+            priceMaxInput.setAttribute('value', '30');
+        }
+
         function filter() {
             sortProd();
             productList.innerHTML = '';
@@ -368,15 +386,13 @@ class Products extends Component {
             let inputWood: string[] = []; // Wood
             let inputCore: string[] = []; // Core
 
-            let inputsLength = document.getElementsByClassName('length');
-            inputValue.push((inputsLength[0] as HTMLInputElement).value, (inputsLength[1] as HTMLInputElement).value);
+            inputValue.push(lengthMinInput.value, lengthMaxInput.value);
             inputValue.sort((a, b) => +a - +b);
 
-            let inputsPrice = document.getElementsByClassName('price');
-            if (+(inputsPrice[0] as HTMLInputElement).value <= +(inputsPrice[1] as HTMLInputElement).value) {
-                inputValue.push((inputsPrice[0] as HTMLInputElement).value, (inputsPrice[1] as HTMLInputElement).value);
+            if (+priceMinInput.value <= +priceMaxInput.value) {
+                inputValue.push(priceMinInput.value, priceMaxInput.value);
             } else {
-                inputValue.push((inputsPrice[1] as HTMLInputElement).value, (inputsPrice[0] as HTMLInputElement).value);
+                inputValue.push(priceMaxInput.value, priceMinInput.value);
             }
 
             let inputsWood = document.getElementsByClassName('wood');
@@ -392,6 +408,11 @@ class Products extends Component {
                     inputCore.push(inputsCore[i].getAttribute('name') as string);
                 }
             }
+
+            let minL = 18;
+            let maxL = 9;
+            let minP = 30;
+            let maxP = 5;
 
             wandsData.forEach(function getMatch(elem) {
                 let searchContent1 = elem.wood;
@@ -425,8 +446,34 @@ class Products extends Component {
                     (searchContent5.includes(searchResult) || searchResult === undefined)
                 ) {
                     filtered.push(elem);
+                    if (+elem.length < minL) {
+                        minL = +elem.length;
+                    }
+                    if (+elem.length > maxL) {
+                        maxL = +elem.length;
+                    }
+                    if (+elem.price < minP) {
+                        minP = +elem.price;
+                        
+                    }
+                    if (+elem.price > maxP) {
+                        maxP = +elem.price;
+                    }
                 }
             });
+
+            lengthMinInput.setAttribute('value', minL.toString());
+            lengthMaxInput.setAttribute('value', maxL.toString());
+            let setMinL = document.querySelector('.minL__label');
+            let setMaxL = document.querySelector('.maxL__label');
+            (setMinL as HTMLDivElement).innerText = minL.toString() + '"';
+            (setMaxL as HTMLDivElement).innerText = maxL.toString() + '"';
+            priceMinInput.setAttribute('value', minP.toString());
+            priceMaxInput.setAttribute('value', maxP.toString());
+            let setMinP = document.querySelector('.minP__label');
+            let setMaxP = document.querySelector('.maxP__label');
+            (setMaxP as HTMLDivElement).innerText = maxP.toString() + 'ʛ';
+            (setMinP as HTMLDivElement).innerText = minP.toString() + 'ʛ';
 
             addWandsGrid(filtered);
             results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
@@ -684,6 +731,7 @@ class Products extends Component {
         }
 
         function resetFilters() {
+            setLengthPrice()
             filtered = [];
             filterLengthContent.innerHTML = '';
             filterPriceContent.innerHTML = '';
