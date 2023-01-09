@@ -11,6 +11,5 @@ export function setLastView(id: string): void {
 }
 
 export function SETVIEW(): void {
-    localStorage.setItem('last-view', 'main-page');
     window.location.hash = `${localStorage.getItem('last-view')}`;
 }

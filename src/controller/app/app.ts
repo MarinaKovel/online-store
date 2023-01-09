@@ -32,13 +32,14 @@ class App {
         if (currentView) {
             currentView.remove();
         }
+
         let view: Page | null = null;
+
         if (idPage === PageIds.MainPage) {
             window.location.hash = `#${PageIds.MainPage}`;
             view = new MainPage(idPage);
             this.defaultPageClassName = PageIds.MainPage;
             setLastView(`#${idPage}`);
-            console.log(localStorage.getItem('last-view'));
         } else if (idPage === PageIds.ShopPage) {
             window.location.hash = `#${PageIds.ShopPage}`;
             view = new ShopPage(idPage);
@@ -59,7 +60,6 @@ class App {
             view = new WandPage(idPage);
             this.defaultPageClassName = getWand(idPage, WandsPageIDs);
             setLastView(`#${idPage}`);
-            console.log(localStorage.getItem('last-view'));
         } else {
             idPage = PageIds.ErPage;
             view = new ErrorPage(idPage);
