@@ -21,7 +21,7 @@ export interface RootObject {
     products: Product[];
 }
 interface ObjectInterface {
-  [key: string]: number;
+    [key: string]: number;
 }
 
 class Order extends Component {
@@ -85,7 +85,7 @@ class Order extends Component {
         const cardCvvReq = document.createElement('div');
         const submit = document.createElement('input');
 
-        popup.className = 'popup';
+        popup.className = 'order';
         form.className = 'form';
         personal.className = 'personal';
         name.className = 'name';
@@ -131,7 +131,7 @@ class Order extends Component {
         tel.setAttribute('name', 'phone');
         tel.setAttribute('id', 'phone');
         tel.setAttribute('placeholder', ' ');
-        tel.setAttribute('pattern', '[\+][0-9]{9,}');
+        tel.setAttribute('pattern', '[+][0-9]{9,}');
         tel.setAttribute('title', 'Minimum 9 numbers starting with "+"');
         tel.setAttribute('autocomplete', 'off');
         tel.required = true;
@@ -151,13 +151,16 @@ class Order extends Component {
         email.setAttribute('name', 'email');
         email.setAttribute('id', 'email');
         email.setAttribute('placeholder', ' ');
-        email.setAttribute('pattern', '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$');
+        email.setAttribute('pattern', '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$');
         email.setAttribute('title', 'Must be a valid email address');
         email.setAttribute('autocomplete', 'off');
         email.required = true;
         emailLabel.setAttribute('for', 'email');
 
-        cardImg.setAttribute('src', 'https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/unknown-card.png');
+        cardImg.setAttribute(
+            'src',
+            'https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/unknown-card.png'
+        );
 
         cardNumInput.setAttribute('type', 'text');
         cardNumInput.setAttribute('name', 'card-number');
@@ -178,7 +181,7 @@ class Order extends Component {
         cardValidInput.setAttribute('autocomplete', 'off');
         cardValidInput.required = true;
         cardValidLabel.setAttribute('for', 'card-valid');
-        
+
         cardCvvInput.setAttribute('type', 'text');
         cardCvvInput.setAttribute('name', 'cvv');
         cardCvvInput.setAttribute('id', 'cvv');
@@ -222,69 +225,81 @@ class Order extends Component {
         cardValidCvv.append(cardValid, cardCvv);
         cardValid.append(cardValidInput, cardValidLabel, cardValidReq);
         cardCvv.append(cardCvvInput, cardCvvLabel, cardCvvReq);
-
-        this.container.append(popup);
+        this.container = document.querySelector('.cart-page') as HTMLElement;
+        this.container.append(popup)!;
 
         // Change img payment
-        cardNumInput.oninput = function() {
-          switch ((this as HTMLInputElement).value[0]) {
-            case '3':
-              cardImg.setAttribute('src', 'https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/american-express.png');
-              break;
-            case '4':
-              cardImg.setAttribute('src', 'https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/visa.png');
-              break;
-            case '5':
-              cardImg.setAttribute('src', 'https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/Master-Card.png');
-              break;
-            default:
-              cardImg.setAttribute('src', 'https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/unknown-card.png');
-          }
-          return;
-        }
+        cardNumInput.oninput = function () {
+            switch ((this as HTMLInputElement).value[0]) {
+                case '3':
+                    cardImg.setAttribute(
+                        'src',
+                        'https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/american-express.png'
+                    );
+                    break;
+                case '4':
+                    cardImg.setAttribute(
+                        'src',
+                        'https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/visa.png'
+                    );
+                    break;
+                case '5':
+                    cardImg.setAttribute(
+                        'src',
+                        'https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/Master-Card.png'
+                    );
+                    break;
+                default:
+                    cardImg.setAttribute(
+                        'src',
+                        'https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/unknown-card.png'
+                    );
+            }
+            return;
+        };
 
         // Valid
         cardValidInput.onkeydown = function () {
-          if (+`${(this as HTMLInputElement).value[0]}${(this as HTMLInputElement).value[1]}` > 12) {
-            cardValidInput.value = '';
-          }
-          return;
-        }
-        cardValidInput.oninput = function() {
-          if (+(this as HTMLInputElement).value < 13 && +(this as HTMLInputElement).value.length == 2) {
-            (this as HTMLInputElement).value = `${(this as HTMLInputElement).value}/`;
-          }
-          return;
-        }
+            if (+`${(this as HTMLInputElement).value[0]}${(this as HTMLInputElement).value[1]}` > 12) {
+                cardValidInput.value = '';
+            }
+            return;
+        };
+        cardValidInput.oninput = function () {
+            if (+(this as HTMLInputElement).value < 13 && +(this as HTMLInputElement).value.length == 2) {
+                (this as HTMLInputElement).value = `${(this as HTMLInputElement).value}/`;
+            }
+            return;
+        };
 
         // order is completed
         let finishImg = document.createElement('img');
         finishImg.setAttribute('src', 'https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/finish.jpg');
-        finishImg.style.height = "250px";
-        finishImg.style.borderRadius = "5px";
-        form.addEventListener("submit", function() {
-            popup.style.fontSize = "2rem";
-            popup.style.height = "300px";
-            popup.style.flexDirection = "column";
-            popup.style.textAlign = "center";
-            popup.style.justifyContent = "space-around";
-            popup.style.alignItems = "center";
-            popup.innerHTML = "Thank you! Your order is proccessed.";
+        finishImg.style.height = '250px';
+        finishImg.style.borderRadius = '5px';
+        form.addEventListener('submit', function () {
+            popup.style.fontSize = '2rem';
+            popup.style.height = '300px';
+            popup.style.flexDirection = 'column';
+            popup.style.textAlign = 'center';
+            popup.style.justifyContent = 'space-around';
+            popup.style.alignItems = 'center';
+            popup.innerHTML = 'Thank you! Your order is proccessed.';
             popup.appendChild(finishImg);
-            
-            setTimeout(function(){
-              window.location.hash = PageIds.MainPage;
-              let cart: ObjectInterface = {0: 0};
-              let totalPrice: ObjectInterface = {price: 0};
-              localStorage.setItem("cart", JSON.stringify(cart));
-              localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
-              let cartNum = document.querySelector('.cart__num');
-              let cartPrice = document.querySelector('.cart__price');
-              (cartNum as HTMLDivElement).innerText = '0';
-              (cartPrice as HTMLDivElement).innerText = '0G';
-              (cartPrice as HTMLDivElement).style.display = 'none';
+
+            setTimeout(function () {
+                window.location.hash = PageIds.CartPage;
+                let cart: ObjectInterface = { 0: 0 };
+                let totalPrice: ObjectInterface = { price: 0 };
+                localStorage.setItem('cart', JSON.stringify(cart));
+                localStorage.setItem('totalPrice', JSON.stringify(totalPrice));
+                let cartNum = document.querySelector('.cart__num');
+                let cartPrice = document.querySelector('.cart__price');
+                (cartNum as HTMLDivElement).innerText = '0';
+                (cartPrice as HTMLDivElement).innerText = '0G';
+                (cartPrice as HTMLDivElement).style.display = 'none';
             }, 3000);
-        })
+        });
     }
 
     render(): HTMLElement {
