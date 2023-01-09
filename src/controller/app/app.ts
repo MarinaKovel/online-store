@@ -1,3 +1,4 @@
+
 import MainPage from '../../pages/main/main';
 import ShopPage from '../../pages/shop/shop';
 import DevsPage from '../../pages/dev-page/dev';

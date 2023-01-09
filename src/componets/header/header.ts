@@ -1,3 +1,4 @@
+
 import './header.scss';
 import Component from '../compTemplate';
 import { PageIds } from '../../controller/app/app';
@@ -56,3 +57,4 @@ class Header extends Component {
 }
 
 export default Header;
+
