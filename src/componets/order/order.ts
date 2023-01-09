@@ -20,6 +20,9 @@ export interface Product {
 export interface RootObject {
     products: Product[];
 }
+interface ObjectInterface {
+  [key: string]: number;
+}
 
 class Order extends Component {
     static TextObj = {
@@ -268,8 +271,18 @@ class Order extends Component {
             popup.style.alignItems = "center";
             popup.innerHTML = "Thank you! Your order is proccessed.";
             popup.appendChild(finishImg);
+            
             setTimeout(function(){
               window.location.hash = PageIds.MainPage;
+              let cart: ObjectInterface = {0: 0};
+              let totalPrice: ObjectInterface = {price: 0};
+              localStorage.setItem("cart", JSON.stringify(cart));
+              localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
+              let cartNum = document.querySelector('.cart__num');
+              let cartPrice = document.querySelector('.cart__price');
+              (cartNum as HTMLDivElement).innerText = '0';
+              (cartPrice as HTMLDivElement).innerText = '0G';
+              (cartPrice as HTMLDivElement).style.display = 'none';
             }, 3000);
         })
     }
