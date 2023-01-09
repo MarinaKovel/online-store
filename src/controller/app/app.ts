@@ -4,23 +4,12 @@ import DevsPage from '../../pages/dev-page/dev';
 import ErrorPage from '../../pages/error/error';
 import Page from '../../constants/page';
 import Header from '../../componets/header/header';
-
-import { WandsPageIDs } from '../../constants/wandsTypes';
 import WandPage from '../../componets/description/wand-page';
 
-const WandPages = Object.values(WandsPageIDs);
+import { WandsPageIDs } from '../../constants/wandsTypes';
 
-function getWand(idPage: string, arr: string[]): string {
-    let testSting: string = '';
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i] === idPage) testSting = arr[i];
-    }
-    return `${testSting}`;
-}
-
-function setLastView(id: string): void {
-    localStorage.setItem('last-view', id);
-}
+import { setLastView } from '../../constants/functions';
+import { getWand } from '../../constants/functions';
 
 export const enum PageIds {
     MainPage = 'main-page',
@@ -51,6 +40,7 @@ class App {
             setLastView(`#${idPage}`);
             console.log(localStorage.getItem('last-view'));
         } else if (idPage === PageIds.ShopPage) {
+            window.location.hash = `#${PageIds.ShopPage}`;
             view = new ShopPage(idPage);
             this.defaultPageClassName = PageIds.ShopPage;
             setLastView(`#${idPage}`);
@@ -58,6 +48,7 @@ class App {
         } else if (idPage === PageIds.DevPage) {
             view = new DevsPage(idPage);
             this.defaultPageClassName = PageIds.DevPage;
+            window.location.hash = `#${PageIds.DevPage}`;
             setLastView(`#${idPage}`);
         } else if (idPage === getWand(idPage, WandsPageIDs)) {
             setLastView(idPage);
@@ -99,5 +90,5 @@ class App {
     }
 }
 
-//MainPage ShopPage DevPage 404 -List of pages
+//MainPage ShopPage DevPage 404 wands -List of pages
 export default App;
