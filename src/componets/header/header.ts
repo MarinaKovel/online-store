@@ -36,6 +36,9 @@ class Header extends Component {
             pageNav.append(pageLink);
         });
         const cartContainer = document.createElement('div');
+        cartContainer.addEventListener('click', () => {
+            window.location.hash = 'cart-page';
+        });
         cartContainer.className = 'cart__container';
         let cartNum = document.createElement('div');
         cartNum.classList.add('cart__num');

@@ -4,7 +4,8 @@ import DevsPage from '../../pages/dev-page/dev';
 import ErrorPage from '../../pages/error/error';
 import Page from '../../constants/page';
 import Header from '../../componets/header/header';
-import WandPage from '../../componets/description/wand-page';
+import WandPage from '../../pages/wand-page/wand-page';
+import CartPage from '../../pages/cart/cart';
 
 import { WandsPageIDs } from '../../constants/wandsTypes';
 
@@ -16,6 +17,7 @@ export const enum PageIds {
     ShopPage = 'shop-page',
     DevPage = 'devs-page',
     ErPage = 'error-page',
+    CartPage = 'cart-page',
 }
 
 class App {
@@ -46,6 +48,10 @@ class App {
             this.defaultPageClassName = PageIds.ShopPage;
             setLastView(`#${idPage}`);
             console.log(localStorage.getItem('last-view'));
+        } else if (idPage === PageIds.CartPage) {
+            view = new CartPage(idPage);
+            this.defaultPageClassName = PageIds.CartPage;
+            setLastView(`#${idPage}`);
         } else if (idPage === PageIds.DevPage) {
             view = new DevsPage(idPage);
             this.defaultPageClassName = PageIds.DevPage;
