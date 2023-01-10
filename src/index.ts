@@ -7,4 +7,5 @@ import { SETVIEW } from './constants/functions';
 SETVIEW();
 
 const app = new App();
+
 app.run();
