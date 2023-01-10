@@ -1,5 +1,6 @@
 import Page from '../../constants/page';
-import Description from '../../componets/description/description'; // Desc
+
+import DevPageInner from '../../componets/dev-page-content/dev-page-content';
 
 class DevsPage extends Page {
     static TextObj = {
@@ -8,13 +9,14 @@ class DevsPage extends Page {
     constructor(id: string) {
         super(id);
     }
+
+    renderContent() {
+        const content = new DevPageInner(this.pageView, 'section', 'devs__inner');
+        content.render();
+    }
+
     render() {
-        const title = this.createHeaderTitle(DevsPage.TextObj.DevPageTitle);
-        this.pageView.append(title);
-
-        let description = new Description('section', 'product');  //add desc
-        this.pageView.append(description.render());  //add desc
-
+        this.renderContent();
         return this.pageView;
     }
 }

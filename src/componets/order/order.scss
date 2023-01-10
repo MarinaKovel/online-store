@@ -1,264 +1,278 @@
 @keyframes animatetop {
-    from {top: 0px;}
-    to {top: 20px;}
+  0% {
+    transform: scale(0);
   }
-  
-  .order {
-    display: block;
-    position: fixed;
-    z-index: 15;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: #7f7f7f80;
+  100% {
+    transform: scale(1);
+  }
 }
-.popup {
-    position: relative;
-    top: 20px;
-    margin: auto;
-    max-width: 500px;
-    height: 121vh;
-    background-color: #000;
-    border: 1px solid gold;
-    border-radius: 5px;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    animation-name: animatetop;
-    animation-duration: 1s;
+
+.order {
+  position: fixed;
+  z-index: 15;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: #7f7f7f80;
+  justify-content: center;
+  align-items: center;
 }
+// .popup {
+//   position: relative;
+//   top: 20px;
+//   margin-bottom: 20px;
+//   margin: auto;
+//   width: 100vw;
+//   height: 121vh;
+//   background-color: #000;
+//   border: 1px solid gold;
+//   border-radius: 5px;
+//   padding: 10px;
+//   display: flex;
+//   justify-content: center;
+//   animation-name: animatetop;
+//   animation-duration: 1s;
+// }
 h2 {
-    font-size: 4rem;
-    text-align: center;
+  font-size: 4rem;
+  text-align: center;
 }
+
 .form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: stretch;
-    font-size: 1.5rem;
-    letter-spacing: 1.5px;
-  }
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  letter-spacing: 1.5px;
+  max-width: 400px;
+  max-height: 121vh;
+  background-color: #000;
+  border: 1px solid gold;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  animation-name: animatetop;
+  animation-duration: 1s;
+}
 
-  form > div {
-    position: relative;
-  }
-  form > div > label {
-    opacity: 0.7;
-    position: absolute;
-    top: 3px;
-    left: 10px;
-  }
-  .card-number-label {
-    opacity: 0.7;
-    position: absolute;
-    top: 51px;
-    left: 30px;
-    font-size: 1.2em;
-    color: #000;
-  }
-  form > div > input[type="text"],
-  form > div > input[type="tel"],
-  form > div > input[type="email"] {
-    width: 96%;
-    border: 0;
-    padding: 5px 5px 5px 10px;
-    background: #292300;
-    border-radius: 5px;
-    margin-bottom: 1px;
-  }
-  .credit {
-    width: 96%;
-    border: 1px solid  #7F7F7F;
-    padding: 5px 5px 5px 10px;
-    background: #fff;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    color: #000;
-    font-family: inherit;
-    font-size: 1.5rem;
-    letter-spacing: 2px;
-  }
+form > div {
+  position: relative;
+}
+form > div > label {
+  opacity: 0.7;
+  position: absolute;
+  top: 3px;
+  left: 10px;
+}
+.card-number-label {
+  opacity: 0.7;
+  position: absolute;
+  top: 51px;
+  left: 30px;
+  font-size: 1.2em;
+  color: #000;
+}
+form > div > input[type="text"],
+form > div > input[type="tel"],
+form > div > input[type="email"] {
+  width: 96%;
+  border: 0;
+  padding: 5px 5px 5px 10px;
+  background: #292300;
+  border-radius: 5px;
+  margin-bottom: 1px;
+}
+.credit {
+  width: 96%;
+  border: 1px solid #7f7f7f;
+  padding: 5px 5px 5px 10px;
+  background: #fff;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  color: #000;
+  font-family: inherit;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+}
 
-  form > div > input[type="text"]:focus,
-  form > div > input[type="tel"]:focus,
-  form > div > input[type="email"]:focus {
-    outline: 0;
-    background: #544700;
-    color: gold;
-    font-family: inherit;
-    letter-spacing: 2px;
-    font-size: 1.5rem;
-    left: 0px;
-  }
-  .credit:focus {
-    outline: 0;
-    background: #e4e3de;
-    color: #000;
-    font-family: inherit;
-    letter-spacing: 2px;
-    font-size: 1.5rem;
-    left: 0px;
-  }
-  form > div > input[type="text"]:focus + label,
-  form > div > input[type="tel"]:focus + label,
-  form > div > input[type="email"]:focus + label,
-  .credit:focus + label {
-    opacity: 0;
-  }
-  form > div > input[type="text"]:valid,
-  form > div > input[type="tel"]:valid,
-  form > div > input[type="email"]:valid {
-    border: 2px solid green;
-    color: gold;
-    font-family: inherit;
-    letter-spacing: 2px;
-    font-size: 1.5rem;
-  }
-  .credit:valid {
-    border: 2px solid green;
-    color: #000;
-    font-family: inherit;
-    letter-spacing: 2px;
-    font-size: 1.5rem;
-  }
-  form > div > input[type="text"]:valid + label,
-  form > div > input[type="tel"]:valid + label,
-  form > div > input[type="email"]:valid + label,
-  .credit:valid + label {
-    opacity: 0;
-  }
-  form > div > input[type="text"]:invalid:not(:focus):not(:placeholder-shown),
-  form > div > input[type="tel"]:invalid:not(:focus):not(:placeholder-shown),
-  form > div > input[type="email"]:invalid:not(:focus):not(:placeholder-shown) {
-    border: 2px solid red;
-    color: gold;
-    font-family: inherit;
-    letter-spacing: 2px;
-    font-size: 1.5rem;
-  }
-  .credit:invalid:not(:focus):not(:placeholder-shown) {
-    border: 2px solid red;
-    color: #000;
-    font-family: inherit;
-    letter-spacing: 2px;
-    font-size: 1.5rem;
-  }
-  form > div > input[type="text"]:invalid:not(:focus):not(:placeholder-shown) + label,
-  form > div > input[type="tel"]:invalid:not(:focus):not(:placeholder-shown) + label,
-  form > div > input[type="email"]:invalid:not(:focus):not(:placeholder-shown) + label,
-  .credit:invalid:not(:focus):not(:placeholder-shown) + label {
-    opacity: 0;
-  }
-  form > div > input[type="text"]:invalid:not(:focus):not(:placeholder-shown) ~ .requirements,
-  form > div > input[type="tel"]:invalid:not(:focus):not(:placeholder-shown) ~ .requirements,
-  form > div > input[type="email"]:invalid:not(:focus):not(:placeholder-shown) ~ .requirements,
-  .credit:invalid:not(:focus):not(:placeholder-shown) ~ .requirements {
-    max-height: 200px;
-    padding: 0 10px 20px 10px;
-  }
-  .credit:invalid:not(:focus):not(:placeholder-shown) ~ .requirements-short {
-    max-height: 200px;
-    padding: 0 0px 0px 10px;
-  }
-  .requirements,
-  .requirements-short {
-    padding: 0 10px 0 10px;
-    max-height: 0;
-    transition: 0.28s;
-    overflow: hidden;
-    color: red;
-    font-size: 1.3rem;
-    padding-bottom: 0;
-  }
-  form input[type="submit"] {
-    width: 100%;
-    margin: 10px 0;
-    padding: 5px;
-  }
-  .card {
-    border: 1px solid goldenrod;
-    background-color: #7F7F7F;
-    background-image: url('https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/card-background.jpg');
-    background-position: 60% 10%;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    border-radius: 25px;
-    padding: 15px;
-    width: 300px;
-    height: 205px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-  }
-  .card-number-container {
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    top: -15px;
-  }
-  .payment {
-    width: 40px;
-    height: 29px;
-    border-radius: 5px;
-    margin-bottom: 3px;
-  }
-  .card-number {
-    width: 95%;
-  }
-  .card-num {
-    position: relative;
-    width: 16rem;
-  }
-  .card-number-label {
-    position: absolute;
-    top: 7px;
-    left: 10px;
-    font-size: 1.2em;
-  }
-  .card-valid-cvv {
-    display: flex;
-    position: relative;
-  }
- .card-valid {
-    width: 8rem;
- }
- .card-cvv {
-    width: 5rem;
-    position: absolute;
-    right: 12px;
- }
- 
- .card-valid-label {
-    opacity: 0.7;
-    position: absolute;
-    top: 7px;
-    left: 10px;
-    font-size: 1.2em;
-    color: #000;
-  }
-  .card-cvv-label {
-    opacity: 0.7;
-    position: absolute;
-    top: 7px;
-    left: 10px;
-    font-size: 1em;
-    letter-spacing: 0;
-    color: #000;
-  }
-  .submit_btn {
-    border: none;
-    border-radius: 25px;
-    background: gold;
-    color: rgb(0, 0, 0);
-    font-family: inherit;
-    font-size: 2.2em;
-    font-weight: bold;
-    cursor: pointer;
-    margin: 10px;
-    padding: 5px;
-  }
+form > div > input[type="text"]:focus,
+form > div > input[type="tel"]:focus,
+form > div > input[type="email"]:focus {
+  outline: 0;
+  background: #544700;
+  color: gold;
+  font-family: inherit;
+  letter-spacing: 2px;
+  font-size: 1.5rem;
+  left: 0px;
+}
+.credit:focus {
+  outline: 0;
+  background: #e4e3de;
+  color: #000;
+  font-family: inherit;
+  letter-spacing: 2px;
+  font-size: 1.5rem;
+  left: 0px;
+}
+form > div > input[type="text"]:focus + label,
+form > div > input[type="tel"]:focus + label,
+form > div > input[type="email"]:focus + label,
+.credit:focus + label {
+  opacity: 0;
+}
+form > div > input[type="text"]:valid,
+form > div > input[type="tel"]:valid,
+form > div > input[type="email"]:valid {
+  border: 2px solid green;
+  color: gold;
+  font-family: inherit;
+  letter-spacing: 2px;
+  font-size: 1.5rem;
+}
+.credit:valid {
+  border: 2px solid green;
+  color: #000;
+  font-family: inherit;
+  letter-spacing: 2px;
+  font-size: 1.5rem;
+}
+form > div > input[type="text"]:valid + label,
+form > div > input[type="tel"]:valid + label,
+form > div > input[type="email"]:valid + label,
+.credit:valid + label {
+  opacity: 0;
+}
+form > div > input[type="text"]:invalid:not(:focus):not(:placeholder-shown),
+form > div > input[type="tel"]:invalid:not(:focus):not(:placeholder-shown),
+form > div > input[type="email"]:invalid:not(:focus):not(:placeholder-shown) {
+  border: 2px solid red;
+  color: gold;
+  font-family: inherit;
+  letter-spacing: 2px;
+  font-size: 1.5rem;
+}
+.credit:invalid:not(:focus):not(:placeholder-shown) {
+  border: 2px solid red;
+  color: #000;
+  font-family: inherit;
+  letter-spacing: 2px;
+  font-size: 1.5rem;
+}
+form > div > input[type="text"]:invalid:not(:focus):not(:placeholder-shown) + label,
+form > div > input[type="tel"]:invalid:not(:focus):not(:placeholder-shown) + label,
+form > div > input[type="email"]:invalid:not(:focus):not(:placeholder-shown) + label,
+.credit:invalid:not(:focus):not(:placeholder-shown) + label {
+  opacity: 0;
+}
+form > div > input[type="text"]:invalid:not(:focus):not(:placeholder-shown) ~ .requirements,
+form > div > input[type="tel"]:invalid:not(:focus):not(:placeholder-shown) ~ .requirements,
+form > div > input[type="email"]:invalid:not(:focus):not(:placeholder-shown) ~ .requirements,
+.credit:invalid:not(:focus):not(:placeholder-shown) ~ .requirements {
+  max-height: 200px;
+  padding: 0 10px 20px 10px;
+}
+.credit:invalid:not(:focus):not(:placeholder-shown) ~ .requirements-short {
+  max-height: 200px;
+  padding: 0 0px 0px 10px;
+}
+.requirements,
+.requirements-short {
+  padding: 0 10px 0 10px;
+  max-height: 0;
+  transition: 0.28s;
+  overflow: hidden;
+  color: red;
+  font-size: 1.3rem;
+  padding-bottom: 0;
+}
+form input[type="submit"] {
+  width: 100%;
+  margin: 10px 0;
+  padding: 5px;
+}
+.card {
+  border: 1px solid goldenrod;
+  background-color: #7f7f7f;
+  background-image: url("https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/card-background.jpg");
+  background-position: 60% 10%;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border-radius: 25px;
+  padding: 15px;
+  width: 300px;
+  height: 205px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.card-number-container {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  top: -15px;
+}
+.payment {
+  width: 40px;
+  height: 29px;
+  border-radius: 5px;
+  margin-bottom: 3px;
+}
+.card-number {
+  width: 95%;
+}
+.card-num {
+  position: relative;
+  width: 16rem;
+}
+.card-number-label {
+  position: absolute;
+  top: 7px;
+  left: 10px;
+  font-size: 1.2em;
+}
+.card-valid-cvv {
+  display: flex;
+  position: relative;
+}
+.card-valid {
+  width: 8rem;
+}
+.card-cvv {
+  width: 5rem;
+  position: absolute;
+  right: 12px;
+}
 
-
+.card-valid-label {
+  opacity: 0.7;
+  position: absolute;
+  top: 7px;
+  left: 10px;
+  font-size: 1.2em;
+  color: #000;
+}
+.card-cvv-label {
+  opacity: 0.7;
+  position: absolute;
+  top: 7px;
+  left: 10px;
+  font-size: 1em;
+  letter-spacing: 0;
+  color: #000;
+}
+.submit_btn {
+  border: none;
+  border-radius: 25px;
+  background: gold;
+  color: rgb(0, 0, 0);
+  font-family: inherit;
+  font-size: 2.2em;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px;
+  padding: 5px;
+}

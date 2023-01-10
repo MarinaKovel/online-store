@@ -1,6 +1,9 @@
 body {
     background-color: #000;
 }
+.shop-page {
+    margin-top: 15px;
+}
 h1 {
     text-align: center;
 }
@@ -257,6 +260,47 @@ input[type=range] {
     background-color: #000;
     display: flex;
     flex-wrap: wrap;
+}
+.empty__list {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 30vh;
+    left: 40vw;
+    right: 10vw;
+    text-align: center;
+}
+.empty__text {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+.empty__btn {
+    display: inline;
+    color: #000;
+    font-size: 2.5rem;
+    background-color: gold;
+    border-radius: 25px;
+    margin: 10px;
+    padding: 5px 10px;
+    box-shadow:  0 0 10px .16em rgba(128, 128, 0, 0.652);
+}
+.empty__btn:hover {
+    box-shadow:  0 0 40px .16em rgba(128, 128, 0, 0.868);
+}
+.wand__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.wand__note {
+    font-size: 2rem;
+}
+.wand__img {
+    max-width: 200px;
+    max-height: 200px;
+    align-self: center;
 }
 .settings__text {
     font-size: 2rem;

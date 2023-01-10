@@ -1,5 +1,6 @@
 import './description.scss';
-import Component from '../compTemplate';
+import Page from '../../constants/page';
+import { PageIds } from '../../controller/app/app';
 
 export interface Product {
     id: number;
@@ -23,14 +24,14 @@ interface ObjectInterface {
     [key: string]: number;
 }
 
-class Description extends Component {
+class WandPage extends Page {
     static TextObj = {
         addToCart: 'Add to cart',
         addToCart2: 'Add more',
         buyNow: 'Buy now',
     };
-    constructor(tagName: string, className: string) {
-        super(tagName, className);
+    constructor(id: string) {
+        super(id);
     }
     renderDescription() {
         let productsInCart: ObjectInterface = {0: 0};
@@ -81,33 +82,35 @@ class Description extends Component {
         prodImg.append(bigImg, previewImg);
         bigImg.append(big);
         previewImg.append(small1, small2);
-        this.container.append(breadcrumb, description);
+        this.pageView.append(breadcrumb, description);
 
         let requestURL = './app-data/wands.json';
         let request = new XMLHttpRequest();
         request.open('GET', requestURL);
         request.responseType = 'json';
         request.send();
-        request.onload = function() {
+        request.onload = function () {
             let wands: RootObject = request.response;
             fillWandDesc(wands);
-        }
+        };
 
         function fillWandDesc(jsonObj: RootObject) {
-            let i = 0;    //Relevant wand's id!! (0-29)
+            const number = window.location.hash.slice(1).replace(/[a-zA-Z]/gi, '');
+            const n = 1;
+            let i = Number(number) - n; //Relevant wand's id!! (0-29)
             let products: Product[] = jsonObj['products'];
 
             let breadcrumbWands = document.createElement('li');
             let breadcrumbWood = document.createElement('li');
             let breadcrumbCore = document.createElement('li');
             let breadcrumbCurrent = document.createElement('li');
-            breadcrumbCurrent.className = "current";
+            breadcrumbCurrent.className = 'current';
             breadcrumbWands.textContent = 'Wands';
             breadcrumbWood.textContent = products[i].wood;
             breadcrumbCore.textContent = products[i].core;
             breadcrumbCurrent.textContent = products[i].name;
             breadcrumb.append(breadcrumbWands, breadcrumbWood, breadcrumbCore, breadcrumbCurrent);
-            
+
             let wandName = document.createElement('h1');
             let wood = document.createElement('p');
             let core = document.createElement('p');
@@ -124,11 +127,11 @@ class Description extends Component {
             addToCart.className = 'add-to-cart';
             buyNow.className = 'buy-now';
 
-            buyNow.innerText = Description.TextObj.buyNow;
+            buyNow.innerText = WandPage.TextObj.buyNow;
             if (productsInCart[i + 1]) {
-                addToCart.innerText = Description.TextObj.addToCart2;
+                addToCart.innerText = WandPage.TextObj.addToCart2;
             } else {
-                addToCart.innerText = Description.TextObj.addToCart;
+                addToCart.innerText = WandPage.TextObj.addToCart;
             }
 
             prodDesc.append(fullDesc, addToCart, buyNow);
@@ -136,10 +139,10 @@ class Description extends Component {
             big.src = products[i].images[0];
             (small1 as HTMLImageElement).src = products[i].images[0];
             (small2 as HTMLImageElement).src = products[i].images[1];
-            small1.addEventListener("click", () => {
+            small1.addEventListener('click', () => {
                 big.src = products[i].images[0];
             });
-            small2.addEventListener("click", () => {
+            small2.addEventListener('click', () => {
                 big.src = products[i].images[1];
             });
 
@@ -153,10 +156,20 @@ class Description extends Component {
             stock.textContent = 'Stock: ' + products[i].stock;
             discountPercentage.textContent = 'Discount: ' + products[i].discountPercentage + '%';
             price.textContent = 'Price: ' + products[i].price + 'ʛ (Galleon)';
-            
-            fullDesc.append(wandName, wood, core, length, ownerOfSimilarWand, rating, stock, description, discountPercentage, price);
-            
-            addToCart.addEventListener('click', () => {
+
+            fullDesc.append(
+                wandName,
+                wood,
+                core,
+                length,
+                ownerOfSimilarWand,
+                rating,
+                stock,
+                description,
+                discountPercentage,
+                price
+            );
+            function addInCart() {
                 let stock = products[i].stock;
                 let key = (i + 1).toString();
                 if (!productsInCart[key] && stock === 0) {
@@ -182,13 +195,43 @@ class Description extends Component {
                 totalPrice = priceInCart;
                 localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
                 (cartNum as HTMLDivElement).innerHTML = sum.toString();
-            });
             }
+            addToCart.addEventListener('click', addInCart);
+
+            buyNow.addEventListener('click', () => {
+                window.location.hash = PageIds.CartPage;
+                setTimeout(function() {
+                    let popup = document.querySelector('.order');
+                    (popup as HTMLDivElement).style.display = 'flex';
+                }, 1000)
+
+                let arrKeys = [];
+                let arrValues = [];
+                for (let key in cart) {
+                    arrKeys.push(key);
+                    arrValues.push(cart[key]);
+                }
+
+                if (arrKeys.length === 0 ) {
+                    addInCart()
+                } else {
+                    let d = (i + 1).toString();
+                    if (arrKeys.includes(d)) {
+                        if (cart[d] === 0) {
+                            addInCart()
+                        }
+                    } else {
+                        addInCart()
+                    }
+                }
+            });
+        }
+        
     }
     render(): HTMLElement {
         this.renderDescription();
-        return this.container;
+        return this.pageView;
     }
 }
 
-export default Description;
+export default WandPage;

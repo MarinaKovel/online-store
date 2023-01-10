@@ -4,24 +4,20 @@ import DevsPage from '../../pages/dev-page/dev';
 import ErrorPage from '../../pages/error/error';
 import Page from '../../constants/page';
 import Header from '../../componets/header/header';
+import WandPage from '../../pages/wand-page/wand-page';
+import CartPage from '../../pages/cart/cart';
 
 import { WandsPageIDs } from '../../constants/wandsTypes';
-import WandPage from '../../componets/description/wand-page';
 
-const WandPages = Object.values(WandsPageIDs);
-function getWand(idPage: string, arr: string[]): string {
-    let testSting: string = '';
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i] === idPage) testSting = arr[i];
-    }
-    return `${testSting}`;
-}
+import { setLastView } from '../../constants/functions';
+import { getWand } from '../../constants/functions';
 
 export const enum PageIds {
     MainPage = 'main-page',
     ShopPage = 'shop-page',
     DevPage = 'devs-page',
     ErPage = 'error-page',
+    CartPage = 'cart-page',
 }
 
 class App {
@@ -31,35 +27,57 @@ class App {
     header: Header;
 
     static renderNewView(idPage: string) {
+        localStorage.setItem('last-view', 'main-page');
         const currentView = document.querySelector(`#${this.defaultPageClassName}`) as HTMLElement;
+        idPage = `${window.location.hash.slice(1)}`;
+
         if (currentView) {
             currentView.remove();
         }
+        const docTitle = document.querySelector('title') as HTMLTitleElement;
+
         let view: Page | null = null;
+
         if (idPage === PageIds.MainPage) {
             window.location.hash = `#${PageIds.MainPage}`;
             view = new MainPage(idPage);
+            docTitle.innerText = `Ollivanders | Main`;
             this.defaultPageClassName = PageIds.MainPage;
+            setLastView(`#${idPage}`);
         } else if (idPage === PageIds.ShopPage) {
+            docTitle.innerText = `Ollivanders | Shop`;
+            window.location.hash = `#${PageIds.ShopPage}`;
             view = new ShopPage(idPage);
             this.defaultPageClassName = PageIds.ShopPage;
+            setLastView(`#${idPage}`);
+            console.log(localStorage.getItem('last-view'));
+        } else if (idPage === PageIds.CartPage) {
+            docTitle.innerText = `Ollivanders | Cart`;
+            view = new CartPage(idPage);
+            this.defaultPageClassName = PageIds.CartPage;
+            setLastView(`#${idPage}`);
         } else if (idPage === PageIds.DevPage) {
+            docTitle.innerText = `Ollivanders | Developers`;
             view = new DevsPage(idPage);
             this.defaultPageClassName = PageIds.DevPage;
+            window.location.hash = `#${PageIds.DevPage}`;
+            setLastView(`#${idPage}`);
         } else if (idPage === getWand(idPage, WandsPageIDs)) {
+            docTitle.innerText = `Ollivanders | ${idPage}`;
+            setLastView(idPage);
             const Article = document.querySelector('article');
             idPage = getWand(idPage, WandsPageIDs);
-            console.log(getWand(idPage, WandsPageIDs));
+            window.location.hash = `#${getWand(idPage, WandsPageIDs)}`;
             Article?.remove();
             view = new WandPage(idPage);
             this.defaultPageClassName = getWand(idPage, WandsPageIDs);
+            setLastView(`#${idPage}`);
         } else {
             idPage = PageIds.ErPage;
             view = new ErrorPage(idPage);
             this.defaultPageClassName = PageIds.ErPage;
         }
         if (view) {
-            console.log(App.appViews);
             const viewHtml = view.render();
             viewHtml.classList.add(this.defaultPageClassName);
             App.appViews.append(viewHtml);
@@ -68,10 +86,8 @@ class App {
 
     router() {
         window.addEventListener('hashchange', () => {
-            console.log('hash-change');
             const hash = window.location.hash.slice(1);
             App.renderNewView(hash);
-            console.log(hash);
         });
     }
 
@@ -80,11 +96,11 @@ class App {
         this.header = new Header('header', 'header');
     }
     run() {
-        App.appViews.append(this.header.render());
-        App.renderNewView(PageIds.ShopPage); //set up start page
         this.router();
+        App.appViews.append(this.header.render());
+        App.renderNewView(localStorage.getItem('last-view')!); //set up start page
     }
 }
 
-//MainPage ShopPage DevPage 404 -List of pages
+//MainPage ShopPage DevPage 404 wands -List of pages
 export default App;

@@ -3,10 +3,12 @@
   display: flex;
   align-items: center;
   position: absolute;
+  height: 70px;
   top: 0;
   left: 0;
   right: 0;
   z-index: 13;
+  background-color: rgba(35, 76, 112, 0.192);
 }
 
 .header__nav {
@@ -38,8 +40,43 @@
   }
 }
 .header__logo {
+  position: absolute;
+  top: 3px;
   font-size: 40px;
   color: Gold;
   font-family: "HarryP_2";
   text-shadow: 1px 1px 2px rgb(13, 12, 13);
+  height: 60px;
+  width: 200px;
+  background-image: url("./logo23.svg");
+
+  background-size: 170px 100px;
+  background-position: 0% 50%;
+  background-repeat: no-repeat;
+  border-radius: 25px;
+}
+.cart__container {
+  height: 50px;
+  width: 90px;
+  margin-left: 20px;
+  display: flex;
+  cursor: pointer;
+}
+.cart__num {
+  height: 60px;
+  width: 50px;
+  background-image: url("https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/16e855dd074766096135b3d744d755e3e01c5e56/cart7.svg");
+  background-position: 100% -29%;
+  background-size: 55px 50px;
+  background-repeat: no-repeat;
+  color: #000;
+  font-size: 1.5rem;
+  text-align: center;
+  line-height: 50px;
+}
+.cart__price {
+  font-size: 1.5rem;
+  height: 50px;
+  line-height: 50px;
+  display: none;
 }
