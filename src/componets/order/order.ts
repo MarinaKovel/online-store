@@ -265,20 +265,18 @@ class Order extends Component {
             }
             return;
         };
-        cardValidInput.oninput = function () {
+       
+        cardValidInput.onkeyup = function () {
+            cardValidInput.value = cardValidInput.value.replace (/[A-Za-zА-Яа-яЁё]/, '');
             if (+(this as HTMLInputElement).value < 13 && +(this as HTMLInputElement).value.length == 2) {
                 (this as HTMLInputElement).value = `${(this as HTMLInputElement).value}/`;
             }
-            return;
-        };
-        cardValidInput.onkeyup = function () {
-            cardValidInput.value = cardValidInput.value.replace (/\D/, '')
         }
         cardCvvInput.onkeyup = function () {
-            cardCvvInput.value = cardCvvInput.value.replace (/\D/, '')
+            cardCvvInput.value = cardCvvInput.value.replace (/\D/, '');
         }
         cardNumInput.onkeyup = function () {
-            cardNumInput.value = cardNumInput.value.replace (/\D/, '')
+            cardNumInput.value = cardNumInput.value.replace (/\D/, '');
         }
 
         // order is completed
