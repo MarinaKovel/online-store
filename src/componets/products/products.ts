@@ -42,7 +42,8 @@ class Products extends Component {
         sortByRatingAscText: 'Sort by Rating ↑',
         sortByPriceAscText: 'Sort by Price ↑',
         sortByPriceDescText: 'Sort by Price ↓',
-        emptyList: 'Sorry! No wands found. Of course. The wand chooses the wizard! A wizard can channel their magical power through any wand. But a specific wand chooses a particular person based on their mentality.',
+        emptyList:
+            'Sorry! No wands found. Of course. The wand chooses the wizard! A wizard can channel their magical power through any wand. But a specific wand chooses a particular person based on their mentality.',
         emptyBtn: 'Let the wand choose me!',
     };
     constructor(tagName: string, className: string) {
@@ -50,15 +51,19 @@ class Products extends Component {
     }
 
     renderProductList() {
-        let productsInCart: ObjectInterface = {0: 0};
-        let priceInCart: ObjectInterface = {price: 0};
-        let json = localStorage.getItem("cart") as string;
-        let jsonP = localStorage.getItem("totalPrice") as string;
+        let productsInCart: ObjectInterface = { 0: 0 };
+        let priceInCart: ObjectInterface = { price: 0 };
+        let json = localStorage.getItem('cart') as string;
+        let jsonP = localStorage.getItem('totalPrice') as string;
         let cart: ObjectInterface = JSON.parse(json);
         let totalPrice: ObjectInterface = JSON.parse(jsonP);
 
-        if (cart) { productsInCart = cart; }
-        if (totalPrice) { priceInCart = totalPrice; }
+        if (cart) {
+            productsInCart = cart;
+        }
+        if (totalPrice) {
+            priceInCart = totalPrice;
+        }
         let sum = 0;
         for (let num of Object.values(productsInCart)) {
             sum += num;
@@ -307,10 +312,14 @@ class Products extends Component {
             lengthMaxInput.setAttribute('step', '1');
 
             let min = lengthMinInput.getAttribute('min');
-            if (min) { minDiv.innerText = min.toString() + '"'; }
+            if (min) {
+                minDiv.innerText = min.toString() + '"';
+            }
 
             let max = lengthMaxInput.getAttribute('max');
-            if (max) { maxDiv.innerText = max.toString() + '"'; }
+            if (max) {
+                maxDiv.innerText = max.toString() + '"';
+            }
 
             lengthSpan.append(lengthMinInput, lengthMaxInput);
             filterLengthContent.append(minDiv, lengthSpan, maxDiv);
@@ -466,7 +475,6 @@ class Products extends Component {
                     }
                     if (+elem.price < minP) {
                         minP = +elem.price;
-                        
                     }
                     if (+elem.price > maxP) {
                         maxP = +elem.price;
@@ -527,6 +535,7 @@ class Products extends Component {
                     const ARTICLE = document.querySelector('article');
                     ARTICLE?.setAttribute('id', prodItem.getAttribute('data-link') as string);
                     window.location.hash = `${ARTICLE?.getAttribute('id')}`;
+                    console.log(`click`);
                 });
 
                 prodItem.className = 'product__item';
@@ -538,8 +547,8 @@ class Products extends Component {
                 stock.className = 'prod__desc';
                 discount.className = 'prod__desc';
                 price.className = 'prod__desc';
-                addToCartBtn.classList.add('buy__btn', (wandsData[i].id).toString());
-                detailsBtn.className = 'buy__btn';
+                addToCartBtn.classList.add('buy__btn', wandsData[i].id.toString());
+                detailsBtn.classList.add('buy__btn', 'buy__details');
                 prodItem.setAttribute('id', wandsData[i].id.toString());
                 prodItem.setAttribute('data-link', `Wand${wandsData[i].id.toString()}`);
 
@@ -570,24 +579,28 @@ class Products extends Component {
                     } else if (!productsInCart[key] && stock > 0) {
                         productsInCart[key] = 1;
                         (cartPrice as HTMLDivElement).style.display = 'block';
-                        (cartPrice as HTMLDivElement).innerText = (+((cartPrice as HTMLDivElement).innerText.slice(0, -1)) + wandsData[i].price).toString() + 'ʛ';
+                        (cartPrice as HTMLDivElement).innerText =
+                            (+(cartPrice as HTMLDivElement).innerText.slice(0, -1) + wandsData[i].price).toString() +
+                            'ʛ';
                         addToCartBtn.innerText = Products.TextObj.addToCartBtn2;
-                    } else if(productsInCart[key] && productsInCart[key] < stock) {
+                    } else if (productsInCart[key] && productsInCart[key] < stock) {
                         productsInCart[key] = productsInCart[key] + 1;
-                        (cartPrice as HTMLDivElement).innerText = (+((cartPrice as HTMLDivElement).innerText.slice(0, -1)) + wandsData[i].price).toString() + 'ʛ';
+                        (cartPrice as HTMLDivElement).innerText =
+                            (+(cartPrice as HTMLDivElement).innerText.slice(0, -1) + wandsData[i].price).toString() +
+                            'ʛ';
                         addToCartBtn.innerText = Products.TextObj.addToCartBtn2;
                     } else if (productsInCart[key] && productsInCart[key] > stock) {
                         productsInCart[key] = productsInCart[key];
                     }
                     cart = productsInCart;
-                    localStorage.setItem("cart", JSON.stringify(cart));
+                    localStorage.setItem('cart', JSON.stringify(cart));
                     let sum = 0;
                     for (let num of Object.values(productsInCart)) {
                         sum += num;
                     }
-                    priceInCart.price = +((cartPrice as HTMLDivElement).innerText.slice(0, -1));
+                    priceInCart.price = +(cartPrice as HTMLDivElement).innerText.slice(0, -1);
                     totalPrice = priceInCart;
-                    localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
+                    localStorage.setItem('totalPrice', JSON.stringify(totalPrice));
                     (cartNum as HTMLDivElement).innerHTML = sum.toString();
                 });
             }
@@ -614,9 +627,16 @@ class Products extends Component {
                 prodName.className = 'prod__name';
                 price.className = 'prod__desc';
                 addToCartBtn.className = 'buy__btn';
-                detailsBtn.className = 'buy__btn';
+                detailsBtn.classList.add('buy__btn', 'buy__details');
                 prodItem.setAttribute('link', 'wand');
                 prodItem.setAttribute('id', wandsData[i].id.toString());
+                prodItem.setAttribute('data-link', `Wand${wandsData[i].id.toString()}`);
+
+                detailsBtn.addEventListener('click', () => {
+                    const ARTICLE = document.querySelector('article');
+                    ARTICLE?.setAttribute('id', prodItem.getAttribute('data-link') as string);
+                    window.location.hash = `${ARTICLE?.getAttribute('id')}`;
+                });
 
                 prodName.textContent = wandsData[i].name;
                 price.textContent = wandsData[i].price + 'ʛ (Galleon)';
@@ -639,24 +659,28 @@ class Products extends Component {
                     } else if (!productsInCart[key] && stock > 0) {
                         productsInCart[key] = 1;
                         (cartPrice as HTMLDivElement).style.display = 'block';
-                        (cartPrice as HTMLDivElement).innerText = (+((cartPrice as HTMLDivElement).innerText.slice(0, -1)) + wandsData[i].price).toString() + 'ʛ';
+                        (cartPrice as HTMLDivElement).innerText =
+                            (+(cartPrice as HTMLDivElement).innerText.slice(0, -1) + wandsData[i].price).toString() +
+                            'ʛ';
                         addToCartBtn.innerText = Products.TextObj.addToCartBtn2;
-                    } else if(productsInCart[key] && productsInCart[key] < stock) {
+                    } else if (productsInCart[key] && productsInCart[key] < stock) {
                         productsInCart[key] = productsInCart[key] + 1;
-                        (cartPrice as HTMLDivElement).innerText = (+((cartPrice as HTMLDivElement).innerText.slice(0, -1)) + wandsData[i].price).toString() + 'ʛ';
+                        (cartPrice as HTMLDivElement).innerText =
+                            (+(cartPrice as HTMLDivElement).innerText.slice(0, -1) + wandsData[i].price).toString() +
+                            'ʛ';
                         addToCartBtn.innerText = Products.TextObj.addToCartBtn2;
                     } else if (productsInCart[key] && productsInCart[key] > stock) {
                         productsInCart[key] = productsInCart[key];
                     }
                     cart = productsInCart;
-                    localStorage.setItem("cart", JSON.stringify(cart));
+                    localStorage.setItem('cart', JSON.stringify(cart));
                     let sum = 0;
                     for (let num of Object.values(productsInCart)) {
                         sum += num;
                     }
-                    priceInCart.price = +((cartPrice as HTMLDivElement).innerText.slice(0, -1));
+                    priceInCart.price = +(cartPrice as HTMLDivElement).innerText.slice(0, -1);
                     totalPrice = priceInCart;
-                    localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
+                    localStorage.setItem('totalPrice', JSON.stringify(totalPrice));
                     (cartNum as HTMLDivElement).innerHTML = sum.toString();
                 });
             }
@@ -768,7 +792,7 @@ class Products extends Component {
         }
 
         function resetFilters() {
-            setLengthPrice()
+            setLengthPrice();
             filtered = [];
             filterLengthContent.innerHTML = '';
             filterPriceContent.innerHTML = '';
@@ -793,9 +817,10 @@ class Products extends Component {
             document.execCommand('copy');
             document.body.removeChild(copytext);
             copy.innerText = 'Copied!';
-            setTimeout(() => { copy.innerText = Products.TextObj.copy; }, 1500);
-          }
-
+            setTimeout(() => {
+                copy.innerText = Products.TextObj.copy;
+            }, 1500);
+        }
     }
 
     render(): HTMLElement {
