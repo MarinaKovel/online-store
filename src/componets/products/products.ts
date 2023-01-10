@@ -211,6 +211,7 @@ class Products extends Component {
             searchForm.addEventListener('change', setLengthPrice);
             searchForm.addEventListener('keyup', filter);
             searchForm.addEventListener('submit', searchSubmit);
+            emptyBtn.addEventListener('click', chooseWand);
         };
 
         function getJson(jsonObj: RootObject) {
@@ -490,7 +491,23 @@ class Products extends Component {
             results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
         }
 
+        function chooseWand() {
+            const wandContainer = document.createElement('div') as HTMLDivElement;
+            const wandNote = document.createElement('span') as HTMLDivElement;
+            const wandImg = document.createElement('img') as HTMLDivElement;
+            wandContainer.className = 'wand__container';
+            wandNote.className = 'wand__note';
+            wandImg.className = 'wand__img';
+            let rand = Math.floor(0 + Math.random() * (30 + 1 - 0));
+            wandNote.innerText = 'Your wand is ' + wandsData[rand].name;
+            wandImg.setAttribute('src', wandsData[rand].thumbnail);
+            emptyList.append(wandContainer);
+            wandContainer.append(wandNote, wandImg);
+            emptyBtn.style.display = 'none';
+        }
+
         function addWandsGrid(wandsData: Product[]) {
+            emptyList.style.display = 'none';
             results.innerText = Products.TextObj.resultText + ' ' + wandsData.length;
             for (let i = 0; i < wandsData.length; i++) {
                 const prodItem = document.createElement('div') as HTMLDivElement;
@@ -578,6 +595,7 @@ class Products extends Component {
         }
 
         function addWandsList(wandsData: Product[]) {
+            emptyList.style.display = 'none';
             results.innerText = Products.TextObj.resultText + ' ' + wandsData.length;
             for (let i = 0; i < wandsData.length; i++) {
                 const prodItem = document.createElement('div') as HTMLDivElement;
