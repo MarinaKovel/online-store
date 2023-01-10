@@ -271,6 +271,15 @@ class Order extends Component {
             }
             return;
         };
+        cardValidInput.onkeyup = function () {
+            cardValidInput.value = cardValidInput.value.replace (/\D/, '')
+        }
+        cardCvvInput.onkeyup = function () {
+            cardCvvInput.value = cardCvvInput.value.replace (/\D/, '')
+        }
+        cardNumInput.onkeyup = function () {
+            cardNumInput.value = cardNumInput.value.replace (/\D/, '')
+        }
 
         // order is completed
         let finishImg = document.createElement('img');
