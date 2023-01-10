@@ -1,4 +1,3 @@
-
 import MainPage from '../../pages/main/main';
 import ShopPage from '../../pages/shop/shop';
 import DevsPage from '../../pages/dev-page/dev';
@@ -35,30 +34,36 @@ class App {
         if (currentView) {
             currentView.remove();
         }
+        const docTitle = document.querySelector('title') as HTMLTitleElement;
 
         let view: Page | null = null;
 
         if (idPage === PageIds.MainPage) {
             window.location.hash = `#${PageIds.MainPage}`;
             view = new MainPage(idPage);
+            docTitle.innerText = `Ollivanders | Main`;
             this.defaultPageClassName = PageIds.MainPage;
             setLastView(`#${idPage}`);
         } else if (idPage === PageIds.ShopPage) {
+            docTitle.innerText = `Ollivanders | Shop`;
             window.location.hash = `#${PageIds.ShopPage}`;
             view = new ShopPage(idPage);
             this.defaultPageClassName = PageIds.ShopPage;
             setLastView(`#${idPage}`);
             console.log(localStorage.getItem('last-view'));
         } else if (idPage === PageIds.CartPage) {
+            docTitle.innerText = `Ollivanders | Cart`;
             view = new CartPage(idPage);
             this.defaultPageClassName = PageIds.CartPage;
             setLastView(`#${idPage}`);
         } else if (idPage === PageIds.DevPage) {
+            docTitle.innerText = `Ollivanders | Developers`;
             view = new DevsPage(idPage);
             this.defaultPageClassName = PageIds.DevPage;
             window.location.hash = `#${PageIds.DevPage}`;
             setLastView(`#${idPage}`);
         } else if (idPage === getWand(idPage, WandsPageIDs)) {
+            docTitle.innerText = `Ollivanders | ${idPage}`;
             setLastView(idPage);
             const Article = document.querySelector('article');
             idPage = getWand(idPage, WandsPageIDs);
