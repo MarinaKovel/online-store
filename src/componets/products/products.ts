@@ -42,6 +42,8 @@ class Products extends Component {
         sortByRatingAscText: 'Sort by Rating ↑',
         sortByPriceAscText: 'Sort by Price ↑',
         sortByPriceDescText: 'Sort by Price ↓',
+        emptyList: 'Sorry! No wands found. Of course. The wand chooses the wizard! A wizard can channel their magical power through any wand. But a specific wand chooses a particular person based on their mentality.',
+        emptyBtn: 'Let the wand choose me!',
     };
     constructor(tagName: string, className: string) {
         super(tagName, className);
@@ -90,6 +92,9 @@ class Products extends Component {
         const productContainer = document.createElement('div') as HTMLDivElement;
         const viewSettings = document.createElement('div') as HTMLDivElement;
         const productList = document.createElement('div') as HTMLDivElement;
+        const emptyList = document.createElement('div') as HTMLDivElement;
+        const emptyText = document.createElement('span') as HTMLSpanElement;
+        const emptyBtn = document.createElement('button') as HTMLSpanElement;
         const sort = document.createElement('select') as HTMLSelectElement;
         const sortRandom = document.createElement('option') as HTMLOptionElement;
         const sortChoiceByRatingDesc = document.createElement('option') as HTMLOptionElement;
@@ -124,6 +129,9 @@ class Products extends Component {
         productContainer.className = 'product__container';
         viewSettings.className = 'view__settings';
         productList.className = 'product__list';
+        emptyList.className = 'empty__list';
+        emptyText.className = 'empty__text';
+        emptyBtn.className = 'empty__btn';
         sort.className = 'sort__menu';
         results.className = 'settings__text';
         searchForm.className = 'search__form';
@@ -155,6 +163,8 @@ class Products extends Component {
         sortChoiceByRatingAsc.innerText = Products.TextObj.sortByRatingAscText;
         sortChoiceByPriceAsc.innerText = Products.TextObj.sortByPriceAscText;
         sortChoiceByPriceDesc.innerText = Products.TextObj.sortByPriceDescText;
+        emptyText.innerText = Products.TextObj.emptyList;
+        emptyBtn.innerText = Products.TextObj.emptyBtn;
 
         filtersContainer.append(resetCopyContainer, filters);
         filters.append(filterWood, filterCore, filterLength, filterPrice);
@@ -163,7 +173,8 @@ class Products extends Component {
         filterLength.append(filterLengthName, filterLengthContent);
         filterPrice.append(filterPriceName, filterPriceContent);
         resetCopyContainer.append(reset, copy);
-        productContainer.append(viewSettings, productList);
+        productContainer.append(viewSettings, productList, emptyList);
+        emptyList.append(emptyText, emptyBtn);
         viewSettings.append(sort, results, searchForm, view);
         sort.append(
             sortRandom,
@@ -563,6 +574,7 @@ class Products extends Component {
                     (cartNum as HTMLDivElement).innerHTML = sum.toString();
                 });
             }
+            addZeroSearchMsg();
         }
 
         function addWandsList(wandsData: Product[]) {
@@ -629,6 +641,13 @@ class Products extends Component {
                     localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
                     (cartNum as HTMLDivElement).innerHTML = sum.toString();
                 });
+            }
+            addZeroSearchMsg();
+        }
+
+        function addZeroSearchMsg() {
+            if (+results.innerText.slice(9) === 0) {
+                emptyList.style.display = 'flex';
             }
         }
 
