@@ -1,0 +1,133 @@
+$index: calc(1vw + 1vh);
+$gold: gold;
+
+.devs-page {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(35, 112, 84, 0.495);
+}
+
+.devs__title {
+  margin-top: 100px;
+  font-size: calc($index * 3);
+}
+
+.devs__dicription {
+  max-width: 600px;
+  text-align: center;
+  font-size: calc($index * 1);
+  line-height: calc($index * 1.4);
+  color: $gold;
+}
+.devs__icons {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.git__logo {
+  width: 60px;
+  height: 60px;
+  background-color: transparent;
+  background-image: url("./img/gitL.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: relative;
+}
+
+.nodejs__logo {
+  width: 120px;
+  height: 50px;
+  background-image: url("./img/nodejs-logo.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.webpack__logo {
+  width: 60px;
+  height: 60px;
+  background-image: url("./img/webpack-logo.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.sass__logo {
+  width: 60px;
+  height: 60px;
+  background-image: url("./img/sass-logo.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.type__logo {
+  width: 60px;
+  height: 60px;
+  background-image: url("./img/Typescript.png");
+  background-color: black;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.devs__links {
+  margin-top: 30px;
+  display: flex;
+  gap: 40px;
+  flex: 1 1 auto;
+}
+
+.links__link {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.link__disrcription {
+  color: $gold;
+  font-size: calc($index * 1.5);
+  &:hover {
+    color: white;
+    transition: all 1s ease-in-out;
+    animation: pulsate1 0.11s ease-in-out infinite alternate;
+    @keyframes pulsate1 {
+      100% {
+        text-shadow: 0 0 4px black, 0 0 11px black, 0 0 19px black, 0 0 40px rgb(0, 0, 255), 0 0 80px rgb(0, 0, 255),
+          0 0 90px rgb(0, 0, 255), 0 0 100px rgb(0, 0, 255), 0 0 150px rgb(0, 0, 255);
+      }
+
+      0% {
+        text-shadow: 0 0 4px black, 0 0 10px black, 0 0 18px black, 0 0 38px rgb(0, 0, 255), 0 0 73px rgb(0, 0, 255),
+          0 0 80px rgb(0, 0, 255), 0 0 94px rgb(0, 0, 255), 0 0 140px rgb(0, 0, 255);
+      }
+    }
+  }
+}
+
+.footer {
+  display: flex;
+  gap: 40px;
+  margin-top: 100px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.school-link {
+  width: 100px;
+  height: 40px;
+  background-image: url("https://rs.school/images/rs_school_js.svg");
+  background-repeat: no-repeat;
+}
+
+.footer__year {
+  font-size: calc($index * 1.4);
+}

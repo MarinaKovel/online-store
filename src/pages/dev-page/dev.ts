@@ -1,6 +1,6 @@
 import Page from '../../constants/page';
-import Cart from '../../componets/cart/cart'; // Cart
-import Order from '../../componets/order/order'; // Order
+
+import DevPageInner from '../../componets/dev-page-content/dev-page-content';
 
 class DevsPage extends Page {
     static TextObj = {
@@ -9,16 +9,14 @@ class DevsPage extends Page {
     constructor(id: string) {
         super(id);
     }
+
+    renderContent() {
+        const content = new DevPageInner(this.pageView, 'section', 'devs__inner');
+        content.render();
+    }
+
     render() {
-        const title = this.createHeaderTitle(DevsPage.TextObj.DevPageTitle);
-        this.pageView.append(title);
-
-        let cart = new Cart('section', 'cart');  //add cart
-        this.pageView.append(cart.render());  //add cart
-
-        let order = new Order('section', 'order');  //add order
-        this.pageView.append(order.render());  //add order
-
+        this.renderContent();
         return this.pageView;
     }
 }

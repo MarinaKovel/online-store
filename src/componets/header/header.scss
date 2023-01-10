@@ -3,10 +3,12 @@
   display: flex;
   align-items: center;
   position: absolute;
+  height: 70px;
   top: 0;
   left: 0;
   right: 0;
   z-index: 13;
+  background-color: rgba(35, 76, 112, 0.192);
 }
 
 .header__nav {
@@ -47,12 +49,11 @@
   height: 60px;
   width: 200px;
   background-image: url("./logo23.svg");
+
   background-size: 170px 100px;
   background-position: 0% 50%;
   background-repeat: no-repeat;
-  background-color: rgba(0, 0, 0, 0.213);
   border-radius: 25px;
-  box-shadow: inset rgba(0, 0, 0, 0) 0 0 1px, inset rgba(56, 44, 29, 0.271) 0 15px 10px;
 }
 .cart__container {
   height: 50px;
