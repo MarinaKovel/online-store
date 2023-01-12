@@ -11,6 +11,7 @@ import { WandsPageIDs } from '../../constants/wandsTypes';
 
 import { setLastView } from '../../constants/functions';
 import { getWand } from '../../constants/functions';
+import customScroll from '../../componets/scroll/scroll';
 
 export const enum PageIds {
     MainPage = 'main-page',
@@ -99,6 +100,7 @@ class App {
         this.router();
         App.appViews.append(this.header.render());
         App.renderNewView(localStorage.getItem('last-view')!); //set up start page
+        customScroll();
     }
 }
 

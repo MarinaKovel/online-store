@@ -19,9 +19,6 @@ export interface Product {
 export interface RootObject {
     products: Product[];
 }
-interface ObjectInterface {
-    [key: string]: number;
-}
 
 class Products extends Component {
     static TextObj = {
@@ -35,48 +32,18 @@ class Products extends Component {
         resultText: 'Results: ',
         searchText: 'Search',
         addToCartBtn: 'Add to cart',
-        addToCartBtn2: 'Add more',
         detailsBtn: 'Details',
         sortRandom: 'Sort options:',
         sortByRatingDescText: 'Sort by Rating ↓',
         sortByRatingAscText: 'Sort by Rating ↑',
         sortByPriceAscText: 'Sort by Price ↑',
         sortByPriceDescText: 'Sort by Price ↓',
-        emptyList:
-            'Sorry! No wands found. Of course. The wand chooses the wizard! A wizard can channel their magical power through any wand. But a specific wand chooses a particular person based on their mentality.',
-        emptyBtn: 'Let the wand choose me!',
     };
     constructor(tagName: string, className: string) {
         super(tagName, className);
     }
 
     renderProductList() {
-        let productsInCart: ObjectInterface = { 0: 0 };
-        let priceInCart: ObjectInterface = { price: 0 };
-        let json = localStorage.getItem('cart') as string;
-        let jsonP = localStorage.getItem('totalPrice') as string;
-        let cart: ObjectInterface = JSON.parse(json);
-        let totalPrice: ObjectInterface = JSON.parse(jsonP);
-
-        if (cart) {
-            productsInCart = cart;
-        }
-        if (totalPrice) {
-            priceInCart = totalPrice;
-        }
-        let sum = 0;
-        for (let num of Object.values(productsInCart)) {
-            sum += num;
-        }
-
-        let cartNum = document.querySelector('.cart__num');
-        let cartPrice = document.querySelector('.cart__price');
-        (cartNum as HTMLDivElement).innerHTML = sum.toString();
-        if (priceInCart.price > 0) {
-            (cartPrice as HTMLDivElement).innerHTML = priceInCart.price.toString() + 'ʛ';
-            (cartPrice as HTMLDivElement).style.display = 'block';
-        }
-
         const filtersContainer = document.createElement('div') as HTMLDivElement;
         const resetCopyContainer = document.createElement('div') as HTMLDivElement;
         const reset = document.createElement('button') as HTMLButtonElement;
@@ -97,9 +64,6 @@ class Products extends Component {
         const productContainer = document.createElement('div') as HTMLDivElement;
         const viewSettings = document.createElement('div') as HTMLDivElement;
         const productList = document.createElement('div') as HTMLDivElement;
-        const emptyList = document.createElement('div') as HTMLDivElement;
-        const emptyText = document.createElement('span') as HTMLSpanElement;
-        const emptyBtn = document.createElement('button') as HTMLSpanElement;
         const sort = document.createElement('select') as HTMLSelectElement;
         const sortRandom = document.createElement('option') as HTMLOptionElement;
         const sortChoiceByRatingDesc = document.createElement('option') as HTMLOptionElement;
@@ -110,10 +74,6 @@ class Products extends Component {
         const searchForm = document.createElement('form') as HTMLFormElement;
         const search = document.createElement('input') as HTMLInputElement;
         const view = document.createElement('div') as HTMLDivElement;
-        const lengthMinInput = document.createElement('input') as HTMLInputElement;
-        const lengthMaxInput = document.createElement('input') as HTMLInputElement;
-        const priceMinInput = document.createElement('input') as HTMLInputElement;
-        const priceMaxInput = document.createElement('input') as HTMLInputElement;
 
         filtersContainer.className = 'filters__container';
         resetCopyContainer.className = 'reset__container';
@@ -134,9 +94,6 @@ class Products extends Component {
         productContainer.className = 'product__container';
         viewSettings.className = 'view__settings';
         productList.className = 'product__list';
-        emptyList.className = 'empty__list';
-        emptyText.className = 'empty__text';
-        emptyBtn.className = 'empty__btn';
         sort.className = 'sort__menu';
         results.className = 'settings__text';
         searchForm.className = 'search__form';
@@ -168,8 +125,6 @@ class Products extends Component {
         sortChoiceByRatingAsc.innerText = Products.TextObj.sortByRatingAscText;
         sortChoiceByPriceAsc.innerText = Products.TextObj.sortByPriceAscText;
         sortChoiceByPriceDesc.innerText = Products.TextObj.sortByPriceDescText;
-        emptyText.innerText = Products.TextObj.emptyList;
-        emptyBtn.innerText = Products.TextObj.emptyBtn;
 
         filtersContainer.append(resetCopyContainer, filters);
         filters.append(filterWood, filterCore, filterLength, filterPrice);
@@ -178,8 +133,7 @@ class Products extends Component {
         filterLength.append(filterLengthName, filterLengthContent);
         filterPrice.append(filterPriceName, filterPriceContent);
         resetCopyContainer.append(reset, copy);
-        productContainer.append(viewSettings, productList, emptyList);
-        emptyList.append(emptyText, emptyBtn);
+        productContainer.append(viewSettings, productList);
         viewSettings.append(sort, results, searchForm, view);
         sort.append(
             sortRandom,
@@ -213,10 +167,8 @@ class Products extends Component {
             reset.addEventListener('click', resetFilters);
             copy.addEventListener('click', copyLink);
             view.addEventListener('click', changeView);
-            searchForm.addEventListener('change', setLengthPrice);
             searchForm.addEventListener('keyup', filter);
             searchForm.addEventListener('submit', searchSubmit);
-            emptyBtn.addEventListener('click', chooseWand);
         };
 
         function getJson(jsonObj: RootObject) {
@@ -258,7 +210,6 @@ class Products extends Component {
                 woodDiv.append(woodInput, woodLabel);
                 filterWoodContent.append(woodDiv);
 
-                woodInput.addEventListener('change', setLengthPrice);
                 woodInput.addEventListener('change', filter);
             }
         }
@@ -283,7 +234,6 @@ class Products extends Component {
                 coreDiv.append(coreInput, coreLabel);
                 filterCoreContent.append(coreDiv);
 
-                coreInput.addEventListener('change', setLengthPrice);
                 coreInput.addEventListener('change', filter);
             }
         }
@@ -293,11 +243,11 @@ class Products extends Component {
             wandsData.forEach((elem) => arrLength.push(+elem.length));
             const minDiv = document.createElement('div') as HTMLDivElement;
             const maxDiv = document.createElement('div') as HTMLDivElement;
+            const lengthMinInput = document.createElement('input') as HTMLInputElement;
+            const lengthMaxInput = document.createElement('input') as HTMLInputElement;
             const lengthSpan = document.createElement('span') as HTMLSpanElement;
 
             lengthSpan.className = 'multi-range';
-            minDiv.className = 'minL__label';
-            maxDiv.className = 'maxL__label';
             lengthMinInput.className = 'category length min';
             lengthMaxInput.className = 'category length max';
             lengthMinInput.setAttribute('type', 'range');
@@ -310,16 +260,8 @@ class Products extends Component {
             lengthMaxInput.setAttribute('max', '18');
             lengthMaxInput.setAttribute('value', '18');
             lengthMaxInput.setAttribute('step', '1');
-
-            let min = lengthMinInput.getAttribute('min');
-            if (min) {
-                minDiv.innerText = min.toString() + '"';
-            }
-
-            let max = lengthMaxInput.getAttribute('max');
-            if (max) {
-                maxDiv.innerText = max.toString() + '"';
-            }
+            minDiv.innerText = '9"';
+            maxDiv.innerText = '18"';
 
             lengthSpan.append(lengthMinInput, lengthMaxInput);
             filterLengthContent.append(minDiv, lengthSpan, maxDiv);
@@ -349,11 +291,11 @@ class Products extends Component {
             wandsData.forEach((elem) => arrPrice.push(+elem.price));
             const minDiv = document.createElement('div') as HTMLDivElement;
             const maxDiv = document.createElement('div') as HTMLDivElement;
+            const priceMinInput = document.createElement('input') as HTMLInputElement;
+            const priceMaxInput = document.createElement('input') as HTMLInputElement;
             const priceSpan = document.createElement('span') as HTMLSpanElement;
 
             priceSpan.className = 'multi-range2';
-            minDiv.className = 'minP__label';
-            maxDiv.className = 'maxP__label';
             priceMinInput.className = 'category price min';
             priceMaxInput.className = 'category price max';
             priceMinInput.setAttribute('type', 'range');
@@ -392,13 +334,6 @@ class Products extends Component {
             priceMaxInput.addEventListener('change', filter);
         }
 
-        function setLengthPrice() {
-            lengthMinInput.setAttribute('value', '9');
-            lengthMaxInput.setAttribute('value', '18');
-            priceMinInput.setAttribute('value', '5');
-            priceMaxInput.setAttribute('value', '30');
-        }
-
         function filter() {
             sortProd();
             productList.innerHTML = '';
@@ -406,14 +341,17 @@ class Products extends Component {
             let inputValue: string[] = []; // Length min, length max, Price min, Price max
             let inputWood: string[] = []; // Wood
             let inputCore: string[] = []; // Core
+            console.log(inputValue);
 
-            inputValue.push(lengthMinInput.value, lengthMaxInput.value);
+            let inputsLength = document.getElementsByClassName('length');
+            inputValue.push((inputsLength[0] as HTMLInputElement).value, (inputsLength[1] as HTMLInputElement).value);
             inputValue.sort((a, b) => +a - +b);
 
-            if (+priceMinInput.value <= +priceMaxInput.value) {
-                inputValue.push(priceMinInput.value, priceMaxInput.value);
+            let inputsPrice = document.getElementsByClassName('price');
+            if (+(inputsPrice[0] as HTMLInputElement).value <= +(inputsPrice[1] as HTMLInputElement).value) {
+                inputValue.push((inputsPrice[0] as HTMLInputElement).value, (inputsPrice[1] as HTMLInputElement).value);
             } else {
-                inputValue.push(priceMaxInput.value, priceMinInput.value);
+                inputValue.push((inputsPrice[1] as HTMLInputElement).value, (inputsPrice[0] as HTMLInputElement).value);
             }
 
             let inputsWood = document.getElementsByClassName('wood');
@@ -429,11 +367,6 @@ class Products extends Component {
                     inputCore.push(inputsCore[i].getAttribute('name') as string);
                 }
             }
-
-            let minL = 18;
-            let maxL = 9;
-            let minP = 30;
-            let maxP = 5;
 
             wandsData.forEach(function getMatch(elem) {
                 let searchContent1 = elem.wood;
@@ -467,55 +400,14 @@ class Products extends Component {
                     (searchContent5.includes(searchResult) || searchResult === undefined)
                 ) {
                     filtered.push(elem);
-                    if (+elem.length < minL) {
-                        minL = +elem.length;
-                    }
-                    if (+elem.length > maxL) {
-                        maxL = +elem.length;
-                    }
-                    if (+elem.price < minP) {
-                        minP = +elem.price;
-                    }
-                    if (+elem.price > maxP) {
-                        maxP = +elem.price;
-                    }
                 }
             });
-
-            lengthMinInput.setAttribute('value', minL.toString());
-            lengthMaxInput.setAttribute('value', maxL.toString());
-            let setMinL = document.querySelector('.minL__label');
-            let setMaxL = document.querySelector('.maxL__label');
-            (setMinL as HTMLDivElement).innerText = minL.toString() + '"';
-            (setMaxL as HTMLDivElement).innerText = maxL.toString() + '"';
-            priceMinInput.setAttribute('value', minP.toString());
-            priceMaxInput.setAttribute('value', maxP.toString());
-            let setMinP = document.querySelector('.minP__label');
-            let setMaxP = document.querySelector('.maxP__label');
-            (setMaxP as HTMLDivElement).innerText = maxP.toString() + 'ʛ';
-            (setMinP as HTMLDivElement).innerText = minP.toString() + 'ʛ';
 
             addWandsGrid(filtered);
             results.innerText = Products.TextObj.resultText + ' ' + productList.childNodes.length;
         }
 
-        function chooseWand() {
-            const wandContainer = document.createElement('div') as HTMLDivElement;
-            const wandNote = document.createElement('span') as HTMLDivElement;
-            const wandImg = document.createElement('img') as HTMLDivElement;
-            wandContainer.className = 'wand__container';
-            wandNote.className = 'wand__note';
-            wandImg.className = 'wand__img';
-            let rand = Math.floor(0 + Math.random() * (30 + 1 - 0));
-            wandNote.innerText = 'Your wand is ' + wandsData[rand].name;
-            wandImg.setAttribute('src', wandsData[rand].thumbnail);
-            emptyList.append(wandContainer);
-            wandContainer.append(wandNote, wandImg);
-            emptyBtn.style.display = 'none';
-        }
-
         function addWandsGrid(wandsData: Product[]) {
-            emptyList.style.display = 'none';
             results.innerText = Products.TextObj.resultText + ' ' + wandsData.length;
             for (let i = 0; i < wandsData.length; i++) {
                 const prodItem = document.createElement('div') as HTMLDivElement;
@@ -535,7 +427,6 @@ class Products extends Component {
                     const ARTICLE = document.querySelector('article');
                     ARTICLE?.setAttribute('id', prodItem.getAttribute('data-link') as string);
                     window.location.hash = `${ARTICLE?.getAttribute('id')}`;
-                    console.log(`click`);
                 });
 
                 prodItem.className = 'product__item';
@@ -547,8 +438,8 @@ class Products extends Component {
                 stock.className = 'prod__desc';
                 discount.className = 'prod__desc';
                 price.className = 'prod__desc';
-                addToCartBtn.classList.add('buy__btn', wandsData[i].id.toString());
-                detailsBtn.classList.add('buy__btn', 'buy__details');
+                addToCartBtn.className = 'buy__btn';
+                detailsBtn.className = 'buy__btn';
                 prodItem.setAttribute('id', wandsData[i].id.toString());
                 prodItem.setAttribute('data-link', `Wand${wandsData[i].id.toString()}`);
 
@@ -560,59 +451,21 @@ class Products extends Component {
                 stock.textContent = 'Stock: ' + wandsData[i].stock;
                 discount.textContent = 'Discount: ' + wandsData[i].discountPercentage + '%';
                 price.textContent = 'Price: ' + wandsData[i].price + 'ʛ';
+                addToCartBtn.innerText = Products.TextObj.addToCartBtn;
                 detailsBtn.innerText = Products.TextObj.detailsBtn;
-                if (productsInCart[i + 1] > 0) {
-                    addToCartBtn.innerText = Products.TextObj.addToCartBtn2;
-                } else {
-                    addToCartBtn.innerText = Products.TextObj.addToCartBtn;
-                }
 
                 productList.append(prodItem);
+                productList.style.gridTemplateColumns = '1fr 1fr 1fr 1fr ';
                 prodItem.append(prodName, core, wood, length, rating, stock, discount, price, addToCartBtn, detailsBtn);
-
-                addToCartBtn.addEventListener('click', () => {
-                    let stock = wandsData[i].stock;
-                    let key = (i + 1).toString();
-                    if (!productsInCart[key] && stock === 0) {
-                        productsInCart[key] = 0;
-                        (cartPrice as HTMLDivElement).style.display = 'none';
-                    } else if (!productsInCart[key] && stock > 0) {
-                        productsInCart[key] = 1;
-                        (cartPrice as HTMLDivElement).style.display = 'block';
-                        (cartPrice as HTMLDivElement).innerText =
-                            (+(cartPrice as HTMLDivElement).innerText.slice(0, -1) + wandsData[i].price).toString() +
-                            'ʛ';
-                        addToCartBtn.innerText = Products.TextObj.addToCartBtn2;
-                    } else if (productsInCart[key] && productsInCart[key] < stock) {
-                        productsInCart[key] = productsInCart[key] + 1;
-                        (cartPrice as HTMLDivElement).innerText =
-                            (+(cartPrice as HTMLDivElement).innerText.slice(0, -1) + wandsData[i].price).toString() +
-                            'ʛ';
-                        addToCartBtn.innerText = Products.TextObj.addToCartBtn2;
-                    } else if (productsInCart[key] && productsInCart[key] > stock) {
-                        productsInCart[key] = productsInCart[key];
-                    }
-                    cart = productsInCart;
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                    let sum = 0;
-                    for (let num of Object.values(productsInCart)) {
-                        sum += num;
-                    }
-                    priceInCart.price = +(cartPrice as HTMLDivElement).innerText.slice(0, -1);
-                    totalPrice = priceInCart;
-                    localStorage.setItem('totalPrice', JSON.stringify(totalPrice));
-                    (cartNum as HTMLDivElement).innerHTML = sum.toString();
-                });
             }
-            addZeroSearchMsg();
         }
 
         function addWandsList(wandsData: Product[]) {
-            emptyList.style.display = 'none';
             results.innerText = Products.TextObj.resultText + ' ' + wandsData.length;
             for (let i = 0; i < wandsData.length; i++) {
                 const prodItem = document.createElement('div') as HTMLDivElement;
                 prodItem.style.backgroundImage = 'url(' + wandsData[i].thumbnail + ')';
+                productList.style.gridTemplateColumns = '1fr';
                 const prodName = document.createElement('div') as HTMLDivElement;
                 const price = document.createElement('div') as HTMLDivElement;
                 const addToCartBtn = document.createElement('button') as HTMLButtonElement;
@@ -627,69 +480,17 @@ class Products extends Component {
                 prodName.className = 'prod__name';
                 price.className = 'prod__desc';
                 addToCartBtn.className = 'buy__btn';
-                detailsBtn.classList.add('buy__btn', 'buy__details');
+                detailsBtn.className = 'buy__btn';
                 prodItem.setAttribute('link', 'wand');
                 prodItem.setAttribute('id', wandsData[i].id.toString());
-                prodItem.setAttribute('data-link', `Wand${wandsData[i].id.toString()}`);
-
-                detailsBtn.addEventListener('click', () => {
-                    const ARTICLE = document.querySelector('article');
-                    ARTICLE?.setAttribute('id', prodItem.getAttribute('data-link') as string);
-                    window.location.hash = `${ARTICLE?.getAttribute('id')}`;
-                });
 
                 prodName.textContent = wandsData[i].name;
                 price.textContent = wandsData[i].price + 'ʛ (Galleon)';
+                addToCartBtn.innerText = Products.TextObj.addToCartBtn;
                 detailsBtn.innerText = Products.TextObj.detailsBtn;
-                if (productsInCart[i + 1] > 0) {
-                    addToCartBtn.innerText = Products.TextObj.addToCartBtn2;
-                } else {
-                    addToCartBtn.innerText = Products.TextObj.addToCartBtn;
-                }
 
                 productList.append(prodItem);
                 prodItem.append(prodName, price, addToCartBtn, detailsBtn);
-
-                addToCartBtn.addEventListener('click', () => {
-                    let stock = wandsData[i].stock;
-                    let key = (i + 1).toString();
-                    if (!productsInCart[key] && stock === 0) {
-                        productsInCart[key] = 0;
-                        (cartPrice as HTMLDivElement).style.display = 'none';
-                    } else if (!productsInCart[key] && stock > 0) {
-                        productsInCart[key] = 1;
-                        (cartPrice as HTMLDivElement).style.display = 'block';
-                        (cartPrice as HTMLDivElement).innerText =
-                            (+(cartPrice as HTMLDivElement).innerText.slice(0, -1) + wandsData[i].price).toString() +
-                            'ʛ';
-                        addToCartBtn.innerText = Products.TextObj.addToCartBtn2;
-                    } else if (productsInCart[key] && productsInCart[key] < stock) {
-                        productsInCart[key] = productsInCart[key] + 1;
-                        (cartPrice as HTMLDivElement).innerText =
-                            (+(cartPrice as HTMLDivElement).innerText.slice(0, -1) + wandsData[i].price).toString() +
-                            'ʛ';
-                        addToCartBtn.innerText = Products.TextObj.addToCartBtn2;
-                    } else if (productsInCart[key] && productsInCart[key] > stock) {
-                        productsInCart[key] = productsInCart[key];
-                    }
-                    cart = productsInCart;
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                    let sum = 0;
-                    for (let num of Object.values(productsInCart)) {
-                        sum += num;
-                    }
-                    priceInCart.price = +(cartPrice as HTMLDivElement).innerText.slice(0, -1);
-                    totalPrice = priceInCart;
-                    localStorage.setItem('totalPrice', JSON.stringify(totalPrice));
-                    (cartNum as HTMLDivElement).innerHTML = sum.toString();
-                });
-            }
-            addZeroSearchMsg();
-        }
-
-        function addZeroSearchMsg() {
-            if (+results.innerText.slice(9) === 0) {
-                emptyList.style.display = 'flex';
             }
         }
 
@@ -777,7 +578,7 @@ class Products extends Component {
             if (view.className === 'view') {
                 viewResult = 'grid';
                 productList.innerHTML = '';
-                productList.style.flexDirection = 'row';
+
                 filtered.length === 0 ? addWandsGrid(wandsData) : addWandsGrid(filtered);
             } else {
                 viewResult = 'list';
@@ -792,14 +593,13 @@ class Products extends Component {
         }
 
         function resetFilters() {
-            setLengthPrice();
             filtered = [];
             filterLengthContent.innerHTML = '';
             filterPriceContent.innerHTML = '';
             productList.innerHTML = '';
             search.value = '';
             sort.value = 'sortRandom';
-            productList.style.flexDirection = 'row';
+            productList.style.gridTemplateColumns = 'repeat(4,minmax(10px 300px)';
             let woodCore = document.getElementsByClassName('category');
             for (let i = 0; i < woodCore.length; i++) {
                 (woodCore[i] as HTMLInputElement).checked = false;
@@ -816,10 +616,6 @@ class Products extends Component {
             copytext.select();
             document.execCommand('copy');
             document.body.removeChild(copytext);
-            copy.innerText = 'Copied!';
-            setTimeout(() => {
-                copy.innerText = Products.TextObj.copy;
-            }, 1500);
         }
     }
 

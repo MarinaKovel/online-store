@@ -6,16 +6,26 @@ $gold: gold;
   min-height: 100vh;
   margin: 0 auto;
   display: flex;
-
+  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: rgba(35, 88, 112, 0.495);
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(73, 1, 71, 0.204);
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .devs__title {
   margin-top: 100px;
   font-size: calc($index * 3);
+  z-index: 2;
 }
 
 .devs__dicription {
@@ -24,6 +34,7 @@ $gold: gold;
   font-size: calc($index * 1);
   line-height: calc($index * 1.4);
   color: $gold;
+  z-index: 2;
 }
 .devs__icons {
   margin-top: 30px;
@@ -31,6 +42,7 @@ $gold: gold;
   gap: 20px;
   justify-content: center;
   align-items: center;
+  z-index: 2;
 }
 
 .git__logo {
@@ -81,6 +93,7 @@ $gold: gold;
   display: flex;
   gap: 40px;
   flex: 1 1 auto;
+  z-index: 2;
 }
 
 .links__link {
@@ -93,6 +106,7 @@ $gold: gold;
 .link__disrcription {
   color: $gold;
   font-size: calc($index * 1.5);
+  z-index: 2;
   &:hover {
     color: white;
     transition: all 1s ease-in-out;
@@ -119,6 +133,7 @@ $gold: gold;
   justify-content: center;
   align-items: center;
   padding: 10px;
+  z-index: 2;
 }
 
 .school-link {

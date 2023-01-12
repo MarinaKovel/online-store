@@ -12,17 +12,6 @@
   will-change: transform;
   transition: var(--transition);
   z-index: 4;
-  &::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    z-index: 10;
-    background-image: url("https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/mv2.gif");
-    height: calc(var(--index) * 6);
-    background-repeat: no-repeat;
-    background-size: cover;
-    bottom: calc(var(--index) * -3);
-  }
 }
 
 .first__title {
@@ -89,8 +78,19 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  overflow: hidden;
+  // overflow: hidden;
   will-change: transform;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+    background-image: url("https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/main/mv2.gif");
+    height: 190px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    bottom: -10%;
+  }
 }
 
 .layer {
